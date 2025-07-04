@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Is it Eric's Birthday?</title>
     <style>
+      :root {
+        --primary-color: #e74c3c;
+        --success-color: #27ae60;
+        --text-color: #333;
+        --background-color: #f8f9fa;
+        --subtitle-color: #6c757d;
+        --font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         display: flex;
         flex-direction: column;
@@ -12,26 +25,62 @@
         align-items: center;
         min-height: 100vh;
         margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        color: #333;
-        font-size: 8em;
+        padding: 1rem;
+        font-family: var(--font-family);
+        background-color: var(--background-color);
+        color: var(--text-color);
+        font-size: clamp(5rem, 15vw, 8rem);
         text-align: center;
+        line-height: 1.2;
       }
-      #birthdayStatus {
-        font-weight: bold;
-        color: #e74c3c;
+
+      .birthday-container {
+        max-width: 90vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
       }
-      #birthdaySubtitle {
-        font-size: 0.2em;
-        margin-top: 10px;
-        color: #666;
+
+      .birthday-status {
+        font-weight: 700;
+        color: var(--primary-color);
+        transition: color 0.3s ease;
+      }
+
+      .birthday-status[data-status="yes"] {
+        color: var(--success-color);
+      }
+
+      .birthday-subtitle {
+        font-size: 0.15em;
+        color: var(--subtitle-color);
+        font-weight: 400;
+        margin-top: 0.5rem;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .birthday-status {
+          transition: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          font-size: clamp(4rem, 18vw, 7rem);
+        }
+        
+        .birthday-subtitle {
+          font-size: 0.18em;
+        }
       }
     </style>
   </head>
   <body>
-    <div id="birthdayStatus"></div>
-    <div id="birthdaySubtitle"></div>
+    <main class="birthday-container">
+      <div class="birthday-status" role="status" aria-live="polite" id="birthdayStatus"></div>
+      <div class="birthday-subtitle" id="birthdaySubtitle"></div>
+    </main>
 
     <script>
       function checkBirthday() {
@@ -47,11 +96,11 @@
 
         if (currentMonth === targetMonth && currentDay === targetDay) {
           birthdayStatusElement.textContent = "YES";
-          birthdayStatusElement.style.color = "#27ae60";
+          birthdayStatusElement.setAttribute("data-status", "yes");
           birthdaySubtitleElement.textContent = "It is Eric's birthday";
         } else {
           birthdayStatusElement.textContent = "NO";
-          birthdayStatusElement.style.color = "#e74c3c";
+          birthdayStatusElement.setAttribute("data-status", "no");
           birthdaySubtitleElement.textContent = "It is not Eric's birthday";
         }
       }
