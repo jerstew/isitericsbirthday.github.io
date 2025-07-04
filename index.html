@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Is it Eric's Birthday?</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        color: #333;
+        font-size: 8em;
+        text-align: center;
+      }
+      #birthdayStatus {
+        font-weight: bold;
+        color: #e74c3c;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="birthdayStatus"></div>
+
+    <script>
+      function checkBirthday() {
+        const today = new Date();
+        const currentMonth = today.getMonth() + 1;
+        const currentDay = today.getDate();
+
+        const targetMonth = 7;
+        const targetDay = 3;
+
+        const birthdayStatusElement = document.getElementById("birthdayStatus");
+
+        if (currentMonth === targetMonth && currentDay === targetDay) {
+          birthdayStatusElement.textContent = "YES";
+          birthdayStatusElement.style.color = "#27ae60";
+        } else {
+          birthdayStatusElement.textContent = "NO";
+          birthdayStatusElement.style.color = "#e74c3c";
+        }
+      }
+
+      checkBirthday();
+    </script>
+  </body>
+</html>
