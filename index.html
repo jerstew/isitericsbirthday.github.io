@@ -7,6 +7,7 @@
     <style>
       body {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         min-height: 100vh;
@@ -21,10 +22,16 @@
         font-weight: bold;
         color: #e74c3c;
       }
+      #birthdaySubtitle {
+        font-size: 0.2em;
+        margin-top: 10px;
+        color: #666;
+      }
     </style>
   </head>
   <body>
     <div id="birthdayStatus"></div>
+    <div id="birthdaySubtitle"></div>
 
     <script>
       function checkBirthday() {
@@ -36,13 +43,16 @@
         const targetDay = 3;
 
         const birthdayStatusElement = document.getElementById("birthdayStatus");
+        const birthdaySubtitleElement = document.getElementById("birthdaySubtitle");
 
         if (currentMonth === targetMonth && currentDay === targetDay) {
           birthdayStatusElement.textContent = "YES";
           birthdayStatusElement.style.color = "#27ae60";
+          birthdaySubtitleElement.textContent = "It is Eric's birthday";
         } else {
           birthdayStatusElement.textContent = "NO";
           birthdayStatusElement.style.color = "#e74c3c";
+          birthdaySubtitleElement.textContent = "It is not Eric's birthday";
         }
       }
 
