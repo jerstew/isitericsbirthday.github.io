@@ -18,7 +18,7 @@
 
 **Purpose**: Confirm the current static implementation and test suite before replacing stale 38rem contracts.
 
-- [ ] T001 Run `node --test`, inspect the current 38rem dialog, title wrapping, progress badge, footer geometry, and result gradients, and confirm the baseline drift documented by `specs/001-verify-eric-identity/plan.md` against `tests/site-routing.test.mjs`, `are-you-eric.html`, and `assets/eric-quiz.css`
+- [X] T001 Run `node --test`, inspect the current 38rem dialog, title wrapping, progress badge, footer geometry, and result gradients, and confirm the baseline drift documented by `specs/001-verify-eric-identity/plan.md` against `tests/site-routing.test.mjs`, `are-you-eric.html`, and `assets/eric-quiz.css`
 
 **Checkpoint**: Existing automated tests pass before revision, and the clarified-contract gaps are reproducible.
 
@@ -30,7 +30,7 @@
 
 **CRITICAL**: T002 must fail against the current implementation before any user-story implementation task begins.
 
-- [ ] T002 Add and run failing static contracts in `tests/site-routing.test.mjs` that reject the stale 38rem cap and result gradients and require the 500px dialog cap, 30rem breakpoint, full/compact title hooks, one-line compact title rule, plain unboxed progress, normal-flow desktop/mobile positioning, 16px mobile outer margins, 24px mobile body padding, desktop/mobile input and primary-action geometry, one footer divider, and absence of whole-window scaling or rounded/pill styling
+- [X] T002 Add and run failing static contracts in `tests/site-routing.test.mjs` that reject the stale 38rem cap and result gradients and require the 500px dialog cap, 30rem breakpoint, full/compact title hooks, one-line compact title rule, plain unboxed progress, normal-flow desktop/mobile positioning, 16px mobile outer margins, 24px mobile body padding, desktop/mobile input and primary-action geometry, one footer divider, and absence of whole-window scaling or rounded/pill styling
 
 **Checkpoint**: The revised static contract suite fails only because the clarified UI has not yet been implemented.
 
@@ -44,11 +44,11 @@
 
 ### Implementation for User Story 1
 
-- [ ] T003 [P] [US1] Add mutually exclusive full and compact title text nodes to `are-you-eric.html` so CSS exposes only `ERIC IDENTITY VERIFICATION WIZARD` above 480px and only `ERIC IDENTITY VERIFICATION` at or below 480px while retaining the existing 44-by-44px `Go back` control and per-step progress headings
-- [ ] T004 [P] [US1] Replace the stale centered 38rem layout in `assets/eric-quiz.css` with a 500px desktop maximum, asymmetric normal-flow above-center placement, shared body/footer edges, 28-32px page heading, visually dominant question text, plain progress text, 40-44px first-name input, one-divider footer, and an 80-100px right-aligned primary action while preserving 16px readable copy and 44px targets
-- [ ] T005 [US1] Implement the `max-width: 30rem` mobile branch and short-height fallback in `assets/eric-quiz.css` with 16px outer margins, 24px body padding, `max(16px, 15vh)` plus dynamic-viewport positioning, scroll-safe normal flow, the required 8/20-24/24/8/24/16px rhythm, a 44-48px first-name input, a 48px full-width primary action, nonwrapping compact title, and reduced adjacent footer/button decoration without removing the retro bevel
-- [ ] T006 [US1] Run the revised `tests/site-routing.test.mjs` contracts and correct `are-you-eric.html` and `assets/eric-quiz.css` until all User Story 1 static checks pass without changing quiz state, validation, history, persistence, or evaluator behavior
-- [ ] T007 [US1] Execute every-step keyboard, Back/Next persistence, required-validation, title-bar exit, computed-style, bounding-rectangle, 480/481 breakpoint, short-height, on-screen-keyboard, 200%-zoom, and overflow scenario in `specs/001-verify-eric-identity/quickstart.md`, correcting deviations in `are-you-eric.html`, `assets/eric-quiz.css`, or `assets/eric-quiz.js`
+- [X] T003 [P] [US1] Add mutually exclusive full and compact title text nodes to `are-you-eric.html` so CSS exposes only `ERIC IDENTITY VERIFICATION WIZARD` above 480px and only `ERIC IDENTITY VERIFICATION` at or below 480px while retaining the existing 44-by-44px `Go back` control and per-step progress headings
+- [X] T004 [P] [US1] Replace the stale centered 38rem layout in `assets/eric-quiz.css` with a 500px desktop maximum, asymmetric normal-flow above-center placement, shared body/footer edges, 28-32px page heading, visually dominant question text, plain progress text, 40-44px first-name input, one-divider footer, and an 80-100px right-aligned primary action while preserving 16px readable copy and 44px targets
+- [X] T005 [US1] Implement the `max-width: 30rem` mobile branch and short-height fallback in `assets/eric-quiz.css` with 16px outer margins, 24px body padding, `max(16px, 15vh)` plus dynamic-viewport positioning, scroll-safe normal flow, the required 8/20-24/24/8/24/16px rhythm, a 44-48px first-name input, a 48px full-width primary action, nonwrapping compact title, and reduced adjacent footer/button decoration without removing the retro bevel
+- [X] T006 [US1] Run the revised `tests/site-routing.test.mjs` contracts and correct `are-you-eric.html` and `assets/eric-quiz.css` until all User Story 1 static checks pass without changing quiz state, validation, history, persistence, or evaluator behavior
+- [X] T007 [US1] Execute every-step keyboard, Back/Next persistence, required-validation, title-bar exit, computed-style, bounding-rectangle, 480/481 breakpoint, short-height, on-screen-keyboard, 200%-zoom, and overflow scenario in `specs/001-verify-eric-identity/quickstart.md`, correcting deviations in `are-you-eric.html`, `assets/eric-quiz.css`, or `assets/eric-quiz.js`
 
 **Checkpoint**: User Story 1 remains independently functional and satisfies FR-024 and FR-026 through FR-032 across the complete responsive matrix.
 
@@ -62,8 +62,8 @@
 
 ### Implementation for User Story 2
 
-- [ ] T008 [US2] Remove radial, linear, and repeating gradient declarations from the verified and rejected result backgrounds in `assets/eric-quiz.css` while preserving solid success/failure colors, square geometry, symbols, text shadows, full-viewport coverage, 5.5rem heading maximum, and the secondary `Try again` control
-- [ ] T009 [US2] Run accepted-profile A/C, rejected-profile B/deviation, reduced-motion, result-focus, one-second visibility, full-screen overflow, and retry-reset checks from `specs/001-verify-eric-identity/quickstart.md`, correcting result-only deviations in `assets/eric-quiz.css`, `assets/eric-quiz.js`, or `are-you-eric.html`
+- [X] T008 [US2] Remove radial, linear, and repeating gradient declarations from the verified and rejected result backgrounds in `assets/eric-quiz.css` while preserving solid success/failure colors, square geometry, symbols, text shadows, full-viewport coverage, 5.5rem heading maximum, and the secondary `Try again` control
+- [X] T009 [US2] Run accepted-profile A/C, rejected-profile B/deviation, reduced-motion, result-focus, one-second visibility, full-screen overflow, and retry-reset checks from `specs/001-verify-eric-identity/quickstart.md`, correcting result-only deviations in `assets/eric-quiz.css`, `assets/eric-quiz.js`, or `are-you-eric.html`
 
 **Checkpoint**: User Story 2 remains independently testable and both result paths comply with the solid-color retro contract.
 
@@ -77,7 +77,7 @@
 
 ### Regression Validation for User Story 3
 
-- [ ] T010 [P] [US3] Run the homepage routing, single-row promotion, accessible invitation, dark-palette, red/green contrast, birthday-result dominance, keyboard focus, 320-1440px, and 200%-zoom regression checks in `tests/site-routing.test.mjs` and `specs/001-verify-eric-identity/quickstart.md`, correcting any regression in `index.html`
+- [X] T010 [P] [US3] Run the homepage routing, single-row promotion, accessible invitation, dark-palette, red/green contrast, birthday-result dominance, keyboard focus, 320-1440px, and 200%-zoom regression checks in `tests/site-routing.test.mjs` and `specs/001-verify-eric-identity/quickstart.md`, correcting any regression in `index.html`
 
 **Checkpoint**: User Story 3 remains independently functional and visually subordinate to the birthday answer.
 
@@ -87,9 +87,9 @@
 
 **Purpose**: Prove the combined implementation satisfies automated, accessibility, privacy, and responsive completion gates.
 
-- [ ] T011 [P] Audit `index.html`, `are-you-eric.html`, and `assets/` with the privacy procedure in `specs/001-verify-eric-identity/quickstart.md` for external runtime URLs, submission, analytics, cookies, storage, URL state, and response retention
-- [ ] T012 [P] Audit `are-you-eric.html` and `assets/eric-quiz.css` against `specs/001-verify-eric-identity/contracts/ui-contract.md` for semantic controls, focus order, labels/groups, inactive-step exclusion, 44px targets, visible focus, WCAG AA contrast, reduced motion, title accessibility, square corners, solid fills, and absence of rounded cards, pill buttons, gradients, or proportional scaling
-- [ ] T013 Run `node --test` and the complete browser validation sequence in `specs/001-verify-eric-identity/quickstart.md`, resolve every remaining deviation in `index.html`, `are-you-eric.html`, `assets/`, or `tests/site-routing.test.mjs`, and mark T001-T013 complete in `specs/001-verify-eric-identity/tasks.md` only after evidence is recorded in the implementation completion report
+- [X] T011 [P] Audit `index.html`, `are-you-eric.html`, and `assets/` with the privacy procedure in `specs/001-verify-eric-identity/quickstart.md` for external runtime URLs, submission, analytics, cookies, storage, URL state, and response retention
+- [X] T012 [P] Audit `are-you-eric.html` and `assets/eric-quiz.css` against `specs/001-verify-eric-identity/contracts/ui-contract.md` for semantic controls, focus order, labels/groups, inactive-step exclusion, 44px targets, visible focus, WCAG AA contrast, reduced motion, title accessibility, square corners, solid fills, and absence of rounded cards, pill buttons, gradients, or proportional scaling
+- [X] T013 Run `node --test` and the complete browser validation sequence in `specs/001-verify-eric-identity/quickstart.md`, resolve every remaining deviation in `index.html`, `are-you-eric.html`, `assets/`, or `tests/site-routing.test.mjs`, and mark T001-T013 complete in `specs/001-verify-eric-identity/tasks.md` only after evidence is recorded in the implementation completion report
 
 ---
 
