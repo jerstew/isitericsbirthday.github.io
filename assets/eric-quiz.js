@@ -7,6 +7,7 @@ const form = document.querySelector("#identityQuiz");
 const steps = [...document.querySelectorAll(".quiz-step")];
 const backButton = document.querySelector("#backButton");
 const nextButton = document.querySelector("#nextButton");
+const exitQuizButton = document.querySelector("#exitQuizButton");
 const verifiedResult = document.querySelector("#verifiedResult");
 const rejectedResult = document.querySelector("#rejectedResult");
 const tryAgainButton = document.querySelector("#tryAgainButton");
@@ -235,6 +236,15 @@ backButton.addEventListener("click", () => {
   if (currentStep > 0) {
     showStep(currentStep - 1);
   }
+});
+
+exitQuizButton.addEventListener("click", () => {
+  if (window.history.length > 1) {
+    window.history.back();
+    return;
+  }
+
+  window.location.assign("./index.html");
 });
 
 form.elements.firstName.addEventListener("input", () => {
