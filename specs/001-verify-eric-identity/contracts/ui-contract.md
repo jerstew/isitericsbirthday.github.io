@@ -15,7 +15,7 @@ The homepage uses a near-black neutral background with high-contrast off-white s
 
 ## Step contract
 
-Only the current step is visible and focusable. Its heading contains `Step n of 5`. Next and Back preserve all mounted control values.
+Only the current step is visible and focusable. Its heading contains plain, unboxed `Step n of 5` text beneath the quiz description and remains the focus destination after navigation. Next and Back preserve all mounted control values.
 
 | Step | Prompt and control | Choices | Forward rule |
 |------|--------------------|---------|--------------|
@@ -56,6 +56,7 @@ Steps 4 and 5 visibly state that continuing with no selection is allowed. Requir
 - Activating Try again resets every control, reveals step 1, and focuses the step-1 heading.
 
 Both results remain understandable through text without color, animation, or sound. They remain full-screen; the result-heading maximum is reduced from 7rem to 5.5rem while the heading remains the largest text on screen.
+Result backgrounds use solid success or failure colors without radial, linear, or repeating gradients.
 
 ## Evaluator contract
 
@@ -70,7 +71,7 @@ The evaluator accepts a QuizAttempt-shaped value and returns a boolean. It retur
 
 ## Responsive and accessibility contract
 
-- No horizontal page scrolling occurs from 320 through 1440 CSS pixels or at 200% browser text zoom.
+- No horizontal page scrolling occurs from 320 through 1440 effective CSS pixels or at browser zoom up to 200% when the resulting layout viewport remains at least 320 CSS pixels wide. The minimum-width test does not stack an additional independent 200% text-only enlargement on an already 320 CSS-pixel layout viewport.
 - Native form controls retain standard keyboard interaction and programmatic labels.
 - Option groups use fieldset and legend semantics.
 - Visual order matches DOM and focus order; no positive tabindex is used.
@@ -79,7 +80,13 @@ The evaluator accepts a QuizAttempt-shaped value and returns a boolean. It retur
 - Inactive steps are absent from the accessibility tree and focus order.
 - Result and validation communication is not duplicated through competing focus and assertive-live mechanisms.
 - A no-script message explains that interactive identity verification requires JavaScript.
-- The quiz window is no wider than 38rem and uses reduced padding, gaps, heading scale, and decorative dimensions.
+- Above 480 CSS pixels, the quiz window is no wider than 500 CSS pixels, sits slightly above center through asymmetric normal-flow layout rather than a transform, displays `ERIC IDENTITY VERIFICATION WIZARD`, and uses an 80-100 CSS-pixel right-aligned primary action.
+- At 480 CSS pixels and below, the quiz window uses 16 CSS-pixel outer margins, begins approximately 15vh/15dvh from the top with at least 16 CSS pixels of clearance, displays `ERIC IDENTITY VERIFICATION` on one line beside the close control, and remains in scrollable document flow when height is constrained. A short-height rule reduces top clearance to 16 CSS pixels when the percentage placement would crowd the dialog.
+- The mobile body uses 24 CSS-pixel horizontal padding; the first-name input is 44-48 CSS pixels high; and the primary action is full-width and 48 CSS pixels high. The mobile vertical rhythm is 8 pixels from heading to description, 20-24 pixels from description to progress, 24 pixels from progress to question, 8 pixels from question label to input, 24 pixels from the input region to the footer divider, and 16 pixels from the divider to the action.
+- On desktop, the `ARE YOU ERIC?` heading is 28-32 CSS pixels, the first-name input is 40-44 CSS pixels high, and body plus footer content shares one left/right edge.
+- Progress is plain text without a filled badge or block. The active question and its control remain visually stronger than the page heading, progress, chrome, and decorative beveling.
+- The action footer uses one divider and predictable spacing. Mobile removes redundant adjacent action borders or shadows while retaining the primary button's retro bevel.
 - Question, answer, and promotional label text remains at least 16 CSS pixels.
 - Every standalone button, text input, select, and linked promotion provides a target of at least 44 by 44 CSS pixels; each radio or checkbox is operable through its labeled option row, which is at least 44 CSS pixels high and spans the available row width.
-- At 320, 375, and 390 CSS pixels, the title-bar text and X control coexist without clipping, the form actions remain reachable, and long oath labels wrap inside the viewport.
+- At 320, 375, 390, and 480 CSS pixels, the compact title-bar text and X control coexist without wrapping, clipping, or overlap; at 481 CSS pixels, the full title and desktop action composition apply.
+- Responsive rules resize individual components rather than proportionally scaling the whole interface. The quiz retains square corners, solid fills, beveled borders, and restrained shadows without rounded cards, pill buttons, or gradients.

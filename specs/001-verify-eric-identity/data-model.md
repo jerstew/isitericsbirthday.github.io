@@ -67,9 +67,13 @@ Presentation constraints do not add persisted state:
 
 | Surface | Compact boundary | Accessibility boundary |
 |---------|------------------|------------------------|
-| Quiz window | Maximum width 38rem; reduced padding, gaps, headings, and decoration | Question/answer text at least 1rem; controls and selectable rows at least 2.75rem high |
+| Desktop quiz window (>480px) | Maximum width 500px; slightly above center; shared content edges; 28-32px page heading; 40-44px first-name input; 80-100px right-aligned primary action | Question/answer text at least 1rem; controls and selectable rows at least 2.75rem high; overflow remains scrollable |
+| Mobile quiz window (<=480px) | 16px outer margins; approximately 15vh from top with 16px minimum; 24px body padding; compact title copy; specified 8/20-24/24/8/24/16px rhythm; 44-48px input; 48px full-width primary action | Complete dialog remains reachable under short heights, keyboard resize, and 200% zoom; title and close target do not overlap |
+| Progress and action hierarchy | Plain `Step n of 5` text; active question is primary; one footer divider; no redundant adjacent action border/shadow | Existing progress heading remains the step focus destination; close target remains at least 44 by 44px |
 | Homepage promotion | One row, maximum width 24rem; icon, `NEW!`, and `ARE YOU ERIC?` only | Entire link target at least 2.75rem high; visible label at least 1rem |
-| Result screens | Full viewport; result heading maximum reduced to 5.5rem | Heading remains largest text, wraps without clipping, and page remains scrollable |
+| Result screens | Full viewport; solid success/failure fills without gradients; result heading maximum reduced to 5.5rem | Heading remains largest text, wraps without clipping, and page remains scrollable |
+
+Responsive and zoom validation use the effective layout viewport: browser zoom may reach 200% provided the resulting viewport remains at least 320 CSS pixels wide. The 320 CSS-pixel boundary is not combined with an additional independent 200% text-only enlargement.
 
 ## QuizResult
 

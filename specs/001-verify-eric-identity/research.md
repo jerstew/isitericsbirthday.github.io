@@ -58,11 +58,11 @@
 
 ## Decision 8: Package-free testing and browser validation
 
-**Decision**: Use Node 24's built-in test runner for the pure evaluator. Cover normalized passing names, representative failing names/ages/reactions, all 64 trait/oath bitmask combinations, missing inputs, and evaluator immutability. Use a locally served current browser for UI, responsive, accessibility, privacy, and birthday regression checks.
+**Decision**: Use Node 24's built-in test runner for the pure evaluator and static markup/CSS contracts. Cover normalized passing names, representative failing names/ages/reactions, all 64 trait/oath bitmask combinations, missing inputs, evaluator immutability, the 500-pixel cap, responsive title hooks, and breakpoint declarations. Use a locally served current browser for UI, accessibility, privacy, and birthday regression checks, plus computed-style and bounding-rectangle inspection at 320, 375, 390, 480, and 481 CSS pixels for every step. Repeat responsive checks under short heights, an on-screen keyboard, and browser zoom up to 200% while retaining a 320 CSS-pixel effective-width minimum.
 
-**Rationale**: Automated logic tests protect the central predicate with no package manifest or browser download. Native browser inspection is proportionate for focus, layout, animation, storage, and network behaviors in this small site.
+**Rationale**: Automated logic and static tests protect deterministic contracts with no package manifest or browser download. Rendered measurements are still required because source-regex tests cannot prove the final cascade, title line count, shared edges, scroll reachability, or absence of overflow across all five steps.
 
-**Alternatives considered**: Manual-only testing leaves the predicate underprotected. Playwright or Cypress would add package metadata, browser binaries, and maintenance larger than the present feature. A published browser test page provides weaker reporting and expands the production surface.
+**Alternatives considered**: Manual-only testing leaves the predicate and source contracts underprotected. Static-regex-only testing misses rendered geometry and accessibility failures. Playwright or Cypress would add package metadata, browser binaries, and maintenance larger than the present feature. A published browser test page provides weaker reporting and expands the production surface.
 
 ## Decision 9: Privacy verification
 
@@ -74,11 +74,11 @@
 
 ## Decision 10: Structure-first responsive compaction
 
-**Decision**: Compact the quiz by reducing its maximum width from 46rem to 38rem, tightening outer/body padding and vertical gaps, reducing display-heading and icon sizes, and retaining 1rem question/answer text plus 2.75rem (44-pixel) interactive rows and controls. Keep result regions full-screen but reduce the maximum result-heading size from 7rem to 5.5rem. Compact the homepage promotion to one row no wider than 24rem with the icon, `NEW!`, and `ARE YOU ERIC?` only.
+**Decision**: Cap the desktop quiz dialog at 500 CSS pixels and apply component-specific responsive rules at 480 CSS pixels and below. Keep the page heading within 28-32 CSS pixels, render progress as plain text, strengthen the active question hierarchy, align body and footer content, and retain 1rem question/answer text plus 2.75rem (44-pixel) interactive targets. On mobile, use 16-pixel outer margins, 24-pixel body padding, the specified vertical rhythm, a 44-48-pixel first-name input, and a 48-pixel full-width primary action. Keep result regions full-screen with a 5.5rem maximum result heading and keep the homepage promotion as a single row no wider than 24rem.
 
-**Rationale**: Width, whitespace, and display typography account for the current oversized impression. Reducing those dimensions yields a materially denser phone and desktop layout without shrinking readable content or touch targets. Explicit caps make the refinement testable rather than subjective.
+**Rationale**: The previous 38rem cap equals 608 pixels and exceeds the clarified 480-520-pixel dialog range. Explicit desktop and mobile dimensions reduce competing visual weight without uniformly scaling text or controls, while the 480/481 boundary and computed-style checks make the refinement testable.
 
-**Alternatives considered**: Uniform scaling would shrink controls and readable text. Phone-only changes would leave the desktop hierarchy oversized. Compacting the full-screen results as ordinary cards would weaken the outcome joke and contradict the result contract.
+**Alternatives considered**: Retaining 38rem contradicts the clarified cap. Uniform scaling would shrink controls and readable text. A single fluid composition would not guarantee the required full-width mobile action or title copy. Compacting the full-screen results as ordinary cards would weaken the outcome joke and contradict the result contract.
 
 ## Decision 11: Browser-history exit semantics
 
@@ -95,3 +95,35 @@
 **Rationale**: A fixed dark homepage removes the current glare and keeps the primary YES/NO result visually dominant. Limiting the palette change to the homepage protects the approved quiz aesthetic and avoids theme state, persistence, or control complexity.
 
 **Alternatives considered**: A mode toggle adds state and interaction outside scope. Pure black and white creates harsher contrast than required. Extending the dark palette to the quiz contradicts the clarified requirement.
+
+## Decision 13: Overflow-safe dialog positioning and responsive title copy
+
+**Decision**: Keep the desktop window slightly above center with asymmetric normal-flow grid rows rather than a transform. At 480 CSS pixels and below, align the window in normal flow using `max(16px, 15vh)` followed by a dynamic-viewport `max(16px, 15dvh)` override, allow document scrolling, and use a short-height media rule to reduce the top padding to 16 pixels when necessary. Expose `ERIC IDENTITY VERIFICATION WIZARD` above the breakpoint and `ERIC IDENTITY VERIFICATION` at and below it, with exactly one string participating in layout and the accessibility tree.
+
+**Rationale**: Normal-flow top spacing adapts when dynamic viewport height changes for browser chrome or an on-screen keyboard and avoids the clipping risks of fixed or absolute positioning. Mutually exclusive text nodes preserve real text and prevent the compact chrome from wrapping into a tall title bar.
+
+**Alternatives considered**: Fixed positioning can conceal content behind the keyboard. Mathematical centering immediately reduces usable space below the form. Transforming or uniformly scaling the whole window does not reflow content and can create overflow. Generated pseudo-element text is less robust for content and accessibility inspection.
+
+## Decision 14: Hierarchy and footer treatment
+
+**Decision**: Keep the progress heading in its existing semantic/focus role but remove its filled badge treatment. Use one divider at the start of the action footer, preserve the button's Windows-style bevel, and remove only redundant container outlines or shadows. Maintain an 80-100-pixel right-aligned primary action on desktop and a 48-pixel-high full-width primary action on mobile.
+
+**Rationale**: Preserving the existing heading and focus target avoids JavaScript or accessibility changes. Separating the footer with one divider establishes a stable action region, while reducing nested decoration prevents the mobile action from competing with the active question.
+
+**Alternatives considered**: Replacing progress with a custom progress bar adds an unnecessary focal point and accessible-state work. Removing all button borders would abandon the retro visual language. Keeping every adjacent outline and shadow preserves the current visual competition.
+
+## Decision 15: Effective-width interpretation for 200% zoom
+
+**Decision**: Validate browser zoom up to 200% only while the resulting layout viewport remains at least the specified 320 CSS-pixel minimum. Treat 320 CSS pixels as the lower effective layout width, including when reached by zooming a wider physical viewport. Do not require an additional independent 200% text-only enlargement on top of an already 320 CSS-pixel layout viewport.
+
+**Rationale**: The exact 26-character compact title and the mandatory 44-pixel close target cannot be guaranteed on one line if text alone is doubled inside a fixed 320 CSS-pixel layout. Using effective CSS width matches responsive CSS behavior and preserves a reproducible lower boundary without clipping, shrinking the close target, or silently changing the required title.
+
+**Alternatives considered**: Allowing the title to wrap conflicts with FR-027. Clipping or ellipsis fails the exact-title contract. Shrinking the close target violates the accessibility boundary. Introducing a third title string would contradict the clarified copy decision.
+
+## Decision 16: Solid-color retro outcomes
+
+**Decision**: Remove the existing radial and repeating-linear result gradients and retain the established solid success and failure colors, text shadows, symbols, and square geometry.
+
+**Rationale**: The clarified visual language expressly excludes gradients. Solid fills preserve the emphatic full-screen outcomes without adding modern decoration or changing result semantics.
+
+**Alternatives considered**: Keeping the existing gradients leaves a delivered-state conflict with FR-032. Replacing them with additional textured layers would preserve the same visual competition. Converting results into cards would contradict the full-screen outcome contract.

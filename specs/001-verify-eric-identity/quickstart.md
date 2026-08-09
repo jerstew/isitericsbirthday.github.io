@@ -49,7 +49,10 @@ Follow [ui-contract.md](contracts/ui-contract.md) and [data-model.md](data-model
 6. Repeat with reaction B and with one deviation in each other field; confirm every attempt produces the full-screen rejected result.
 7. Activate `Try again`; confirm all controls clear and focus returns to the step-1 heading.
 8. Partially answer the quiz and refresh; confirm the attempt is discarded.
-9. Confirm the quiz window is no wider than 38rem, question and answer text is at least 16 pixels, controls and option rows are at least 44 pixels high, and the compact layout has no horizontal overflow at 320, 375, and 390 CSS pixels.
+9. Above 480 CSS pixels, confirm the quiz window is no wider than 500 pixels, `ARE YOU ERIC?` is 28-32 pixels, the first-name input is 40-44 pixels high, the primary action is 80-100 pixels wide and right-aligned, and all body/footer regions share the same horizontal content edges.
+10. At 320, 375, 390, and 480 CSS pixels, confirm 16-pixel outer margins, 24-pixel body padding, a 28-32-pixel page heading, a 44-48-pixel first-name input, and a 48-pixel-high full-width primary action. Confirm the action footer uses one divider and has no redundant adjacent border or shadow.
+11. At the same mobile widths, confirm the vertical gaps are 8 pixels from heading to description, 20-24 pixels from description to plain progress text, 24 pixels from progress to question, 8 pixels from the first-name label to its input, 24 pixels from the input region to the footer divider, and 16 pixels from the divider to the action.
+12. Confirm question and answer text is at least 16 pixels, all interactive targets and option rows are at least 44 pixels high, the active question is visually dominant, and no layout has horizontal overflow.
 
 ## Validate title-bar exit behavior
 
@@ -72,7 +75,7 @@ Follow [ui-contract.md](contracts/ui-contract.md) and [data-model.md](data-model
 
 ## Validate responsive results
 
-At 320, 375, 768, 1024, and 1440 CSS pixels, and at 200% text zoom:
+At 320, 375, 768, 1024, and 1440 effective CSS pixels, and at browser zoom up to 200% while the resulting layout viewport remains at least 320 CSS pixels:
 
 - Confirm no horizontal page scrolling.
 - Confirm long oath labels wrap without clipping or overlapping controls.
@@ -80,6 +83,16 @@ At 320, 375, 768, 1024, and 1440 CSS pixels, and at 200% text zoom:
 - Confirm the rejected result covers the viewport and can scroll vertically when needed.
 - Confirm both result headings have a 5.5rem maximum, remain the largest text on screen, and wrap without clipping.
 - Confirm the retry control remains visible and operable.
+- Confirm both result backgrounds use solid colors without radial, linear, or repeating gradients.
+
+## Validate responsive dialog boundaries
+
+1. At 320, 375, 390, and 480 CSS pixels, confirm the title bar shows `ERIC IDENTITY VERIFICATION` on one line without clipping or overlapping the 44-by-44-pixel close target.
+2. At 481, 768, 1024, and 1440 CSS pixels, confirm the title bar shows `ERIC IDENTITY VERIFICATION WIZARD` and the primary action is right-aligned rather than full-width.
+3. On a normal-height desktop viewport, confirm the dialog is slightly above mathematical center without a positioning transform. At mobile widths, confirm its top begins approximately 15% of the dynamic viewport height from the top and never has less than 16 pixels of clearance.
+4. Repeat mobile checks with a short viewport, the on-screen keyboard open, and browser zoom up to 200% while retaining at least a 320 CSS-pixel effective layout width; confirm the complete dialog and action footer remain reachable through vertical document scrolling without horizontal overflow. Do not stack a separate 200% text-only enlargement onto an already 320 CSS-pixel viewport.
+5. Confirm progress appears as plain unboxed text, the active question is more prominent than progress and chrome, and component dimensions change independently rather than through whole-window scaling.
+6. Confirm the quiz retains square corners, solid fills, and Windows-style bevels without rounded cards, pill buttons, or gradients.
 
 ## Validate privacy
 
