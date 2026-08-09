@@ -29,7 +29,7 @@
         font-family: var(--font-family);
         background-color: var(--background-color);
         color: var(--text-color);
-        font-size: clamp(5rem, 15vw, 8rem);
+        font-size: 1rem;
         text-align: center;
         line-height: 1.2;
       }
@@ -43,7 +43,9 @@
       }
 
       .birthday-status {
+        font-size: clamp(5rem, 15vw, 8rem);
         font-weight: 700;
+        line-height: 1;
         color: var(--primary-color);
         transition: color 0.3s ease;
       }
@@ -53,14 +55,115 @@
       }
 
       .birthday-subtitle {
-        font-size: 0.15em;
+        font-size: clamp(1rem, 2.25vw, 1.2rem);
         color: var(--subtitle-color);
         font-weight: 400;
         margin-top: 0.25rem;
       }
 
+      .quiz-promo {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-items: center;
+        gap: 0.9rem;
+        width: min(32rem, 100%);
+        min-height: 4.5rem;
+        margin-top: 2rem;
+        padding: 0.75rem 1rem;
+        background: #c0c0c0;
+        border-color: #ffffff #000000 #000000 #ffffff;
+        border-style: solid;
+        border-width: 0.1875rem;
+        box-shadow: 0.1875rem 0.1875rem 0 #808080;
+        color: #000000;
+        font-family: "MS Sans Serif", Tahoma, Geneva, Verdana, sans-serif;
+        text-align: left;
+        text-decoration: none;
+      }
+
+      .quiz-promo:hover {
+        background: #d0d0d0;
+      }
+
+      .quiz-promo:focus-visible {
+        outline: 0.1875rem solid #000080;
+        outline-offset: 0.25rem;
+      }
+
+      .quiz-promo:active {
+        border-color: #000000 #ffffff #ffffff #000000;
+        box-shadow: none;
+        transform: translate(0.1875rem, 0.1875rem);
+      }
+
+      .quiz-promo-icon {
+        display: grid;
+        width: 3.25rem;
+        height: 3.25rem;
+        place-items: center;
+        background: #000080;
+        border: 0.125rem inset #ffffff;
+        color: #ffffff;
+      }
+
+      .quiz-promo-icon svg {
+        width: 2.25rem;
+        height: 2.25rem;
+      }
+
+      .quiz-promo-copy {
+        display: grid;
+        gap: 0.15rem;
+        min-width: 0;
+      }
+
+      .quiz-promo-badge {
+        width: max-content;
+        padding: 0.1rem 0.35rem;
+        background: #ffff00;
+        border: 0.0625rem solid #000000;
+        font-size: 0.75rem;
+        font-weight: 700;
+        line-height: 1.1;
+      }
+
+      .quiz-promo-title {
+        font-size: clamp(1rem, 5vw, 1.35rem);
+        line-height: 1.1;
+      }
+
+      .quiz-promo-description {
+        color: #202020;
+        font-size: 0.875rem;
+        line-height: 1.3;
+      }
+
+      @media (max-width: 25rem) {
+        .quiz-promo {
+          gap: 0.625rem;
+          min-height: 4rem;
+          margin-top: 1.5rem;
+          padding: 0.5rem 0.625rem;
+        }
+
+        .quiz-promo-icon {
+          width: 2.75rem;
+          height: 2.75rem;
+        }
+
+        .quiz-promo-icon svg {
+          width: 1.875rem;
+          height: 1.875rem;
+        }
+
+        .quiz-promo-description {
+          font-size: 0.8125rem;
+        }
+      }
+
       @media (prefers-reduced-motion: reduce) {
-        .birthday-status {
+        .birthday-status,
+        .quiz-promo {
           transition: none;
         }
       }
@@ -71,6 +174,26 @@
       <div class="birthday-status" role="status" aria-live="polite" id="birthdayStatus"></div>
       <div class="birthday-subtitle" id="birthdaySubtitle"></div>
     </main>
+
+    <a
+      class="quiz-promo"
+      href="/are-you-eric.html"
+      aria-label="New: Take the Are You Eric identity quiz"
+    >
+      <span class="quiz-promo-icon" aria-hidden="true">
+        <svg viewBox="0 0 48 48" focusable="false">
+          <rect x="7" y="5" width="34" height="38" fill="#c0c0c0" stroke="currentColor" stroke-width="3" />
+          <circle cx="18" cy="19" r="6" fill="#000080" />
+          <path d="M9 35c1-7 5-10 9-10s8 3 9 10" fill="#000080" />
+          <path d="M30 16h8M30 22h8M30 28h6" stroke="#000080" stroke-width="3" />
+        </svg>
+      </span>
+      <span class="quiz-promo-copy">
+        <span class="quiz-promo-badge">NEW!</span>
+        <strong class="quiz-promo-title">ARE YOU ERIC?</strong>
+        <span class="quiz-promo-description">Take the official identity quiz →</span>
+      </span>
+    </a>
 
     <script>
       function checkBirthday() {
