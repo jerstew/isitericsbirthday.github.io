@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { ERIC_PROFILE, isEric } from "../assets/eric-profile.mjs";
+await import("../assets/eric-profile.js");
+
+const { ERIC_PROFILE, isEric } = globalThis.EricIdentity;
 
 const PASSING_ATTEMPT = Object.freeze({
   firstName: "Eric",

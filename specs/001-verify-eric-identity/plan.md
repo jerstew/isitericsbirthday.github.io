@@ -6,11 +6,11 @@
 
 ## Summary
 
-Add a directly addressable five-step Eric identity quiz and a retro promotional link below the existing birthday result. The implementation remains a static, dependency-free GitHub Pages site: semantic HTML and local CSS provide the interface, browser JavaScript manages transient form state and finite confetti, and a pure ECMAScript module performs exact-profile evaluation. Node's built-in test runner verifies the evaluator; browser-based validation covers navigation, focus, responsive layout, accessibility, privacy, and birthday-page regression.
+Add a directly addressable five-step Eric identity quiz and a retro promotional link below the existing birthday result. The implementation remains a static, dependency-free GitHub Pages site: semantic HTML and local CSS provide the interface, ordered classic browser scripts manage transient form state and finite confetti, and a pure evaluator performs exact-profile evaluation. Node's built-in test runner verifies the evaluator; browser-based validation covers navigation, focus, responsive layout, accessibility, privacy, direct-file compatibility, and birthday-page regression.
 
 ## Technical Context
 
-**Language/Version**: HTML5, CSS, and standards-based ECMAScript modules supported by current evergreen browsers; Node.js 24 for development tests
+**Language/Version**: HTML5, CSS, and standards-based JavaScript supported by current evergreen browsers; Node.js 24 for development tests
 
 **Primary Dependencies**: Browser platform APIs only at runtime; Node built-in `node:test` and `node:assert/strict` for automated logic tests
 
@@ -60,8 +60,8 @@ index.html                   # Existing birthday page plus quiz promotion
 are-you-eric.html            # Semantic five-step quiz and result regions
 assets/
 |-- eric-quiz.css            # Quiz, result, responsive, and reduced-motion styles
-|-- eric-profile.mjs         # Pure Eric-profile normalization and evaluation
-`-- eric-quiz.mjs            # Step navigation, validation, focus, results, confetti
+|-- eric-profile.js          # Pure Eric-profile normalization and evaluation
+`-- eric-quiz.js             # Step navigation, validation, focus, results, confetti
 tests/
 `-- eric-profile.test.mjs    # Package-free evaluator matrix
 CNAME

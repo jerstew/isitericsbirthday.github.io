@@ -1,4 +1,6 @@
-import { isEric } from "./eric-profile.mjs";
+"use strict";
+
+const { isEric } = globalThis.EricIdentity;
 
 const quizPage = document.querySelector(".quiz-page");
 const form = document.querySelector("#identityQuiz");

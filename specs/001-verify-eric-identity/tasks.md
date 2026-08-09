@@ -18,7 +18,7 @@
 
 **Purpose**: Establish the planned static-site file layout without adding packages or build tooling.
 
-- [X] T001 Create the planned empty source and test file structure at `are-you-eric.html`, `assets/eric-quiz.css`, `assets/eric-profile.mjs`, `assets/eric-quiz.mjs`, and `tests/eric-profile.test.mjs`
+- [X] T001 Create the planned empty source and test file structure at `are-you-eric.html`, `assets/eric-quiz.css`, `assets/eric-profile.js`, `assets/eric-quiz.js`, and `tests/eric-profile.test.mjs`
 
 ---
 
@@ -29,7 +29,7 @@
 **CRITICAL**: User-story implementation begins only after the evaluator tests pass and the shared style foundation exists.
 
 - [X] T002 [P] Write failing package-free tests for normalized passing names, failing names/ages/reactions, missing or malformed values, all 64 trait/oath bitmask combinations, and evaluator immutability in `tests/eric-profile.test.mjs`
-- [X] T003 Implement the immutable Eric profile, normalization, exact set comparison, and fail-closed exported evaluator required by T002 in `assets/eric-profile.mjs`
+- [X] T003 Implement the immutable Eric profile, normalization, exact set comparison, and fail-closed evaluator required by T002 in `assets/eric-profile.js`
 - [X] T004 [P] Define the local system-font stack, color tokens, box sizing, focus-visible treatment, control target sizing, and reduced-motion baseline in `assets/eric-quiz.css`
 
 **Checkpoint**: `node --test tests/eric-profile.test.mjs` passes with no package installation, and the shared visual/accessibility primitives are ready.
@@ -46,9 +46,9 @@
 
 - [X] T005 [P] [US1] Author the directly addressable quiz document with unique title/H1, one semantic form, five mounted step panels, exact prompts and choices, progress headings, hidden verified/rejected text regions, local asset references, and a no-script message in `are-you-eric.html`
 - [X] T006 [P] [US1] Implement the responsive quiz card, fieldsets, labels, controls, optional-step guidance, progress treatment, navigation layout, hidden-state behavior, and 320-1440 pixel/200% zoom wrapping in `assets/eric-quiz.css`
-- [X] T007 [US1] Implement current-step state, form-submit advancement for steps 1-4, non-validating Back behavior, mounted-control answer preservation, and step-heading focus management in `assets/eric-quiz.mjs`
-- [X] T008 [US1] Add trimmed-empty name, missing-age, and missing-reaction validation with persistent inline errors, `aria-describedby`, `aria-invalid`, correction clearing, and invalid-control focus in `assets/eric-quiz.mjs`
-- [X] T009 [US1] Collect the five-field QuizAttempt, call the pure evaluator only on step-5 submission, hide the form, and reveal/focus exactly one basic result region in `assets/eric-quiz.mjs`
+- [X] T007 [US1] Implement current-step state, form-submit advancement for steps 1-4, non-validating Back behavior, mounted-control answer preservation, and step-heading focus management in `assets/eric-quiz.js`
+- [X] T008 [US1] Add trimmed-empty name, missing-age, and missing-reaction validation with persistent inline errors, `aria-describedby`, `aria-invalid`, correction clearing, and invalid-control focus in `assets/eric-quiz.js`
+- [X] T009 [US1] Collect the five-field QuizAttempt, call the pure evaluator only on step-5 submission, hide the form, and reveal/focus exactly one basic result region in `assets/eric-quiz.js`
 - [X] T010 [US1] Run the direct-page, ordered-step, required-validation, Back/Next persistence, Enter-key, empty-checkbox, refresh-reset, and no-early-outcome checks documented in `specs/001-verify-eric-identity/quickstart.md`
 
 **Checkpoint**: User Story 1 is independently functional as the MVP, with a complete quiz and deterministic plain-text result.
@@ -65,8 +65,8 @@
 
 - [X] T011 [P] [US2] Add the decorative confetti canvas, static reduced-motion celebration, and real `Try again` button to the verified/rejected result markup in `are-you-eric.html`
 - [X] T012 [P] [US2] Style the verified celebration and scroll-safe full-viewport retro red rejection, dominant result headings, non-color cues, secondary retry control, and zoom-safe result layout in `assets/eric-quiz.css`
-- [X] T013 [P] [US2] Implement pointer-transparent finite canvas confetti with 100-150 bounded particles, capped device-pixel ratio, resize handling, frame cancellation, and an approximately three-second lifetime in `assets/eric-quiz.mjs`
-- [X] T014 [US2] Integrate result focus, reduced-motion suppression, static success fallback, animation cleanup, form reset, step-1 restoration, and retry focus behavior in `assets/eric-quiz.mjs`
+- [X] T013 [P] [US2] Implement pointer-transparent finite canvas confetti with 100-150 bounded particles, capped device-pixel ratio, resize handling, frame cancellation, and an approximately three-second lifetime in `assets/eric-quiz.js`
+- [X] T014 [US2] Integrate result focus, reduced-motion suppression, static success fallback, animation cleanup, form reset, step-1 restoration, and retry focus behavior in `assets/eric-quiz.js`
 - [X] T015 [US2] Run the exact-profile, one-field-deviation, full-screen fail, retry reset, result timing, animation fallback, and reduced-motion checks documented in `specs/001-verify-eric-identity/quickstart.md`
 
 **Checkpoint**: User Stories 1 and 2 jointly deliver the complete quiz joke and both production result experiences.
@@ -148,7 +148,7 @@ After User Story 1, these tasks can run together:
 ```text
 T011: Add result controls and canvas in are-you-eric.html
 T012: Style both result states in assets/eric-quiz.css
-T013: Implement bounded confetti in assets/eric-quiz.mjs
+T013: Implement bounded confetti in assets/eric-quiz.js
 ```
 
 ### User Story 3
@@ -178,3 +178,13 @@ User Story 3 has no safe intra-story parallel tasks because T016-T018 all modify
 - No package manifest, dependency installation, backend, database, or build output is required.
 - Commit after each completed task or coherent task group.
 - Stop at any checkpoint to validate the current increment independently.
+
+---
+
+## Phase 7: Routing and Script-Loading Regression Fix
+
+**Purpose**: Keep homepage-to-quiz navigation inside the current deployment base path and make the first submission action work when the site is opened directly or served by GitHub Pages.
+
+- [X] T023 Add failing subpath-routing and classic-script quiz-control regression tests in `tests/site-routing.test.mjs`
+- [X] T024 Replace the root-absolute homepage quiz URL in `index.html` and runtime `.mjs` modules in `are-you-eric.html` and `assets/` with document-relative, direct-file-compatible classic scripts
+- [X] T025 Run the complete automated suite and browser-check homepage navigation plus first-name submission using `tests/site-routing.test.mjs` and `specs/001-verify-eric-identity/quickstart.md`

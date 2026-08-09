@@ -26,9 +26,9 @@
 
 ## Decision 4: Exact-profile evaluation boundary
 
-**Decision**: Put name normalization, exact set comparison, and pass/fail evaluation in a pure exported ECMAScript module. Treat missing or malformed input as a failing profile rather than an exception. Keep UI orchestration in a separate module.
+**Decision**: Put name normalization, exact set comparison, and pass/fail evaluation in a pure browser-global script loaded before a separate UI orchestration script. Treat missing or malformed input as a failing profile rather than an exception. Use classic scripts so the static quiz also works in direct-file and preview contexts that block module loading.
 
-**Rationale**: The exact-match predicate is the highest-risk behavior and can be exhaustively tested without a DOM emulator. Separating it also prevents UI state from changing the supplied attempt during comparison.
+**Rationale**: The exact-match predicate is the highest-risk behavior and can be exhaustively tested without a DOM emulator. Separating it also prevents UI state from changing the supplied attempt during comparison, while ordered classic scripts avoid `.mjs` MIME and `file:` module restrictions.
 
 **Alternatives considered**: Inline event-handler logic is harder to test and encourages duplicated conditions. Adding a DOM testing library would require package infrastructure that the repository does not otherwise need.
 

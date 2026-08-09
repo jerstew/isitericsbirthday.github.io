@@ -19,7 +19,7 @@ Open:
 - `http://localhost:8000/`
 - `http://localhost:8000/are-you-eric.html`
 
-Do not validate the module-based quiz by opening the HTML file directly from disk.
+The quiz also supports opening `index.html` directly from disk; the local server remains the preferred production-like validation path.
 
 ## Run automated evaluator tests
 
