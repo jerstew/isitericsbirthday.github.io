@@ -29,6 +29,7 @@ test("homepage promotion is a compact accessible three-item row", () => {
   assert.match(homeHtml, /class="quiz-promo"[\s\S]*?aria-label="New: Take the Are You Eric identity quiz"/);
   assert.match(homeHtml, /width:\s*min\(24rem, 100%\)/);
   assert.match(homeHtml, /min-height:\s*2\.75rem/);
+  assert.match(homeHtml, /margin-top:\s*clamp\(3rem, 10vh, 6rem\)/);
   assert.match(homeHtml, /class="quiz-promo-icon"/);
   assert.match(homeHtml, /class="quiz-promo-badge">NEW!<\/span>/);
   assert.match(homeHtml, /class="quiz-promo-title">ARE YOU ERIC\?<\/strong>/);
