@@ -24,7 +24,7 @@
 
 **Alternatives considered**: Browser validation bubbles are transient and inconsistent under magnification. Disabled Next buttons do not identify what must be corrected. A live announcement without focus movement leaves focus attached to hidden content.
 
-## Decision 4: Exact-profile evaluation boundary
+## Decision 4: Accepted-profile evaluation boundary
 
 **Decision**: Put name normalization, accepted-reaction membership, exact set comparison, and pass/fail evaluation in a pure browser-global script loaded before a separate UI orchestration script. Accept reactions A and C, reject reaction B, and treat missing or malformed input as a failing profile rather than an exception. Use classic scripts so the static quiz also works in direct-file and preview contexts that block module loading.
 
@@ -34,7 +34,7 @@
 
 ## Decision 5: Main-page promotion and responsive typography
 
-**Decision**: Add a normal-flow anchor after the existing birthday content, styled as a CSS-only Windows 95-style beveled card with a `NEW!` badge and a small decorative inline icon. Move the existing viewport-sized typography from the body to the birthday status so the promotion can use bounded rem-based sizing.
+**Decision**: Add a normal-flow anchor after the existing birthday content, styled as a compact single-row CSS-only Windows 95-style beveled button with a `NEW!` badge, `ARE YOU ERIC?` label, and small decorative inline icon. Move the existing viewport-sized typography from the body to the birthday status so the promotion can use bounded rem-based sizing.
 
 **Rationale**: The anchor works without JavaScript, keeps the YES/NO result dominant, avoids extra asset requests, and can wrap safely at 320 pixels and 200% zoom.
 
@@ -71,3 +71,27 @@
 **Rationale**: Runtime and static inspection together cover all dimensions of FR-021; either method alone leaves blind spots.
 
 **Alternatives considered**: Local or session storage violates refresh/reopen reset behavior. Query or fragment state exposes answers. Code review alone cannot prove runtime behavior.
+
+## Decision 10: Structure-first responsive compaction
+
+**Decision**: Compact the quiz by reducing its maximum width from 46rem to 38rem, tightening outer/body padding and vertical gaps, reducing display-heading and icon sizes, and retaining 1rem question/answer text plus 2.75rem (44-pixel) interactive rows and controls. Keep result regions full-screen but reduce the maximum result-heading size from 7rem to 5.5rem. Compact the homepage promotion to one row no wider than 24rem with the icon, `NEW!`, and `ARE YOU ERIC?` only.
+
+**Rationale**: Width, whitespace, and display typography account for the current oversized impression. Reducing those dimensions yields a materially denser phone and desktop layout without shrinking readable content or touch targets. Explicit caps make the refinement testable rather than subjective.
+
+**Alternatives considered**: Uniform scaling would shrink controls and readable text. Phone-only changes would leave the desktop hierarchy oversized. Compacting the full-screen results as ordinary cards would weaken the outcome joke and contradict the result contract.
+
+## Decision 11: Browser-history exit semantics
+
+**Decision**: Add a title-bar `button` with visible X text, accessible name `Go back`, and native hover tooltip `Go back`. On activation, call `history.back()` when `history.length > 1`; otherwise navigate to the relative homepage `./index.html`. Continue managing form stages solely through the existing in-memory `currentStep` and `hidden` states without History API calls.
+
+**Rationale**: Native history Back preserves the visitor's real entry path, while a relative fallback works on the custom domain, GitHub Pages subpaths, and direct-file previews. Keeping form navigation outside browser history ensures the X and browser Back never step through the wizard.
+
+**Alternatives considered**: Always linking home discards the visitor's entry path. `document.referrer` can be suppressed despite usable history. Adding stage hashes or `pushState` entries directly conflicts with the clarified navigation model.
+
+## Decision 12: Homepage-only dark hierarchy
+
+**Decision**: Apply a near-black neutral background and high-contrast off-white supporting text to `index.html` only. Preserve the red/green birthday-state semantics after contrast verification. Keep the compact promotion's silver Windows styling and add a focus treatment visible against both the silver control and dark page. Do not alter the quiz palette or add a theme toggle.
+
+**Rationale**: A fixed dark homepage removes the current glare and keeps the primary YES/NO result visually dominant. Limiting the palette change to the homepage protects the approved quiz aesthetic and avoids theme state, persistence, or control complexity.
+
+**Alternatives considered**: A mode toggle adds state and interaction outside scope. Pure black and white creates harsher contrast than required. Extending the dark palette to the quiz contradicts the clarified requirement.

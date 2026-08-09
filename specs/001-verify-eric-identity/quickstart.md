@@ -32,8 +32,10 @@ Expected result: all tests pass, including normalized names, failing field value
 ## Validate the main page
 
 1. Confirm the existing YES/NO result and subtitle still reflect July 3 as Eric's birthday.
-2. Confirm the quiz promotion appears below the primary result, retains a 1990s beveled appearance, wraps without overlap, and contains a working standard link.
-3. Confirm the YES/NO result remains visually dominant at 320, 375, 768, 1024, and 1440 CSS pixels and at 200% text zoom.
+2. Confirm the page uses a near-black neutral background and high-contrast off-white supporting text without changing the red/green birthday-state meaning.
+3. Confirm the quiz promotion is a single row no wider than 24rem containing only the small icon, `NEW!`, and `ARE YOU ERIC?`, with a working standard link and accessible invitation.
+4. Confirm the promotion is at least 44 pixels high, its visible label is at least 16 pixels, and it remains visually subordinate to the YES/NO result at 320, 375, 390, 768, 1024, and 1440 CSS pixels and at 200% text zoom.
+5. Measure the homepage background, supporting text, focus indicator, promotion, and both birthday-state colors; confirm each meets its applicable WCAG AA contrast threshold.
 
 ## Validate the quiz flow
 
@@ -47,6 +49,15 @@ Follow [ui-contract.md](contracts/ui-contract.md) and [data-model.md](data-model
 6. Repeat with reaction B and with one deviation in each other field; confirm every attempt produces the full-screen rejected result.
 7. Activate `Try again`; confirm all controls clear and focus returns to the step-1 heading.
 8. Partially answer the quiz and refresh; confirm the attempt is discarded.
+9. Confirm the quiz window is no wider than 38rem, question and answer text is at least 16 pixels, controls and option rows are at least 44 pixels high, and the compact layout has no horizontal overflow at 320, 375, and 390 CSS pixels.
+
+## Validate title-bar exit behavior
+
+1. Open the quiz from the homepage, advance to each of the five steps, and confirm the address and browser-history length do not change between steps.
+2. On each step, confirm the title-bar X has visible X text, accessible name `Go back`, hover tooltip `Go back`, a visible focus indicator, and a target at least 44 by 44 CSS pixels.
+3. From a quiz opened through the homepage, activate X and confirm it returns directly to the homepage in one action rather than moving to an earlier quiz step.
+4. Open the quiz as the first entry in a fresh browsing context, activate X, and confirm the relative homepage opens as the fallback.
+5. Use the form's `Back` button and confirm it remains the only control that moves to an earlier quiz stage while preserving answers.
 
 ## Validate keyboard and accessibility behavior
 
@@ -67,6 +78,7 @@ At 320, 375, 768, 1024, and 1440 CSS pixels, and at 200% text zoom:
 - Confirm long oath labels wrap without clipping or overlapping controls.
 - Confirm navigation controls remain reachable and do not overlap.
 - Confirm the rejected result covers the viewport and can scroll vertically when needed.
+- Confirm both result headings have a 5.5rem maximum, remain the largest text on screen, and wrap without clipping.
 - Confirm the retry control remains visible and operable.
 
 ## Validate privacy

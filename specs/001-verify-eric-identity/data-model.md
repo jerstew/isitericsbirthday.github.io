@@ -43,6 +43,7 @@ Coordinates presentation state during the active page load.
 | `phase` | enum | `answering`, `verified`, or `rejected` |
 | `attempt` | QuizAttempt | Derived from the mounted form controls when required |
 | `confettiActive` | boolean | May be true only during `verified` and never under reduced motion |
+| `historyEntriesCreated` | integer | Always `0`; stage transitions never create, replace, or encode an entry |
 
 ### State transitions
 
@@ -53,10 +54,22 @@ answering(step n) --Back--> answering(step n-1), for n=2..5
 answering(step 5) --submit accepted profile--> verified
 answering(step 5) --submit any deviation--> rejected
 rejected --Try again--> answering(step 1, cleared attempt)
+answering(step any) --title-bar X with prior history--> previous browser entry
+answering(step any) --title-bar X without prior history--> homepage
 refresh/reopen -> answering(step 1, cleared attempt)
 ```
 
-There is no transition from `verified` back into an old attempt and no result transition occurs before the step-5 submission.
+There is no transition from `verified` back into an old attempt and no result transition occurs before the step-5 submission. Next, Back, validation, retry, and result transitions operate without `pushState`, `replaceState`, hashes, or query changes.
+
+## Presentation Constraints
+
+Presentation constraints do not add persisted state:
+
+| Surface | Compact boundary | Accessibility boundary |
+|---------|------------------|------------------------|
+| Quiz window | Maximum width 38rem; reduced padding, gaps, headings, and decoration | Question/answer text at least 1rem; controls and selectable rows at least 2.75rem high |
+| Homepage promotion | One row, maximum width 24rem; icon, `NEW!`, and `ARE YOU ERIC?` only | Entire link target at least 2.75rem high; visible label at least 1rem |
+| Result screens | Full viewport; result heading maximum reduced to 5.5rem | Heading remains largest text, wraps without clipping, and page remains scrollable |
 
 ## QuizResult
 

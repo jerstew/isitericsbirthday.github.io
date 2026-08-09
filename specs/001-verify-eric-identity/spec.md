@@ -8,6 +8,16 @@
 
 **Input**: User description: "Add a new page to the existing novelty microsite with a satirical, multi-step quiz that determines whether the visitor is Eric, presents distinct pass and fail outcomes, and is promoted from the main page with a 1990s-style callout."
 
+## Clarifications
+
+### Session 2026-08-09
+
+- Q: How should the quiz title-bar X navigate? → A: Navigate back one browser-history entry, falling back to the homepage when none exists; quiz stages must never create history entries, and stage reversal remains exclusive to the form's Back button.
+- Q: How should the quiz and homepage promotion become more compact without sacrificing accessibility? → A: Reduce container dimensions, padding, gaps, display headings, icons, and other decorative elements while preserving body text at 16px or larger and interactive targets at 44×44px or larger.
+- Q: What content should remain in the compact homepage quiz promotion? → A: Use one Windows-style row containing a small icon, the `NEW!` badge, and `ARE YOU ERIC?`; remove the separate description line while retaining an accessible invitation to take the quiz.
+- Q: What dark palette should the homepage use? → A: Use a near-black neutral background with high-contrast off-white supporting text, preserve the existing red/green birthday-status colors, and leave the quiz page theme unchanged.
+- Q: Should compact sizing apply to the result screens? → A: Keep both outcomes full-screen, but moderately reduce their result-heading sizes along with compacting the quiz window and form.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Complete the Eric identity quiz (Priority: P1)
@@ -24,6 +34,8 @@ A visitor opens the quiz, answers five identity questions one step at a time, an
 2. **Given** a visitor is on a step with a required single-value answer, **When** the visitor attempts to continue without answering it, **Then** the visitor remains on that step and receives a clear prompt to provide an answer.
 3. **Given** a visitor has moved beyond the first step, **When** the visitor goes back to an earlier step, **Then** all answers already entered during the current attempt remain available for review or change.
 4. **Given** a visitor has reached the final step, **When** the visitor submits the attempt, **Then** all five responses are evaluated together and no outcome is disclosed before submission.
+5. **Given** a visitor is on any quiz step, **When** the visitor activates the title-bar X, **Then** the browser returns to the prior page or opens the homepage when no prior history entry exists.
+6. **Given** the quiz is viewed on a phone-sized screen, **When** any step is displayed, **Then** the window, whitespace, headings, and decorative elements use a compact layout while question and answer text remains at least 16px and every interactive target remains at least 44×44px.
 
 ---
 
@@ -41,6 +53,7 @@ A visitor receives either an emphatic rejection or a celebratory verification ba
 2. **Given** reaction B is selected or any other submitted answer differs from the accepted criteria, **When** the visitor submits, **Then** a full-screen retro red result displays `YOU ARE NOT ERIC.` and a secondary `Try again` control.
 3. **Given** the fail result is visible, **When** the visitor activates `Try again`, **Then** a fresh, unanswered attempt begins at the first step.
 4. **Given** the visitor has requested reduced motion, **When** the passing result appears, **Then** the verification message remains complete and celebratory without motion-dependent confetti.
+5. **Given** either result is displayed, **When** it fills the viewport, **Then** its moderately reduced heading remains the dominant content and the outcome remains unmistakable.
 
 ---
 
@@ -54,9 +67,10 @@ A visitor viewing the existing birthday answer can discover and open the Eric id
 
 **Acceptance Scenarios**:
 
-1. **Given** the main page has displayed its existing birthday answer, **When** the visitor reaches the bottom of the page, **Then** a visibly distinct, beveled 1990s-style rectangle marks the identity quiz as a new feature and includes an icon, explanatory text, and a clear action.
+1. **Given** the main page has displayed its existing birthday answer, **When** the visitor reaches the bottom of the page, **Then** a compact single-row beveled 1990s-style button marks the identity quiz as a new feature with a small icon, `NEW!` badge, and `ARE YOU ERIC?` label while remaining subordinate to the YES/NO answer.
 2. **Given** the promotional element is visible, **When** the visitor activates its link, **Then** the new quiz page opens at step 1.
 3. **Given** the promotional element has been added, **When** the main page is loaded on Eric's birthday or any other day, **Then** the existing YES/NO answer remains the primary content and retains its existing meaning.
+4. **Given** the main page is loaded, **When** its birthday result and supporting content render, **Then** a near-black neutral background and high-contrast off-white supporting text are used while the existing red/green birthday-status colors retain their meaning.
 
 ### Edge Cases
 
@@ -65,6 +79,7 @@ A visitor viewing the existing birthday answer can discover and open the Eric id
 - Selecting extra answers in either checkbox list is a profile deviation; a passing attempt requires the exact checkbox combination, not merely inclusion of the correct item.
 - Selecting no traits or no sworn statement is allowed as a response but produces the fail outcome upon submission.
 - Repeated forward and backward navigation does not duplicate answers or change selections.
+- Moving between quiz stages never adds or replaces browser-history entries; browser Back and the title-bar X therefore leave the quiz rather than navigating between stages.
 - Refreshing or reopening the quiz starts a new attempt; unfinished and completed attempts are not recovered.
 - If animation is unavailable or suppressed, the pass message still communicates the complete result.
 - Long translated browser-generated validation text, text zoom, narrow screens, and keyboard-only navigation do not conceal questions or navigation controls.
@@ -74,7 +89,7 @@ A visitor viewing the existing birthday answer can discover and open the Eric id
 ### Functional Requirements
 
 - **FR-001**: The main page MUST retain its existing birthday-answer behavior and provide a link to the identity quiz at the bottom of its content.
-- **FR-002**: The quiz promotion MUST appear as a distinct beveled rectangle with a 1990s visual character, an icon, a visible new-feature indicator, explanatory text, and a clear invitation to take the quiz.
+- **FR-002**: The quiz promotion MUST appear as a compact, single-row beveled button with a 1990s visual character, a small icon, a visible `NEW!` badge, and the visible label `ARE YOU ERIC?`. It MUST omit the separate description line, retain a clear accessible invitation to take the quiz, and remain visually subordinate to the birthday answer.
 - **FR-003**: The quiz MUST be available as a distinct page that can be opened directly as well as from the main page.
 - **FR-004**: The quiz MUST present five ordered steps and make the visitor's current position in the sequence apparent.
 - **FR-005**: Step 1 MUST display the prompt `Enter your first name.` and accept a text response.
@@ -95,6 +110,9 @@ A visitor viewing the existing birthday answer can discover and open the Eric id
 - **FR-020**: The experience MUST honor the visitor's reduced-motion preference by suppressing or substantially reducing confetti movement while preserving the pass outcome.
 - **FR-021**: Quiz responses and results MUST remain limited to the current page session and MUST NOT be retained, transmitted, or exposed in the page address.
 - **FR-022**: The quiz and its promotion MUST remain usable without horizontal scrolling at viewport widths from 320 through 1440 pixels and at up to 200% text zoom.
+- **FR-023**: The quiz title bar MUST include a keyboard-operable Windows-style X control whose accessible name and hover tooltip are `Go back`; activating it MUST navigate one browser-history entry backward and MUST open the homepage when no prior entry exists. Quiz stage changes MUST NOT create or replace browser-history entries, and backward stage navigation MUST remain exclusive to the form's `Back` button.
+- **FR-024**: The quiz and homepage promotion MUST achieve a visibly more compact hierarchy by reducing container width, padding, gaps, display-heading scale, icon size, and decorative dimensions rather than shrinking readable copy or controls. Question, answer, and promotional body text MUST remain at least 16 CSS pixels, and every interactive target MUST remain at least 44 by 44 CSS pixels. Success and failure outcomes MUST remain full-screen, but their result-heading sizes MUST be moderately reduced while retaining dominant visual priority.
+- **FR-025**: The homepage MUST use a near-black neutral background and high-contrast off-white supporting text by default, without a theme toggle. The existing red/green birthday-status colors MUST retain their semantic meaning and meet WCAG AA contrast against the new background. This dark-theme requirement MUST NOT alter the quiz page palette.
 
 ### Key Entities
 
@@ -114,6 +132,10 @@ A visitor viewing the existing birthday answer can discover and open the Eric id
 - **SC-006**: The pass or fail message becomes visible within 1 second of submission under normal page-use conditions.
 - **SC-007**: Inspection of a completed or abandoned attempt confirms that 0 quiz answers are retained after refresh, transmitted away from the page, or included in the page address.
 - **SC-008**: In a content review, 100% of the user-provided prompt and answer wording appears accurately, including capitalization and emphasis where specified.
+- **SC-009**: From every quiz stage, activating the title-bar X leaves the quiz in one action, while browser history inspection confirms that moving among all five stages creates zero history entries.
+- **SC-010**: At 320, 375, and 390 CSS-pixel viewport widths, every quiz step and the homepage promotion retain text of at least 16 CSS pixels and interactive targets of at least 44 by 44 CSS pixels while occupying less visual area than the current implementation through reduced non-content dimensions.
+- **SC-011**: On the homepage in both birthday states, the background, supporting text, focus indicators, red/green status text, and compact promotion meet WCAG AA contrast, while visual comparison confirms that the quiz page palette is unchanged.
+- **SC-012**: At every tested viewport from 320 through 1440 CSS pixels and at 200% text zoom, both result screens cover the viewport without horizontal scrolling, and their reduced headings remain the largest text on screen without clipping.
 
 ## Assumptions
 
