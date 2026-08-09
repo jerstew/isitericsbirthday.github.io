@@ -4,7 +4,7 @@
   const ERIC_PROFILE = Object.freeze({
     firstName: "eric",
     age: "eric-exact-age",
-    reaction: "own-name",
+    reactions: Object.freeze(["turn-around", "own-name"]),
     traits: Object.freeze(["westbank", "resembles-eric", "is-eric"]),
     oath: Object.freeze(["solemnly-swear"]),
   });
@@ -34,7 +34,7 @@
       attempt.firstName.trim().toLocaleLowerCase("en-US") ===
         ERIC_PROFILE.firstName &&
       attempt.age === ERIC_PROFILE.age &&
-      attempt.reaction === ERIC_PROFILE.reaction &&
+      ERIC_PROFILE.reactions.includes(attempt.reaction) &&
       hasExactValues(attempt.traits, ERIC_PROFILE.traits) &&
       hasExactValues(attempt.oath, ERIC_PROFILE.oath)
     );

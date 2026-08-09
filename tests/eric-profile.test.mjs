@@ -28,6 +28,7 @@ function subset(values, mask) {
 
 test("canonical profile is deeply frozen", () => {
   assert.equal(Object.isFrozen(ERIC_PROFILE), true);
+  assert.equal(Object.isFrozen(ERIC_PROFILE.reactions), true);
   assert.equal(Object.isFrozen(ERIC_PROFILE.traits), true);
   assert.equal(Object.isFrozen(ERIC_PROFILE.oath), true);
 });
@@ -50,8 +51,12 @@ test("only the distinct exact-age sentinel passes", () => {
   }
 });
 
-test("only reaction C passes", () => {
-  for (const reaction of ["turn-around", "ignore", "", undefined]) {
+test("reactions A and C pass while B and malformed values fail", () => {
+  for (const reaction of ["turn-around", "own-name"]) {
+    assert.equal(isEric(attemptWith({ reaction })), true, String(reaction));
+  }
+
+  for (const reaction of ["ignore", "", undefined]) {
     assert.equal(isEric(attemptWith({ reaction })), false, String(reaction));
   }
 });

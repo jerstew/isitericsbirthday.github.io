@@ -54,7 +54,7 @@ Both results remain understandable through text without color, animation, or sou
 
 ## Evaluator contract
 
-The evaluator accepts a QuizAttempt-shaped value and returns a boolean. It returns `true` only for the canonical EricProfile defined in [data-model.md](../data-model.md). It must not mutate the supplied object or collections. Missing, unknown, or malformed values return `false`.
+The evaluator accepts a QuizAttempt-shaped value and returns a boolean. It returns `true` only for the canonical EricProfile criteria defined in [data-model.md](../data-model.md): reaction A or C is accepted, reaction B is rejected, and every other field must match exactly. It must not mutate the supplied object or collections. Missing, unknown, or malformed values return `false`.
 
 ## Privacy contract
 

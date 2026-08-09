@@ -43,8 +43,8 @@ Follow [ui-contract.md](contracts/ui-contract.md) and [data-model.md](data-model
 2. Attempt to advance through steps 1, 2, and 3 without answers; each must remain active, show a persistent associated error, and focus the affected control.
 3. Supply answers, use Back and Next repeatedly, and confirm all edits persist.
 4. Confirm steps 4 and 5 allow an empty set and disclose no outcome before `Verify identity`.
-5. Submit the exact canonical profile and confirm the verified heading appears within 1 second with finite confetti.
-6. Repeat with one deviation in each field and confirm every attempt produces the full-screen rejected result.
+5. Submit the accepted profile once with reaction A and once with reaction C; confirm each shows the verified heading within 1 second with finite confetti.
+6. Repeat with reaction B and with one deviation in each other field; confirm every attempt produces the full-screen rejected result.
 7. Activate `Try again`; confirm all controls clear and focus returns to the step-1 heading.
 8. Partially answer the quiz and refresh; confirm the attempt is discarded.
 

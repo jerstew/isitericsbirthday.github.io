@@ -26,7 +26,7 @@
 
 ## Decision 4: Exact-profile evaluation boundary
 
-**Decision**: Put name normalization, exact set comparison, and pass/fail evaluation in a pure browser-global script loaded before a separate UI orchestration script. Treat missing or malformed input as a failing profile rather than an exception. Use classic scripts so the static quiz also works in direct-file and preview contexts that block module loading.
+**Decision**: Put name normalization, accepted-reaction membership, exact set comparison, and pass/fail evaluation in a pure browser-global script loaded before a separate UI orchestration script. Accept reactions A and C, reject reaction B, and treat missing or malformed input as a failing profile rather than an exception. Use classic scripts so the static quiz also works in direct-file and preview contexts that block module loading.
 
 **Rationale**: The exact-match predicate is the highest-risk behavior and can be exhaustively tested without a DOM emulator. Separating it also prevents UI state from changing the supplied attempt during comparison, while ordered classic scripts avoid `.mjs` MIME and `file:` module restrictions.
 

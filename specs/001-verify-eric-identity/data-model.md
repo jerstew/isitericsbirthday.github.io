@@ -23,13 +23,13 @@ Represents the five answers submitted during one page load.
 
 ## EricProfile
 
-The immutable canonical answer combination.
+The immutable canonical acceptance criteria. Two profiles pass because the reaction may be either A or C; every other field remains exact.
 
 | Field | Canonical value |
 |-------|-----------------|
 | `firstName` | `eric` after normalization |
 | `age` | `eric-exact-age` |
-| `reaction` | `own-name` |
+| `reaction` | `turn-around` or `own-name` |
 | `traits` | Exactly `westbank`, `resembles-eric`, and `is-eric` |
 | `oath` | Exactly `solemnly-swear` |
 
@@ -50,7 +50,7 @@ Coordinates presentation state during the active page load.
 new/load -> answering(step 1)
 answering(step n) --valid Next--> answering(step n+1), for n=1..4
 answering(step n) --Back--> answering(step n-1), for n=2..5
-answering(step 5) --submit exact profile--> verified
+answering(step 5) --submit accepted profile--> verified
 answering(step 5) --submit any deviation--> rejected
 rejected --Try again--> answering(step 1, cleared attempt)
 refresh/reopen -> answering(step 1, cleared attempt)
@@ -65,4 +65,4 @@ There is no transition from `verified` back into an old attempt and no result tr
 | `status` | enum | `verified` or `rejected` |
 | `message` | fixed text | `IDENTITY VERIFIED: WELCOME, ERIC.` or `YOU ARE NOT ERIC.` |
 
-The result is derived only from exact equality between `QuizAttempt` and `EricProfile`; it is not stored separately.
+The result is derived only from the accepted-reaction membership check plus exact equality for every other `QuizAttempt` field; it is not stored separately.

@@ -6,7 +6,7 @@
 
 ## Summary
 
-Add a directly addressable five-step Eric identity quiz and a retro promotional link below the existing birthday result. The implementation remains a static, dependency-free GitHub Pages site: semantic HTML and local CSS provide the interface, ordered classic browser scripts manage transient form state and finite confetti, and a pure evaluator performs exact-profile evaluation. Node's built-in test runner verifies the evaluator; browser-based validation covers navigation, focus, responsive layout, accessibility, privacy, direct-file compatibility, and birthday-page regression.
+Add a directly addressable five-step Eric identity quiz and a retro promotional link below the existing birthday result. The implementation remains a static, dependency-free GitHub Pages site: semantic HTML and local CSS provide the interface, ordered classic browser scripts manage transient form state and finite confetti, and a pure evaluator applies the accepted-profile criteria. Node's built-in test runner verifies the evaluator; browser-based validation covers navigation, focus, responsive layout, accessibility, privacy, direct-file compatibility, and birthday-page regression.
 
 ## Technical Context
 

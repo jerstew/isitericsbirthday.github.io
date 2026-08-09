@@ -29,16 +29,16 @@ A visitor opens the quiz, answers five identity questions one step at a time, an
 
 ### User Story 2 - Receive an unmistakable identity result (Priority: P1)
 
-A visitor receives either an emphatic rejection or a celebratory verification based on whether every answer matches the defined Eric profile.
+A visitor receives either an emphatic rejection or a celebratory verification based on whether every answer matches one of the two accepted Eric profiles, which differ only in the public-reaction answer.
 
 **Why this priority**: The contrasting result states deliver the joke and provide a definitive end to the quiz.
 
-**Independent Test**: Submit one exact-profile response and several responses that each differ in only one field; verify that the exact response passes and every deviation fails.
+**Independent Test**: Submit both accepted-profile responses and several responses that differ in a disqualifying field; verify that reactions A and C pass while reaction B and every other deviation fail.
 
 **Acceptance Scenarios**:
 
-1. **Given** the submitted first name is `Eric` after ignoring capitalization and surrounding whitespace, the selected age is `Eric's Exact Age`, reaction C is selected, all three traits are selected, and only `I SOLEMNLY SWEAR` is selected in the final checklist, **When** the visitor submits, **Then** confetti appears with `IDENTITY VERIFIED: WELCOME, ERIC.`
-2. **Given** any submitted answer differs from that exact profile, **When** the visitor submits, **Then** a full-screen retro red result displays `YOU ARE NOT ERIC.` and a secondary `Try again` control.
+1. **Given** the submitted first name is `Eric` after ignoring capitalization and surrounding whitespace, the selected age is `Eric's Exact Age`, reaction A or C is selected, all three traits are selected, and only `I SOLEMNLY SWEAR` is selected in the final checklist, **When** the visitor submits, **Then** confetti appears with `IDENTITY VERIFIED: WELCOME, ERIC.`
+2. **Given** reaction B is selected or any other submitted answer differs from the accepted criteria, **When** the visitor submits, **Then** a full-screen retro red result displays `YOU ARE NOT ERIC.` and a secondary `Try again` control.
 3. **Given** the fail result is visible, **When** the visitor activates `Try again`, **Then** a fresh, unanswered attempt begins at the first step.
 4. **Given** the visitor has requested reduced motion, **When** the passing result appears, **Then** the verification message remains complete and celebratory without motion-dependent confetti.
 
@@ -85,8 +85,8 @@ A visitor viewing the existing birthday answer can discover and open the Eric id
 - **FR-010**: The quiz MUST prevent forward movement when the first-name, age, or reaction step lacks an answer and MUST identify the unanswered prompt without discarding entered responses.
 - **FR-011**: The visitor MUST be able to move backward before submission and revise prior answers without losing other answers from the current attempt.
 - **FR-012**: The quiz MUST evaluate the complete response only when the visitor submits the final step.
-- **FR-013**: The sole passing profile MUST be: first name equal to `Eric` after case-insensitive comparison and removal of surrounding whitespace; age equal to the distinct `Eric's Exact Age` option; reaction C; all three traits selected; and only `I SOLEMNLY SWEAR: I am Eric.` selected in the sworn-statement checklist.
-- **FR-014**: Any response that is not the sole passing profile MUST produce the fail outcome.
+- **FR-013**: The passing profiles MUST be: first name equal to `Eric` after case-insensitive comparison and removal of surrounding whitespace; age equal to the distinct `Eric's Exact Age` option; reaction A or C; all three traits selected; and only `I SOLEMNLY SWEAR: I am Eric.` selected in the sworn-statement checklist.
+- **FR-014**: Any response that does not match one of the two passing profiles MUST produce the fail outcome.
 - **FR-015**: The fail outcome MUST cover the available viewing area with a retro red banner, display `YOU ARE NOT ERIC.` as the dominant content, and include a secondary `Try again` control.
 - **FR-016**: Activating `Try again` MUST clear every response and return the visitor to step 1.
 - **FR-017**: The pass outcome MUST display `IDENTITY VERIFIED: WELCOME, ERIC.` as the dominant content and trigger a confetti celebration.
@@ -99,14 +99,14 @@ A visitor viewing the existing birthday answer can discover and open the Eric id
 ### Key Entities
 
 - **Quiz attempt**: The transient set of answers for one visit, consisting of first name, age selection, public reaction, selected traits, and selected sworn statements; it is discarded on retry, refresh, or page exit.
-- **Eric profile**: The single canonical combination of answers that produces identity verification.
+- **Eric profile**: The canonical identity criteria, allowing reaction A or C and requiring exact matches for every other answer.
 - **Quiz result**: One of two mutually exclusive outcomes, verified or not Eric, derived from comparing a submitted quiz attempt with the Eric profile.
 
 ## Success Criteria *(mandatory)*
 
 ### Measurable Outcomes
 
-- **SC-001**: In a complete test matrix, 100% of exact-profile submissions receive the verified result and 100% of submissions differing in any single field receive the not-Eric result.
+- **SC-001**: In a complete test matrix, 100% of accepted-profile submissions using reaction A or C receive the verified result, while reaction B and 100% of submissions differing in any other field receive the not-Eric result.
 - **SC-002**: A first-time visitor can complete and submit the five-step quiz in under 2 minutes without external instructions.
 - **SC-003**: In usability testing, at least 90% of participants can identify their current quiz step, move backward to revise an answer, and reach a result on their first attempt.
 - **SC-004**: The promotion and full quiz flow remain readable and operable at every tested viewport width from 320 through 1440 pixels, at 200% text zoom, and using keyboard-only input.
@@ -118,7 +118,7 @@ A visitor viewing the existing birthday answer can discover and open the Eric id
 ## Assumptions
 
 - `Eric's Exact Age` is intentionally a separate satirical answer and is the only passing age selection; numeric options remain available only as failing alternatives.
-- Reaction C is the canonical Eric response because it explicitly recognizes Eric as the visitor's own name.
+- Reactions A and C are both accepted: Eric may instinctively turn around or recognize that someone is calling his name; reaction B remains disqualifying.
 - Eric's trait profile includes all three listed traits.
 - The passing sworn response selects only `I SOLEMNLY SWEAR: I am Eric.`; selecting either contradictory statement, alone or in addition, fails verification.
 - The mock perjury language is comedic interface copy and does not create an actual legal attestation or collect a signature.

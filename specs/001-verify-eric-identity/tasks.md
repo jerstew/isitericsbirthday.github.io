@@ -4,7 +4,7 @@
 
 **Prerequisites**: `plan.md`, `spec.md`, `research.md`, `data-model.md`, `contracts/ui-contract.md`, `quickstart.md`
 
-**Tests**: Automated tests cover the pure exact-profile evaluator. Browser interaction, accessibility, responsive behavior, privacy, and birthday regression use the manual validation contract in `quickstart.md`.
+**Tests**: Automated tests cover the pure accepted-profile evaluator. Browser interaction, accessibility, responsive behavior, privacy, and birthday regression use the manual validation contract in `quickstart.md`.
 
 **Organization**: Tasks are grouped by user story so each story can be implemented and validated as an incremental slice.
 
@@ -24,7 +24,7 @@
 
 ## Phase 2: Foundational (Blocking Prerequisites)
 
-**Purpose**: Implement and verify the shared exact-profile decision boundary and common quiz styling foundation.
+**Purpose**: Implement and verify the shared accepted-profile decision boundary and common quiz styling foundation.
 
 **CRITICAL**: User-story implementation begins only after the evaluator tests pass and the shared style foundation exists.
 
@@ -67,7 +67,7 @@
 - [X] T012 [P] [US2] Style the verified celebration and scroll-safe full-viewport retro red rejection, dominant result headings, non-color cues, secondary retry control, and zoom-safe result layout in `assets/eric-quiz.css`
 - [X] T013 [P] [US2] Implement pointer-transparent finite canvas confetti with 100-150 bounded particles, capped device-pixel ratio, resize handling, frame cancellation, and an approximately three-second lifetime in `assets/eric-quiz.js`
 - [X] T014 [US2] Integrate result focus, reduced-motion suppression, static success fallback, animation cleanup, form reset, step-1 restoration, and retry focus behavior in `assets/eric-quiz.js`
-- [X] T015 [US2] Run the exact-profile, one-field-deviation, full-screen fail, retry reset, result timing, animation fallback, and reduced-motion checks documented in `specs/001-verify-eric-identity/quickstart.md`
+- [X] T015 [US2] Run the accepted-profile, one-field-deviation, full-screen fail, retry reset, result timing, animation fallback, and reduced-motion checks documented in `specs/001-verify-eric-identity/quickstart.md`
 
 **Checkpoint**: User Stories 1 and 2 jointly deliver the complete quiz joke and both production result experiences.
 
@@ -165,7 +165,7 @@ User Story 3 has no safe intra-story parallel tasks because T016-T018 all modify
 
 ### Incremental Delivery
 
-1. **Foundation**: Static file layout, exact-profile tests/evaluator, and shared style primitives.
+1. **Foundation**: Static file layout, accepted-profile tests/evaluator, and shared style primitives.
 2. **MVP / US1**: Direct five-step quiz with validation, navigation, persistence during the attempt, and one result.
 3. **Result experience / US2**: Full retro failure, confetti success, reduced-motion behavior, focus, and retry.
 4. **Discovery / US3**: Main-page promotion while preserving birthday behavior.
@@ -188,3 +188,13 @@ User Story 3 has no safe intra-story parallel tasks because T016-T018 all modify
 - [X] T023 Add failing subpath-routing and classic-script quiz-control regression tests in `tests/site-routing.test.mjs`
 - [X] T024 Replace the root-absolute homepage quiz URL in `index.html` and runtime `.mjs` modules in `are-you-eric.html` and `assets/` with document-relative, direct-file-compatible classic scripts
 - [X] T025 Run the complete automated suite and browser-check homepage navigation plus first-name submission using `tests/site-routing.test.mjs` and `specs/001-verify-eric-identity/quickstart.md`
+
+---
+
+## Phase 8: Expand Accepted Public Reactions
+
+**Purpose**: Accept both plausible Eric reactions to hearing "Hey Eric!" while preserving every other exact-match requirement.
+
+- [X] T026 Add a failing evaluator regression test proving reactions A and C pass while B and malformed reaction values fail in `tests/eric-profile.test.mjs`
+- [X] T027 Update the accepted-reaction evaluator rule, version the browser asset URLs to invalidate stale evaluator caches, and synchronize `spec.md`, `data-model.md`, `research.md`, `contracts/ui-contract.md`, and `quickstart.md`
+- [X] T028 Run the complete automated suite and browser-check verified outcomes for reactions A and C plus rejection for reaction B
