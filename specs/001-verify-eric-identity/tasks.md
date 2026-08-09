@@ -18,7 +18,7 @@
 
 **Purpose**: Establish the planned static-site file layout without adding packages or build tooling.
 
-- [ ] T001 Create the planned empty source and test file structure at `are-you-eric.html`, `assets/eric-quiz.css`, `assets/eric-profile.mjs`, `assets/eric-quiz.mjs`, and `tests/eric-profile.test.mjs`
+- [X] T001 Create the planned empty source and test file structure at `are-you-eric.html`, `assets/eric-quiz.css`, `assets/eric-profile.mjs`, `assets/eric-quiz.mjs`, and `tests/eric-profile.test.mjs`
 
 ---
 
@@ -28,9 +28,9 @@
 
 **CRITICAL**: User-story implementation begins only after the evaluator tests pass and the shared style foundation exists.
 
-- [ ] T002 [P] Write failing package-free tests for normalized passing names, failing names/ages/reactions, missing or malformed values, all 64 trait/oath bitmask combinations, and evaluator immutability in `tests/eric-profile.test.mjs`
-- [ ] T003 Implement the immutable Eric profile, normalization, exact set comparison, and fail-closed exported evaluator required by T002 in `assets/eric-profile.mjs`
-- [ ] T004 [P] Define the local system-font stack, color tokens, box sizing, focus-visible treatment, control target sizing, and reduced-motion baseline in `assets/eric-quiz.css`
+- [X] T002 [P] Write failing package-free tests for normalized passing names, failing names/ages/reactions, missing or malformed values, all 64 trait/oath bitmask combinations, and evaluator immutability in `tests/eric-profile.test.mjs`
+- [X] T003 Implement the immutable Eric profile, normalization, exact set comparison, and fail-closed exported evaluator required by T002 in `assets/eric-profile.mjs`
+- [X] T004 [P] Define the local system-font stack, color tokens, box sizing, focus-visible treatment, control target sizing, and reduced-motion baseline in `assets/eric-quiz.css`
 
 **Checkpoint**: `node --test tests/eric-profile.test.mjs` passes with no package installation, and the shared visual/accessibility primitives are ready.
 
@@ -44,12 +44,12 @@
 
 ### Implementation for User Story 1
 
-- [ ] T005 [P] [US1] Author the directly addressable quiz document with unique title/H1, one semantic form, five mounted step panels, exact prompts and choices, progress headings, hidden verified/rejected text regions, local asset references, and a no-script message in `are-you-eric.html`
-- [ ] T006 [P] [US1] Implement the responsive quiz card, fieldsets, labels, controls, optional-step guidance, progress treatment, navigation layout, hidden-state behavior, and 320-1440 pixel/200% zoom wrapping in `assets/eric-quiz.css`
-- [ ] T007 [US1] Implement current-step state, form-submit advancement for steps 1-4, non-validating Back behavior, mounted-control answer preservation, and step-heading focus management in `assets/eric-quiz.mjs`
-- [ ] T008 [US1] Add trimmed-empty name, missing-age, and missing-reaction validation with persistent inline errors, `aria-describedby`, `aria-invalid`, correction clearing, and invalid-control focus in `assets/eric-quiz.mjs`
-- [ ] T009 [US1] Collect the five-field QuizAttempt, call the pure evaluator only on step-5 submission, hide the form, and reveal/focus exactly one basic result region in `assets/eric-quiz.mjs`
-- [ ] T010 [US1] Run the direct-page, ordered-step, required-validation, Back/Next persistence, Enter-key, empty-checkbox, refresh-reset, and no-early-outcome checks documented in `specs/001-verify-eric-identity/quickstart.md`
+- [X] T005 [P] [US1] Author the directly addressable quiz document with unique title/H1, one semantic form, five mounted step panels, exact prompts and choices, progress headings, hidden verified/rejected text regions, local asset references, and a no-script message in `are-you-eric.html`
+- [X] T006 [P] [US1] Implement the responsive quiz card, fieldsets, labels, controls, optional-step guidance, progress treatment, navigation layout, hidden-state behavior, and 320-1440 pixel/200% zoom wrapping in `assets/eric-quiz.css`
+- [X] T007 [US1] Implement current-step state, form-submit advancement for steps 1-4, non-validating Back behavior, mounted-control answer preservation, and step-heading focus management in `assets/eric-quiz.mjs`
+- [X] T008 [US1] Add trimmed-empty name, missing-age, and missing-reaction validation with persistent inline errors, `aria-describedby`, `aria-invalid`, correction clearing, and invalid-control focus in `assets/eric-quiz.mjs`
+- [X] T009 [US1] Collect the five-field QuizAttempt, call the pure evaluator only on step-5 submission, hide the form, and reveal/focus exactly one basic result region in `assets/eric-quiz.mjs`
+- [X] T010 [US1] Run the direct-page, ordered-step, required-validation, Back/Next persistence, Enter-key, empty-checkbox, refresh-reset, and no-early-outcome checks documented in `specs/001-verify-eric-identity/quickstart.md`
 
 **Checkpoint**: User Story 1 is independently functional as the MVP, with a complete quiz and deterministic plain-text result.
 
@@ -63,11 +63,11 @@
 
 ### Implementation for User Story 2
 
-- [ ] T011 [P] [US2] Add the decorative confetti canvas, static reduced-motion celebration, and real `Try again` button to the verified/rejected result markup in `are-you-eric.html`
-- [ ] T012 [P] [US2] Style the verified celebration and scroll-safe full-viewport retro red rejection, dominant result headings, non-color cues, secondary retry control, and zoom-safe result layout in `assets/eric-quiz.css`
-- [ ] T013 [P] [US2] Implement pointer-transparent finite canvas confetti with 100-150 bounded particles, capped device-pixel ratio, resize handling, frame cancellation, and an approximately three-second lifetime in `assets/eric-quiz.mjs`
-- [ ] T014 [US2] Integrate result focus, reduced-motion suppression, static success fallback, animation cleanup, form reset, step-1 restoration, and retry focus behavior in `assets/eric-quiz.mjs`
-- [ ] T015 [US2] Run the exact-profile, one-field-deviation, full-screen fail, retry reset, result timing, animation fallback, and reduced-motion checks documented in `specs/001-verify-eric-identity/quickstart.md`
+- [X] T011 [P] [US2] Add the decorative confetti canvas, static reduced-motion celebration, and real `Try again` button to the verified/rejected result markup in `are-you-eric.html`
+- [X] T012 [P] [US2] Style the verified celebration and scroll-safe full-viewport retro red rejection, dominant result headings, non-color cues, secondary retry control, and zoom-safe result layout in `assets/eric-quiz.css`
+- [X] T013 [P] [US2] Implement pointer-transparent finite canvas confetti with 100-150 bounded particles, capped device-pixel ratio, resize handling, frame cancellation, and an approximately three-second lifetime in `assets/eric-quiz.mjs`
+- [X] T014 [US2] Integrate result focus, reduced-motion suppression, static success fallback, animation cleanup, form reset, step-1 restoration, and retry focus behavior in `assets/eric-quiz.mjs`
+- [X] T015 [US2] Run the exact-profile, one-field-deviation, full-screen fail, retry reset, result timing, animation fallback, and reduced-motion checks documented in `specs/001-verify-eric-identity/quickstart.md`
 
 **Checkpoint**: User Stories 1 and 2 jointly deliver the complete quiz joke and both production result experiences.
 
@@ -81,10 +81,10 @@
 
 ### Implementation for User Story 3
 
-- [ ] T016 [US3] Move large viewport typography ownership from `body` to `.birthday-status` and establish normal rem sizing for additional content without changing birthday calculation or copy in `index.html`
-- [ ] T017 [US3] Add the normal-flow `/are-you-eric.html` promotional anchor after the birthday content with a visible `NEW!` badge, explanatory text, clear action, and assistive-technology-hidden inline icon in `index.html`
-- [ ] T018 [US3] Add the CSS-only Windows 95-style bevel, inset active state, visible focus state, bounded fluid width, independent rem typography, and narrow-screen wrapping for the promotion in `index.html`
-- [ ] T019 [US3] Run the root-page birthday regression, content-dominance, keyboard-link, 320-1440 pixel, and 200% zoom checks documented in `specs/001-verify-eric-identity/quickstart.md`
+- [X] T016 [US3] Move large viewport typography ownership from `body` to `.birthday-status` and establish normal rem sizing for additional content without changing birthday calculation or copy in `index.html`
+- [X] T017 [US3] Add the normal-flow `/are-you-eric.html` promotional anchor after the birthday content with a visible `NEW!` badge, explanatory text, clear action, and assistive-technology-hidden inline icon in `index.html`
+- [X] T018 [US3] Add the CSS-only Windows 95-style bevel, inset active state, visible focus state, bounded fluid width, independent rem typography, and narrow-screen wrapping for the promotion in `index.html`
+- [X] T019 [US3] Run the root-page birthday regression, content-dominance, keyboard-link, 320-1440 pixel, and 200% zoom checks documented in `specs/001-verify-eric-identity/quickstart.md`
 
 **Checkpoint**: All three user stories are functional, and the original novelty answer remains the main page's primary purpose.
 
@@ -94,9 +94,9 @@
 
 **Purpose**: Verify requirements that span all stories and close any discovered defects.
 
-- [ ] T020 Audit `index.html`, `are-you-eric.html`, and `assets/` for network submission, external runtime URLs, analytics, cookies, browser storage, URL-state exposure, and prohibited persistence using the privacy procedure in `specs/001-verify-eric-identity/quickstart.md`
-- [ ] T021 Validate and correct keyboard order, native labels/groups, hidden-step accessibility, heading focus, error association, duplicate IDs, WCAG AA contrast, target sizing, narrow viewports, and 200% zoom across `are-you-eric.html` and `assets/eric-quiz.css`
-- [ ] T022 Run `node --test` and the complete end-to-end validation sequence in `specs/001-verify-eric-identity/quickstart.md`, resolving any remaining deviation in `index.html`, `are-you-eric.html`, `assets/`, or `tests/eric-profile.test.mjs`
+- [X] T020 Audit `index.html`, `are-you-eric.html`, and `assets/` for network submission, external runtime URLs, analytics, cookies, browser storage, URL-state exposure, and prohibited persistence using the privacy procedure in `specs/001-verify-eric-identity/quickstart.md`
+- [X] T021 Validate and correct keyboard order, native labels/groups, hidden-step accessibility, heading focus, error association, duplicate IDs, WCAG AA contrast, target sizing, narrow viewports, and 200% zoom across `are-you-eric.html` and `assets/eric-quiz.css`
+- [X] T022 Run `node --test` and the complete end-to-end validation sequence in `specs/001-verify-eric-identity/quickstart.md`, resolving any remaining deviation in `index.html`, `are-you-eric.html`, `assets/`, or `tests/eric-profile.test.mjs`
 
 ---
 
