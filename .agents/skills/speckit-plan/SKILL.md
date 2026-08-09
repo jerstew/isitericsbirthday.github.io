@@ -103,7 +103,11 @@ Check if `.specify/extensions.yml` exists in the project root.
 
 ## Completion Report
 
-Command ends after Phase 1 design. Report branch, IMPL_PLAN path, and generated artifacts.
+Before reporting completion, review the repository diff and create logical, atomic local commits
+for every artifact changed by this workflow. Never push commits or branches automatically; pushing
+requires an explicit user request. Command ends after
+Phase 1 design. Report the branch, commit identifier(s), IMPL_PLAN path, generated artifacts, and
+exactly one concrete next command or bounded manual action when further work exists.
 
 ## Phases
 
@@ -162,5 +166,6 @@ Command ends after Phase 1 design. Report branch, IMPL_PLAN path, and generated 
 ## Done When
 
 - [ ] Plan workflow executed and design artifacts generated
+- [ ] All changed repository files committed locally and no automatic push performed
 - [ ] Extension hooks dispatched or skipped according to the rules in Mandatory Post-Execution Hooks above
-- [ ] Completion reported to user with branch, plan path, and generated artifacts
+- [ ] Completion reported with branch, commit identifiers, plan path, generated artifacts, and one concrete next step

@@ -42,6 +42,10 @@
 
 [Gates determined based on constitution file]
 
+The completed planning workflow MUST end with reviewed local commits, MUST NOT push automatically,
+and MUST name one concrete next step in its handoff when further work exists. A push requires an
+explicit user request.
+
 ## Project Structure
 
 ### Documentation (this feature)

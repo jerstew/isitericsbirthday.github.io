@@ -74,6 +74,13 @@ git config --get remote.origin.url
 > [!CAUTION]
 > UNDER NO CIRCUMSTANCES EVER CREATE ISSUES IN REPOSITORIES THAT DO NOT MATCH THE REMOTE URL
 
+## Completion Handoff
+
+This workflow does not modify repository files, so no local commit is required unless another
+authorized step changed files during the same run. Never push commits or branches automatically;
+pushing requires an explicit user request. Report created and skipped issues, then recommend exactly
+one concrete next command or bounded manual action when further work exists.
+
 ## Post-Execution Checks
 
 **Check for extension hooks (after tasks-to-issues conversion)**:

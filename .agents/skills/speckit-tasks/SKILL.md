@@ -123,6 +123,10 @@ Check if `.specify/extensions.yml` exists in the project root.
 
 ## Completion Report
 
+Before reporting completion, review the repository diff and create logical, atomic local commits
+for `tasks.md` and any other repository files changed by this workflow. Never push commits or
+branches automatically; pushing requires an explicit user request.
+
 Output path to generated tasks.md and summary:
 - Total task count
 - Task count per user story
@@ -130,6 +134,8 @@ Output path to generated tasks.md and summary:
 - Independent test criteria for each story
 - Suggested MVP scope (typically just User Story 1)
 - Format validation: Confirm ALL tasks follow the checklist format (checkbox, ID, labels, file paths)
+- Created commit identifier(s)
+- Exactly one concrete next command or bounded manual action when further work exists
 
 Context for task generation: $ARGUMENTS
 
@@ -210,5 +216,6 @@ Every task MUST strictly follow this format:
 ## Done When
 
 - [ ] tasks.md generated with all phases, task IDs, and file paths
+- [ ] All changed repository files committed locally and no automatic push performed
 - [ ] Extension hooks dispatched or skipped according to the rules in Mandatory Post-Execution Hooks above
-- [ ] Completion reported to user with task count, story breakdown, and MVP scope
+- [ ] Completion reported with task count, story breakdown, MVP scope, commit identifiers, and one concrete next step

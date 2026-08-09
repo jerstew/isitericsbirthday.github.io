@@ -177,6 +177,9 @@ User Story 3 has no safe intra-story parallel tasks because T016-T018 all modify
 - `[US1]`, `[US2]`, and `[US3]` provide specification traceability.
 - No package manifest, dependency installation, backend, database, or build output is required.
 - Commit after each completed task or coherent task group.
+- Ensure every completed workflow's repository changes are committed locally before recommending the next step.
+- Never push commits or branches automatically; pushing requires an explicit user request.
+- End every completion report with exactly one concrete next command or bounded manual action when further work exists.
 - Stop at any checkpoint to validate the current increment independently.
 
 ---

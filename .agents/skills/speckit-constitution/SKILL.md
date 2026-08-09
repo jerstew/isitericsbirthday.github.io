@@ -103,10 +103,15 @@ Follow this execution flow:
 
 7. Write the completed constitution back to `.specify/memory/constitution.md` (overwrite).
 
-8. Output a final summary to the user with:
+8. Review the completed repository diff and create logical, atomic local commits for the
+   constitution, templates, workflow definitions, and dependent artifacts changed by this run.
+   Never push commits or branches automatically; pushing requires an explicit user request.
+
+9. Output a final summary to the user with:
    - New version and bump rationale.
    - Any files flagged for manual follow-up.
-   - Suggested commit message (e.g., `docs: amend constitution to vX.Y.Z (principle additions + governance update)`).
+   - Created commit identifier(s).
+   - Exactly one concrete next command or bounded manual action when further work exists.
 
 Formatting & Style Requirements:
 

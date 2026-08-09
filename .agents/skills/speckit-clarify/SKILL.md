@@ -268,6 +268,9 @@ Check if `.specify/extensions.yml` exists in the project root.
 
 ## Completion Report
 
+Before reporting completion, review the repository diff and create logical, atomic local commits
+for every specification or checklist file changed by this workflow. Never push commits or branches
+automatically; pushing requires an explicit user request.
 Report completion (after questioning loop ends or early termination):
 - Number of questions asked & answered.
 - Path to updated spec.
@@ -276,10 +279,13 @@ Report completion (after questioning loop ends or early termination):
 - Coverage summary table listing each taxonomy category with Status: Resolved (was Partial/Missing and addressed), Deferred (exceeds question quota or better suited for planning), Clear (already sufficient), Outstanding (still Partial/Missing but low impact).
 - If any Outstanding or Deferred remain, recommend whether to proceed to `/speckit-plan` or run `/speckit-clarify` again later post-plan.
 - Suggested next command.
+- Created commit identifier(s).
+- Exactly one concrete next command or bounded manual action when further work exists.
 
 ## Done When
 
 - [ ] Spec ambiguities identified and clarifications integrated into spec file
 - [ ] Spec quality checklist re-validated against updated spec (if `FEATURE_DIR/checklists/requirements.md` exists)
+- [ ] All changed repository files committed locally and no automatic push performed
 - [ ] Extension hooks dispatched or skipped according to the rules in Mandatory Post-Execution Hooks above
-- [ ] Completion reported to user with questions answered, sections touched, checklist status, and coverage summary
+- [ ] Completion reported with questions answered, sections touched, checklist status, coverage summary, commit identifiers, and one concrete next step

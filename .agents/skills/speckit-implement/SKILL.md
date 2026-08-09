@@ -213,11 +213,16 @@ Check if `.specify/extensions.yml` exists in the project root.
 
 ## Completion Report
 
-Report final status with summary of completed work.
+Before reporting completion, review the repository diff and create logical, atomic local commits
+for all completed implementation, test, task, and documentation changes. Never push commits or
+branches automatically; pushing requires an explicit user request. Report final status with
+verification evidence, created commit identifier(s), and exactly one concrete next command or
+bounded manual action when further work exists.
 
 ## Done When
 
 - [ ] All tasks in tasks.md completed and marked `[X]`
 - [ ] Implementation validated against specification, plan, and test coverage
+- [ ] All changed repository files committed locally and no automatic push performed
 - [ ] Extension hooks dispatched or skipped according to the rules in Mandatory Post-Execution Hooks above
-- [ ] Completion reported to user with summary of completed work
+- [ ] Completion reported with summary, verification evidence, commit identifiers, and one concrete next step

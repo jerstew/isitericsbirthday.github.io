@@ -218,14 +218,14 @@ Task: "Create [Entity2] model in src/models/[entity2].py"
 2. Complete Phase 2: Foundational (CRITICAL - blocks all stories)
 3. Complete Phase 3: User Story 1
 4. **STOP and VALIDATE**: Test User Story 1 independently
-5. Deploy/demo if ready
+5. Review/demo locally if ready
 
 ### Incremental Delivery
 
 1. Complete Setup + Foundational → Foundation ready
-2. Add User Story 1 → Test independently → Deploy/Demo (MVP!)
-3. Add User Story 2 → Test independently → Deploy/Demo
-4. Add User Story 3 → Test independently → Deploy/Demo
+2. Add User Story 1 → Test independently → Review/Demo locally (MVP!)
+3. Add User Story 2 → Test independently → Review/Demo locally
+4. Add User Story 3 → Test independently → Review/Demo locally
 5. Each story adds value without breaking previous stories
 
 ### Parallel Team Strategy
@@ -247,6 +247,8 @@ With multiple developers:
 - [Story] label maps task to specific user story for traceability
 - Each user story should be independently completable and testable
 - Verify tests fail before implementing
-- Commit after each task or logical group
+- Commit after each task or logical group and ensure all completed changes are locally committed before handoff
+- Never push commits or branches automatically; pushing requires an explicit user request
+- Every completion report names exactly one concrete next command or bounded manual action when further work exists
 - Stop at any checkpoint to validate story independently
 - Avoid: vague tasks, same file conflicts, cross-story dependencies that break independence

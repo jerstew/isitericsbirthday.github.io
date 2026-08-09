@@ -230,11 +230,16 @@ Append to the **end** of `tasks.md`, per the append contract:
 
 ### 8. Provide Next Actions (Handoff)
 
+- When tasks were appended, review the diff and create a logical, atomic local commit containing
+  the updated `tasks.md` before handoff. When no files changed, state that no commit was needed.
+- Never push commits or branches automatically; pushing requires an explicit user request.
 - On `tasks_appended`: state how many tasks were appended under which phase, and recommend
   running `/speckit-implement` to complete them; note that a follow-up converge
   run will find fewer or no remaining items.
-- On `converged`: recommend proceeding to review / opening a PR. No further implement pass
-  is needed for this feature's specified scope.
+- On `converged`: recommend one concrete local review or validation action. No further implement
+  pass is needed for this feature's specified scope.
+- Report the created commit identifier when applicable and provide exactly one next action when
+  further work exists.
 
 ### 9. Check for extension hooks
 

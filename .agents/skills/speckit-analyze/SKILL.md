@@ -199,6 +199,9 @@ At end of report, output a concise Next Actions block:
 - If CRITICAL issues exist: Recommend resolving before `/speckit-implement`
 - If only LOW/MEDIUM: User may proceed, but provide improvement suggestions
 - Provide explicit command suggestions: e.g., "Run /speckit-specify with refinement", "Run /speckit-plan to adjust architecture", "Manually edit tasks.md to add coverage for 'performance-metrics'"
+- Recommend exactly one concrete next command or bounded manual action when further work exists.
+  This read-only workflow requires no commit and MUST NOT push commits or branches automatically;
+  pushing requires an explicit user request.
 
 ### 8. Offer Remediation
 

@@ -269,11 +269,16 @@ Check if `.specify/extensions.yml` exists in the project root.
 
 ## Completion Report
 
+Before reporting completion, review the repository diff and create logical, atomic local commits
+for the specification, checklist, feature metadata, and any other repository files changed by this
+workflow. Never push commits or branches automatically; pushing requires an explicit user request.
+
 Report completion to the user with:
 - `SPECIFY_FEATURE_DIRECTORY` — the feature directory path
 - `SPEC_FILE` — the spec file path
 - Checklist results summary
-- Readiness for the next phase (`/speckit-clarify` or `/speckit-plan`)
+- Created commit identifier(s)
+- Exactly one concrete next phase command (`/speckit-clarify` or `/speckit-plan`)
 
 **NOTE:** Branch creation is handled by the `before_specify` hook (git extension). Spec directory and file creation are always handled by this core command.
 
@@ -341,5 +346,6 @@ Success criteria must be:
 ## Done When
 
 - [ ] Specification written to `SPEC_FILE` and validated against quality checklist
+- [ ] All changed repository files committed locally and no automatic push performed
 - [ ] Extension hooks dispatched or skipped according to the rules in Mandatory Post-Execution Hooks above
-- [ ] Completion reported to user with feature directory, spec file path, and checklist results
+- [ ] Completion reported with feature directory, spec file path, checklist results, commit identifiers, and one concrete next step
