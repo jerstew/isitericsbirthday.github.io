@@ -52,6 +52,12 @@ test("quiz title bar exposes one history-aware exit control", () => {
     /id="exitQuizButton"[\s\S]*?type="button"[\s\S]*?aria-label="Go back"[\s\S]*?title="Go back"[\s\S]*?>X<\/button>/,
   );
   assert.match(quizCss, /\.window-close\s*\{[\s\S]*?min-width:\s*2\.75rem[\s\S]*?min-height:\s*2\.75rem/);
+  assert.match(quizCss, /\.window-titlebar\s*\{[\s\S]*?align-items:\s*center[\s\S]*?padding:\s*0\.25rem/);
+  assert.match(quizCss, /\.window-title\s*\{[\s\S]*?padding-block:\s*0\.125rem[\s\S]*?line-height:\s*1\.25/);
+  assert.doesNotMatch(
+    quizCss,
+    /@media \(max-width: 30rem\) \{[\s\S]*?\.window-titlebar\s*\{[^}]*align-items:\s*flex-start/,
+  );
   assert.match(quizJs, /window\.history\.length\s*>\s*1/);
   assert.match(quizJs, /window\.history\.back\(\)/);
   assert.match(quizJs, /window\.location\.assign\("\.\/index\.html"\)/);
