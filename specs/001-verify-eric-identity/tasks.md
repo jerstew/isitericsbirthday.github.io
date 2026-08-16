@@ -93,6 +93,58 @@
 
 ---
 
+## Phase 7: User Story 1 Delta - Answer Random Eric Preference Statements (Priority: P1) MVP
+
+**Goal**: Replace the completed fixed trait checklist with three distinct, randomly sampled Eric preference statements that each require an explicit True/False response and remain stable while navigating within the attempt.
+
+**Independent Test**: Start repeated fresh attempts, confirm Step 4 always contains three unique members of the seven-statement pool, verify more than one combination occurs, reject incomplete Step 4 responses with focus on the first unanswered group, and confirm Back/Next preserves the selected statements and answers.
+
+### Tests for User Story 1 Delta
+
+- [ ] T014 [P] [US1] Add failing pool and sampler tests to `tests/eric-profile.test.mjs` covering all seven exact records, canonical truth values, three-item length, pool membership, uniqueness, deterministic injected randomness, repeated-sample variety, and canonical-pool immutability
+- [ ] T015 [P] [US1] Add failing static Step 4 contracts to `tests/site-routing.test.mjs` that reject the legacy trait checkboxes and require a statement mount point, associated validation message, and accessible True/False group hooks in `are-you-eric.html` and `assets/eric-quiz.js`
+
+### Implementation for User Story 1 Delta
+
+- [ ] T016 [US1] Define the immutable seven-record Eric statement pool and pure injectable-random three-of-seven sampler in `assets/eric-profile.js`, making unknown sample inputs fail closed without mutating canonical records
+- [ ] T017 [P] [US1] Replace the legacy Step 4 trait checkbox markup in `are-you-eric.html` with the statement-group mount point, instructions, and persistent validation region defined by `specs/001-verify-eric-identity/contracts/ui-contract.md`
+- [ ] T018 [US1] Render each sampled statement as a mounted fieldset with its statement legend and native True/False radio pair in `assets/eric-quiz.js`, retain selected IDs and responses through Back/Next, and block advancement while focusing the first unanswered group
+- [ ] T019 [US1] Style the three Step 4 statement fieldsets, legends, True/False option rows, validation state, keyboard focus, wrapping, and 44px targets across desktop and mobile in `assets/eric-quiz.css` without changing the established dialog geometry or retro visual contract
+- [ ] T020 [US1] Run `tests/eric-profile.test.mjs`, `tests/site-routing.test.mjs`, and the Step 4 variation, required-answer, keyboard, accessibility-tree, persistence, responsive, and overflow scenarios in `specs/001-verify-eric-identity/quickstart.md`, correcting User Story 1 deviations in `assets/eric-profile.js`, `assets/eric-quiz.js`, `assets/eric-quiz.css`, or `are-you-eric.html`
+
+**Checkpoint**: User Story 1 independently presents, validates, and preserves three randomized Eric statements without disclosing an identity result.
+
+---
+
+## Phase 8: User Story 2 Delta - Evaluate Preference Answers and Retry (Priority: P1)
+
+**Goal**: Verify identity only when all three displayed Step 4 answers match their canonical truth values, fail closed for malformed statement data, and create a clean fresh sample after rejection and retry.
+
+**Independent Test**: For every statement, submit an otherwise-passing profile with the canonical answer and with the answer inverted; confirm canonical combinations remain eligible to pass, every inversion fails, malformed maps fail without exceptions, and `Try again` clears answers and creates a fresh valid sample.
+
+### Tests for User Story 2 Delta
+
+- [ ] T021 [US2] Replace legacy trait-set evaluator cases in `tests/eric-profile.test.mjs` with failing tests for correct three-statement maps, every single-answer inversion, unknown/duplicate/missing/extra/non-boolean data, A/C acceptance, B rejection, oath exactness, and evaluator input immutability
+
+### Implementation for User Story 2 Delta
+
+- [ ] T022 [US2] Replace exact trait-set comparison with canonical three-statement response-map validation in `assets/eric-profile.js` and collect the selected statement IDs plus explicit booleans into the submitted attempt in `assets/eric-quiz.js`
+- [ ] T023 [US2] Update `Try again` handling in `assets/eric-quiz.js` to clear Step 4 controls and errors, discard the prior selected IDs, obtain and mount a fresh valid three-statement sample, and preserve existing result reset and Step 1 focus behavior
+- [ ] T024 [US2] Run the accepted A/C, rejected B, canonical/inverted statement, malformed evaluator input, result-focus, one-second result, reduced-motion, and retry scenarios in `tests/eric-profile.test.mjs` and `specs/001-verify-eric-identity/quickstart.md`, correcting User Story 2 deviations in `assets/eric-profile.js` or `assets/eric-quiz.js`
+
+**Checkpoint**: User Story 2 independently produces the correct result for every canonical or inverted Step 4 statement and resets into a valid fresh attempt.
+
+---
+
+## Phase 9: Step 4 Cross-Cutting Validation
+
+**Purpose**: Prove the additive Step 4 implementation preserves the completed responsive, accessibility, privacy, history, homepage, and result behavior from T001-T013.
+
+- [ ] T025 [P] Audit `are-you-eric.html`, `assets/eric-profile.js`, `assets/eric-quiz.js`, and `assets/eric-quiz.css` against `specs/001-verify-eric-identity/contracts/ui-contract.md` for native group semantics, exact copy, unique IDs/names, focus order, 44px targets, 320-1440px layout, 200% zoom, reduced motion, transient state, zero network/storage/URL exposure, and unchanged browser-history behavior
+- [ ] T026 Run `node --test` and the complete updated sequence in `specs/001-verify-eric-identity/quickstart.md`, resolve every remaining Step 4 or regression deviation in `are-you-eric.html`, `assets/`, or `tests/`, and mark only T014-T026 complete in `specs/001-verify-eric-identity/tasks.md` after implementation evidence is recorded
+
+---
+
 ## Dependencies & Execution Order
 
 ### Phase Dependencies
@@ -103,6 +155,9 @@
 - **Phase 4 - User Story 2**: Depends on T006 because T008 shares `assets/eric-quiz.css`; T009 follows T008.
 - **Phase 5 - User Story 3**: Depends on T002 only and can run in parallel with Phases 3 and 4 because it changes only `index.html` if a regression exists.
 - **Phase 6 - Polish**: Depends on all selected story phases; T011 and T012 can run in parallel, and T013 follows both.
+- **Phase 7 - User Story 1 Delta**: Begins from the completed T001-T013 baseline. T014 and T015 can run in parallel and must fail before implementation; T016 follows T014, T017 follows T015, T018 follows T016 and T017, T019 follows T017 and T018, and T020 follows T014-T019.
+- **Phase 8 - User Story 2 Delta**: Depends on the Step 4 attempt model completed by T020. T021 must fail before T022; T023 follows T022; T024 follows T021-T023.
+- **Phase 9 - Step 4 Cross-Cutting Validation**: Depends on T020 and T024. T025 performs the independent audit, and T026 follows all T014-T025 work.
 
 ### User Story Dependencies
 
@@ -114,6 +169,8 @@ Baseline -> Failing contracts -> US1 -> US2 -> Polish
 - **User Story 1 (P1)**: Starts after the shared failing contracts and is the suggested MVP.
 - **User Story 2 (P1)**: Its CSS task follows User Story 1 to avoid concurrent edits, but its result behavior remains independently testable.
 - **User Story 3 (P2)**: Has no implementation dependency on User Story 1 or 2 and can be regression-tested in parallel.
+- **User Story 1 Step 4 delta (P1)**: T014-T020 replace the old Step 4 interaction while preserving the completed responsive quiz shell.
+- **User Story 2 Step 4 delta (P1)**: T021-T024 depend on User Story 1's selected-statement model but remain independently result-testable through supplied attempts.
 
 ### Within Each User Story
 
@@ -142,6 +199,22 @@ T011: Run the privacy audit after story implementation
 T012: Run the accessibility and visual-contract audit after story implementation
 ```
 
+### Step 4 Delta
+
+After the completed T001-T013 baseline, these failing-test tracks can run together:
+
+```text
+T014: Add statement pool and sampler tests in tests/eric-profile.test.mjs
+T015: Add Step 4 static UI contracts in tests/site-routing.test.mjs
+```
+
+After both contracts fail as expected, these different-file implementation tasks can begin independently:
+
+```text
+T016: Implement the canonical pool and sampler in assets/eric-profile.js
+T017: Replace Step 4 markup in are-you-eric.html
+```
+
 ## Implementation Strategy
 
 ### MVP First
@@ -158,11 +231,20 @@ T012: Run the accessibility and visual-contract audit after story implementation
 4. **Discovery regression / US3**: Reconfirm homepage promotion, palette, and routing.
 5. **Polish**: Complete privacy, accessibility, automated, and browser evidence gates.
 
+### Additive Step 4 Delivery
+
+1. Preserve T001-T013 as the completed responsive-dialog baseline.
+2. Complete T014-T015 and observe both new contract tracks fail against the legacy trait checklist.
+3. Complete T016-T020 to deliver and independently validate randomized Step 4 presentation and required responses.
+4. Complete T021-T024 to deliver canonical answer evaluation and fresh retry behavior.
+5. Complete T025-T026 to prove the new interaction does not regress any completed user story or constitutional boundary.
+
 ## Notes
 
 - `[P]` marks tasks that affect different files or independent validation dimensions.
 - `[US1]`, `[US2]`, and `[US3]` provide specification traceability.
 - No dependency installation, package manifest, backend, database, remote asset, or build output is permitted.
 - Existing evaluator semantics, response privacy, stage history, and homepage behavior are regression boundaries rather than redesign targets.
+- For the additive T014-T026 delta only, the legacy trait portion of the evaluator and Step 4 interaction is the explicit replacement target; name, age, reaction, oath, response-privacy, stage-history, homepage, and result semantics remain regression boundaries.
 - Commit each completed task or coherent task group locally; never push without an explicit user request.
 - Stop at any checkpoint to validate the current increment independently.
