@@ -12,6 +12,8 @@
 
 **Updated**: 2026-08-16 — Reframe Step 4 as general statements whose canonical answers align with Eric's preferences without naming Eric in the statements.
 
+**Updated**: 2026-08-16 — Refine Step 4 into concise first-person self-report statements with a serious psychological-exam tone and update three negative-preference topics.
+
 ## Clarifications
 
 ### Session 2026-08-09
@@ -31,6 +33,7 @@
 
 - Q: How should the Step 4 content vary between quiz attempts? → A: Show three distinct statements selected at random from a seven-statement pool, require a True/False response for each, and evaluate each response against Eric's defined likes and dislikes.
 - Q: Should Step 4 statements explicitly describe Eric? → A: No. Present general statements about the same seven topics and assign canonical answers that align with Eric's likes and dislikes.
+- Q: What tone and grammatical perspective should Step 4 use? → A: Use concise, clear first-person self-report statements that resemble a serious psychological assessment while preserving the satirical content.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -116,13 +119,13 @@ A visitor viewing the existing birthday answer can discover and open the Eric id
 - **FR-007**: Step 3 MUST display `When someone calls out 'Hey Eric!' in public, what is your reaction?` and offer exactly one selection among: `A) I turn around.`, `B) I ignore it (I am not Eric).`, and `C) I wonder why someone is calling me by my name.`
 - **FR-008**: Step 4 MUST present exactly three distinct statements selected at random from the statement pool in FR-008a and MUST require the visitor to mark each displayed statement as `True` or `False`.
 - **FR-008a**: The Step 4 statement pool and correct responses MUST be:
-  - `Cats make excellent companions.` — `True`
-  - `Eddie Murphy is a talented musician and singer.` — `True`
-  - `Sports gambling is a fun activity.` — `True`
-  - `Good thin-crust pizza is one of life's great pleasures.` — `True`
-  - `Arguing about software architecture is an enjoyable pastime.` — `False`
-  - `Bad Mexican food is still worth eating.` — `False`
-  - `Call of Duty is a fun game.` — `False`
+  - `I regard cats as excellent companions.` — `True`
+  - `I consider Eddie Murphy a talented musician and singer.` — `True`
+  - `I find sports gambling to be an enjoyable activity.` — `True`
+  - `I consider good thin-crust pizza one of life's great pleasures.` — `True`
+  - `I believe Malört has no place at any bar.` — `False`
+  - `I consider Velvet Cactus the best Mexican food in New Orleans.` — `False`
+  - `I regard video games as a waste of time and focus.` — `False`
 - **FR-008b**: The three Step 4 statements MUST remain fixed for the duration of the current attempt, including backward and forward navigation, but a retry, refresh, or new visit MAY produce a different three-statement selection.
 - **FR-009**: Step 5 MUST display `Under penalty of perjury, do you solemnly swear (or affirm) that you are, in fact, the individual legally and physically recognized as Eric?` and allow any combination of: `I SOLEMNLY SWEAR: I am Eric.`, `PERJURY WARNING: I am not Eric, but I am attempting to impersonate Eric.`, and `FIFTH AMENDMENT: I decline to answer on the grounds that I may not be Eric.` The lead-in labels MUST retain their specified emphasis.
 - **FR-010**: The quiz MUST prevent forward movement when the first-name, age, or reaction step lacks an answer or when any displayed Step 4 statement lacks a True/False response, and MUST identify the unanswered prompt or statement without discarding entered responses.
@@ -181,7 +184,7 @@ A visitor viewing the existing birthday answer can discover and open the Eric id
 - **SC-019**: At supported mobile widths and representative short-height or 200%-zoom conditions, the dialog begins approximately 15% of the viewport height from the top when space permits and otherwise remains fully reachable through vertical document scrolling without clipping or horizontal overflow.
 - **SC-020**: Across the 320–1440 CSS-pixel test range, responsive comparison confirms that typography and controls are sized independently rather than uniformly scaled, the active question remains the primary content, and the interface retains square-cornered retro Windows styling without rounded cards, pill buttons, or gradients.
 - **SC-021**: Across at least 20 fresh quiz attempts, Step 4 displays exactly three distinct statements per attempt, every displayed statement belongs to the seven-statement pool, more than one three-statement combination appears, and backward/forward navigation never changes the combination within an attempt.
-- **SC-022**: In content review, all seven Step 4 statements are general claims that do not name Eric and have an intended response consistent with the documented positive preferences (cats, Eddie Murphy as a musician and singer, sports gambling, and good thin-crust pizza) and negative preferences (arguing about architecture, bad Mexican food, and Call of Duty).
+- **SC-022**: In content review, all seven Step 4 statements use concise, understandable first-person self-report language, do not name Eric, and have an intended response consistent with the documented positive preferences (cats, Eddie Murphy as a musician and singer, sports gambling, and good thin-crust pizza) and negative preferences (excluding Malört from bars, ranking Velvet Cactus as New Orleans's best Mexican food, and treating video games as a waste of time and focus).
 
 ## Assumptions
 
@@ -189,6 +192,7 @@ A visitor viewing the existing birthday answer can discover and open the Eric id
 - Reactions A and C are both accepted: Eric may instinctively turn around or recognize that someone is calling his name; reaction B remains disqualifying.
 - Eric's Step 4 profile treats the four general positive-preference statements as true and the three general negative-preference statements as false.
 - The seven initial Step 4 statements are draft satirical copy and may be reworded during content iteration without changing their underlying subject or correct response.
+- Step 4 wording intentionally imitates a formal self-report inventory; the serious tone is part of the satire and does not represent a real psychological assessment.
 - The passing sworn response selects only `I SOLEMNLY SWEAR: I am Eric.`; selecting either contradictory statement, alone or in addition, fails verification.
 - The mock perjury language is comedic interface copy and does not create an actual legal attestation or collect a signature.
 - Evaluation occurs after final submission rather than after each step so visitors can complete and revise the joke questionnaire without early answer disclosure.

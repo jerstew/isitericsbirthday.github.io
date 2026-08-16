@@ -9,37 +9,37 @@ const { ERIC_PROFILE, ERIC_STATEMENTS, isEric, sampleEricStatements } =
 const EXPECTED_STATEMENTS = Object.freeze([
   Object.freeze({
     id: "likes-cats",
-    text: "Cats make excellent companions.",
+    text: "I regard cats as excellent companions.",
     answer: true,
   }),
   Object.freeze({
     id: "likes-eddie-murphy-music",
-    text: "Eddie Murphy is a talented musician and singer.",
+    text: "I consider Eddie Murphy a talented musician and singer.",
     answer: true,
   }),
   Object.freeze({
     id: "likes-sports-gambling",
-    text: "Sports gambling is a fun activity.",
+    text: "I find sports gambling to be an enjoyable activity.",
     answer: true,
   }),
   Object.freeze({
     id: "likes-thin-crust-pizza",
-    text: "Good thin-crust pizza is one of life's great pleasures.",
+    text: "I consider good thin-crust pizza one of life's great pleasures.",
     answer: true,
   }),
   Object.freeze({
-    id: "likes-architecture-arguments",
-    text: "Arguing about software architecture is an enjoyable pastime.",
+    id: "rejects-malort-at-bars",
+    text: "I believe Malört has no place at any bar.",
     answer: false,
   }),
   Object.freeze({
-    id: "likes-bad-mexican-food",
-    text: "Bad Mexican food is still worth eating.",
+    id: "ranks-velvet-cactus-best",
+    text: "I consider Velvet Cactus the best Mexican food in New Orleans.",
     answer: false,
   }),
   Object.freeze({
-    id: "likes-call-of-duty",
-    text: "Call of Duty is a fun game.",
+    id: "views-video-games-as-waste",
+    text: "I regard video games as a waste of time and focus.",
     answer: false,
   }),
 ]);
@@ -79,13 +79,13 @@ const PASSING_ATTEMPT = Object.freeze({
   reaction: "own-name",
   selectedStatementIds: Object.freeze([
     "likes-cats",
-    "likes-architecture-arguments",
-    "likes-call-of-duty",
+    "rejects-malort-at-bars",
+    "views-video-games-as-waste",
   ]),
   preferenceAnswers: Object.freeze({
     "likes-cats": true,
-    "likes-architecture-arguments": false,
-    "likes-call-of-duty": false,
+    "rejects-malort-at-bars": false,
+    "views-video-games-as-waste": false,
   }),
   oath: Object.freeze(["solemnly-swear"]),
 });
@@ -174,9 +174,9 @@ test("only the exact oath set passes across all combinations", () => {
 test("rejects malformed, duplicate, mismatched, and unknown statement data", () => {
   const invalidAttempts = [
     attemptWith({ selectedStatementIds: null }),
-    attemptWith({ selectedStatementIds: ["likes-cats", "likes-cats", "likes-call-of-duty"] }),
-    attemptWith({ selectedStatementIds: ["likes-cats", "likes-call-of-duty"] }),
-    attemptWith({ selectedStatementIds: ["likes-cats", "likes-call-of-duty", "unknown"] }),
+    attemptWith({ selectedStatementIds: ["likes-cats", "likes-cats", "views-video-games-as-waste"] }),
+    attemptWith({ selectedStatementIds: ["likes-cats", "views-video-games-as-waste"] }),
+    attemptWith({ selectedStatementIds: ["likes-cats", "views-video-games-as-waste", "unknown"] }),
     attemptWith({ preferenceAnswers: null }),
     attemptWith({ preferenceAnswers: { "likes-cats": true } }),
     attemptWith({ preferenceAnswers: { ...PASSING_ATTEMPT.preferenceAnswers, extra: true } }),
@@ -185,7 +185,7 @@ test("rejects malformed, duplicate, mismatched, and unknown statement data", () 
       selectedStatementIds: [
         "likes-cats",
         "likes-sports-gambling",
-        "likes-call-of-duty",
+        "views-video-games-as-waste",
       ],
     }),
   ];
@@ -206,9 +206,9 @@ test("does not mutate the supplied attempt or its collections", () => {
   const attempt = attemptWith({
     firstName: " ERIC ",
     selectedStatementIds: [
-      "likes-call-of-duty",
+      "views-video-games-as-waste",
       "likes-cats",
-      "likes-architecture-arguments",
+      "rejects-malort-at-bars",
     ],
   });
   const snapshot = structuredClone(attempt);

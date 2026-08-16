@@ -4,37 +4,37 @@
   const ERIC_STATEMENTS = Object.freeze([
     Object.freeze({
       id: "likes-cats",
-      text: "Cats make excellent companions.",
+      text: "I regard cats as excellent companions.",
       answer: true,
     }),
     Object.freeze({
       id: "likes-eddie-murphy-music",
-      text: "Eddie Murphy is a talented musician and singer.",
+      text: "I consider Eddie Murphy a talented musician and singer.",
       answer: true,
     }),
     Object.freeze({
       id: "likes-sports-gambling",
-      text: "Sports gambling is a fun activity.",
+      text: "I find sports gambling to be an enjoyable activity.",
       answer: true,
     }),
     Object.freeze({
       id: "likes-thin-crust-pizza",
-      text: "Good thin-crust pizza is one of life's great pleasures.",
+      text: "I consider good thin-crust pizza one of life's great pleasures.",
       answer: true,
     }),
     Object.freeze({
-      id: "likes-architecture-arguments",
-      text: "Arguing about software architecture is an enjoyable pastime.",
+      id: "rejects-malort-at-bars",
+      text: "I believe Malört has no place at any bar.",
       answer: false,
     }),
     Object.freeze({
-      id: "likes-bad-mexican-food",
-      text: "Bad Mexican food is still worth eating.",
+      id: "ranks-velvet-cactus-best",
+      text: "I consider Velvet Cactus the best Mexican food in New Orleans.",
       answer: false,
     }),
     Object.freeze({
-      id: "likes-call-of-duty",
-      text: "Call of Duty is a fun game.",
+      id: "views-video-games-as-waste",
+      text: "I regard video games as a waste of time and focus.",
       answer: false,
     }),
   ]);

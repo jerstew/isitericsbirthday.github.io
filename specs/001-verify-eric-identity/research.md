@@ -130,7 +130,7 @@
 
 ## Decision 17: Three-of-seven preference statement sampling
 
-**Decision**: Model each Step 4 item as an immutable record containing a stable identifier, exact general-statement text that does not name Eric, and a canonical boolean answer aligned with his preferences. For each fresh attempt, use a pure helper to shuffle a copy of the seven identifiers and take three without replacement. The helper accepts an injectable random-number source for deterministic tests and uses the browser's ordinary random source by default. Store only the selected identifiers and visitor answers in the active session; do not guarantee a True/False balance or rotation across visits.
+**Decision**: Model each Step 4 item as an immutable record containing a stable identifier, concise first-person self-report text that does not name Eric, and a canonical boolean answer aligned with his preferences. For each fresh attempt, use a pure helper to shuffle a copy of the seven identifiers and take three without replacement. The helper accepts an injectable random-number source for deterministic tests and uses the browser's ordinary random source by default. Store only the selected identifiers and visitor answers in the active session; do not guarantee a True/False balance or rotation across visits.
 
 **Rationale**: Sampling without replacement directly satisfies the distinct-item rule and permits all 35 valid three-item combinations. Keeping canonical records in the pure profile module prevents display and evaluation truth values from drifting, while copied-array shuffling avoids mutating shared configuration.
 

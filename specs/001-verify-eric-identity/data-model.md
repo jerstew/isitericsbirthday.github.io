@@ -94,13 +94,13 @@ Immutable canonical records used to render and evaluate Step 4.
 
 | ID | Display text | Canonical answer |
 |----|--------------|------------------|
-| `likes-cats` | `Cats make excellent companions.` | `true` |
-| `likes-eddie-murphy-music` | `Eddie Murphy is a talented musician and singer.` | `true` |
-| `likes-sports-gambling` | `Sports gambling is a fun activity.` | `true` |
-| `likes-thin-crust-pizza` | `Good thin-crust pizza is one of life's great pleasures.` | `true` |
-| `likes-architecture-arguments` | `Arguing about software architecture is an enjoyable pastime.` | `false` |
-| `likes-bad-mexican-food` | `Bad Mexican food is still worth eating.` | `false` |
-| `likes-call-of-duty` | `Call of Duty is a fun game.` | `false` |
+| `likes-cats` | `I regard cats as excellent companions.` | `true` |
+| `likes-eddie-murphy-music` | `I consider Eddie Murphy a talented musician and singer.` | `true` |
+| `likes-sports-gambling` | `I find sports gambling to be an enjoyable activity.` | `true` |
+| `likes-thin-crust-pizza` | `I consider good thin-crust pizza one of life's great pleasures.` | `true` |
+| `rejects-malort-at-bars` | `I believe Malört has no place at any bar.` | `false` |
+| `ranks-velvet-cactus-best` | `I consider Velvet Cactus the best Mexican food in New Orleans.` | `false` |
+| `views-video-games-as-waste` | `I regard video games as a waste of time and focus.` | `false` |
 
 ### Selection and validation rules
 

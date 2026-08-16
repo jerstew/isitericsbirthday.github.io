@@ -35,3 +35,4 @@
 - Validation iteration 2 passed all checklist items on 2026-08-09. No clarification markers remain.
 - Update validation iteration 1 passed all checklist items on 2026-08-16. The Step 4 statement pool, random selection behavior, answer persistence, validation, passing criteria, edge cases, entities, assumptions, and measurable outcomes are mutually consistent. No clarification markers remain.
 - General-statement update validation iteration 1 passed all checklist items on 2026-08-16. All seven statements are general claims, retain the approved preference topics and truth values, and remain consistent with the acceptance and evaluation criteria.
+- Psychological-exam copy validation iteration 1 passed all checklist items on 2026-08-16. All seven statements use concise first-person self-report language, retain clear canonical answers, and align with the revised preference topics.

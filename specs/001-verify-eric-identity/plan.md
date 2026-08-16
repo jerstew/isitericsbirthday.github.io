@@ -77,7 +77,7 @@ CNAME
 
 ### Pool and selection
 
-- Define seven immutable general-statement records with stable identifiers, exact display text that does not name Eric, and canonical boolean answers aligned with his preferences in the pure profile module.
+- Define seven immutable general-statement records with stable identifiers, concise first-person self-report text that does not name Eric, and canonical boolean answers aligned with his preferences in the pure profile module.
 - Select three unique records for a fresh page load or retry through a pure helper that shuffles a copied identifier list and takes the first three; never mutate or reorder the canonical pool. Accept an injectable random-number source for deterministic unit tests and default to the browser's ordinary random source at runtime.
 - Store the selected identifiers in the active `QuizSession`. Back and Next reuse that selection and the mounted responses; refresh, reopen, or retry starts a fresh selection.
 - Random selection is intended to provide variety, not security or guaranteed rotation. No balancing by True/False answer or history across visits is required.
