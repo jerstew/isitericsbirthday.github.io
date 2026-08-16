@@ -22,7 +22,7 @@ Only the current step is visible and focusable. Its heading contains plain, unbo
 | 1 | `Enter your first name.` text input | Free text | Trimmed value must not be empty |
 | 2 | `Select your current age.` select | Integers 1-119 plus `Eric's Exact Age` | A choice must be selected |
 | 3 | `When someone calls out 'Hey Eric!' in public, what is your reaction?` radio group | A, B, and C exactly as specified | One choice must be selected |
-| 4 | Three selected Eric preference statements, each presented as a fieldset with a native True/False radio pair | Three distinct records sampled from the seven-item pool in `data-model.md` | Every displayed statement must have exactly one response |
+| 4 | `Mark each statement as True or False.` followed by three general preference-aligned statements, each presented as a fieldset with a native True/False radio pair | Three distinct records sampled from the seven-item pool in `data-model.md` | Every displayed statement must have exactly one response |
 | 5 | Full penalty-of-perjury prompt checkbox group | Solemnly swear, perjury warning, fifth amendment exactly as specified | Any set, including empty; submit label is `Verify identity` |
 
 Step 5 permits an empty selection. Step 4 does not advance until all three statements are answered. Required-step errors remain visible, identify the relevant prompt or first unanswered statement, are programmatically associated with the affected controls, and focus the invalid input or first unanswered radio group.

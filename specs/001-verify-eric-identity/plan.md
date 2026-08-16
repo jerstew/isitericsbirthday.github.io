@@ -6,7 +6,7 @@
 
 ## Summary
 
-Refine the existing five-step Eric identity quiz without changing its static, dependency-free GitHub Pages architecture. Step 4 replaces the fixed trait checklist with three distinct True/False statements sampled from a seven-statement preference pool for each fresh attempt. The selection and responses remain stable while navigating within an attempt, every displayed statement requires an answer, and verification compares each answer with its canonical truth value. Existing responsive geometry, title-bar exit, homepage hierarchy, privacy boundary, and full-screen outcomes remain unchanged. Semantic HTML, local CSS, ordered classic scripts, and an updated pure evaluator remain the complete runtime stack.
+Refine the existing five-step Eric identity quiz without changing its static, dependency-free GitHub Pages architecture. Step 4 replaces the fixed trait checklist with three distinct general True/False statements sampled from a seven-statement preference-aligned pool for each fresh attempt. The statements do not name Eric, but their canonical answers align with his likes and dislikes. The selection and responses remain stable while navigating within an attempt, every displayed statement requires an answer, and verification compares each answer with its canonical truth value. Existing responsive geometry, title-bar exit, homepage hierarchy, privacy boundary, and full-screen outcomes remain unchanged. Semantic HTML, local CSS, ordered classic scripts, and an updated pure evaluator remain the complete runtime stack.
 
 ## Technical Context
 
@@ -77,7 +77,7 @@ CNAME
 
 ### Pool and selection
 
-- Define seven immutable statement records with stable identifiers, exact display text, and canonical boolean answers in the pure profile module.
+- Define seven immutable general-statement records with stable identifiers, exact display text that does not name Eric, and canonical boolean answers aligned with his preferences in the pure profile module.
 - Select three unique records for a fresh page load or retry through a pure helper that shuffles a copied identifier list and takes the first three; never mutate or reorder the canonical pool. Accept an injectable random-number source for deterministic unit tests and default to the browser's ordinary random source at runtime.
 - Store the selected identifiers in the active `QuizSession`. Back and Next reuse that selection and the mounted responses; refresh, reopen, or retry starts a fresh selection.
 - Random selection is intended to provide variety, not security or guaranteed rotation. No balancing by True/False answer or history across visits is required.

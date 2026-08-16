@@ -94,13 +94,13 @@ Immutable canonical records used to render and evaluate Step 4.
 
 | ID | Display text | Canonical answer |
 |----|--------------|------------------|
-| `likes-cats` | `Eric likes cats.` | `true` |
-| `likes-eddie-murphy-music` | `Eric likes Eddie Murphy as a musician and singer.` | `true` |
-| `likes-sports-gambling` | `Eric likes gambling on sports.` | `true` |
-| `likes-thin-crust-pizza` | `Eric likes good thin-crust pizza.` | `true` |
-| `likes-architecture-arguments` | `Eric likes arguing about architecture.` | `false` |
-| `likes-bad-mexican-food` | `Eric likes bad Mexican food.` | `false` |
-| `likes-call-of-duty` | `Eric likes Call of Duty.` | `false` |
+| `likes-cats` | `Cats make excellent companions.` | `true` |
+| `likes-eddie-murphy-music` | `Eddie Murphy is a talented musician and singer.` | `true` |
+| `likes-sports-gambling` | `Sports gambling is a fun activity.` | `true` |
+| `likes-thin-crust-pizza` | `Good thin-crust pizza is one of life's great pleasures.` | `true` |
+| `likes-architecture-arguments` | `Arguing about software architecture is an enjoyable pastime.` | `false` |
+| `likes-bad-mexican-food` | `Bad Mexican food is still worth eating.` | `false` |
+| `likes-call-of-duty` | `Call of Duty is a fun game.` | `false` |
 
 ### Selection and validation rules
 

@@ -11,18 +11,18 @@ const quizJs = await readFile(new URL("assets/eric-quiz.js", root), "utf8");
 test("homepage quiz link stays within the current deployment path", () => {
   const href = homeHtml.match(/class="quiz-promo"[\s\S]*?href="([^"]+)"/)?.[1];
 
-  assert.equal(href, "./are-you-eric.html?v=3");
+  assert.equal(href, "./are-you-eric.html?v=4");
   const target = new URL(href, "https://example.test/repository/index.html");
   assert.equal(target.pathname, "/repository/are-you-eric.html");
-  assert.equal(target.search, "?v=3");
+  assert.equal(target.search, "?v=4");
 });
 
 test("reached quiz exposes a classic-script first-step submit control", () => {
   assert.match(quizHtml, /id="nextButton"\s+type="submit">Next<\/button>/);
   assert.doesNotMatch(quizHtml, />\s*Send\s*</i);
-  assert.match(quizHtml, /href="assets\/eric-quiz\.css\?v=3"/);
-  assert.match(quizHtml, /src="assets\/eric-profile\.js\?v=3"/);
-  assert.match(quizHtml, /src="assets\/eric-quiz\.js\?v=3"/);
+  assert.match(quizHtml, /href="assets\/eric-quiz\.css\?v=4"/);
+  assert.match(quizHtml, /src="assets\/eric-profile\.js\?v=4"/);
+  assert.match(quizHtml, /src="assets\/eric-quiz\.js\?v=4"/);
   assert.doesNotMatch(quizHtml, /type="module"/);
 });
 
@@ -133,6 +133,8 @@ test("results retain compact headings without gradients", () => {
 test("Step 4 exposes randomized accessible True/False statement hooks", () => {
   assert.doesNotMatch(quizHtml, /name="traits"|Select all traits that apply/);
   assert.match(quizHtml, /id="preferenceStatements"/);
+  assert.match(quizHtml, />Mark each statement as True or False\.<\/p>/);
+  assert.doesNotMatch(quizHtml, /Mark each statement about Eric/);
   assert.match(quizHtml, /id="preferenceStatementsError"[^>]*role="alert"[^>]*hidden/);
   assert.match(quizJs, /sampleEricStatements/);
   assert.match(quizJs, /preferenceStatements/);

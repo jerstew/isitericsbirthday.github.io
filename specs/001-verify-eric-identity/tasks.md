@@ -93,9 +93,9 @@
 
 ---
 
-## Phase 7: User Story 1 Delta - Answer Random Eric Preference Statements (Priority: P1) MVP
+## Phase 7: User Story 1 Delta - Answer Random Preference-Aligned Statements (Priority: P1) MVP
 
-**Goal**: Replace the completed fixed trait checklist with three distinct, randomly sampled Eric preference statements that each require an explicit True/False response and remain stable while navigating within the attempt.
+**Goal**: Replace the completed fixed trait checklist with three distinct, randomly sampled general statements whose answers align with Eric's preferences, each requiring an explicit True/False response and remaining stable while navigating within the attempt.
 
 **Independent Test**: Start repeated fresh attempts, confirm Step 4 always contains three unique members of the seven-statement pool, verify more than one combination occurs, reject incomplete Step 4 responses with focus on the first unanswered group, and confirm Back/Next preserves the selected statements and answers.
 
@@ -106,13 +106,13 @@
 
 ### Implementation for User Story 1 Delta
 
-- [X] T016 [US1] Define the immutable seven-record Eric statement pool and pure injectable-random three-of-seven sampler in `assets/eric-profile.js` without mutating canonical records
+- [X] T016 [US1] Define the immutable seven-record preference-aligned statement pool and pure injectable-random three-of-seven sampler in `assets/eric-profile.js` without mutating canonical records
 - [X] T017 [P] [US1] Replace the legacy Step 4 trait checkbox markup in `are-you-eric.html` with the statement-group mount point, instructions, and persistent validation region defined by `specs/001-verify-eric-identity/contracts/ui-contract.md`
 - [X] T018 [US1] Render each sampled statement as a mounted fieldset with its statement legend and native True/False radio pair in `assets/eric-quiz.js`, retain selected IDs and responses through Back/Next, and block advancement while focusing the first unanswered group
 - [X] T019 [US1] Style the three Step 4 statement fieldsets, legends, True/False option rows, validation state, keyboard focus, wrapping, and 44px targets across desktop and mobile in `assets/eric-quiz.css` without changing the established dialog geometry or retro visual contract
 - [X] T020 [US1] Run `tests/eric-profile.test.mjs`, `tests/site-routing.test.mjs`, and the Step 4 variation, required-answer, keyboard, accessibility-tree, persistence, responsive, and overflow scenarios in `specs/001-verify-eric-identity/quickstart.md`, correcting User Story 1 deviations in `assets/eric-profile.js`, `assets/eric-quiz.js`, `assets/eric-quiz.css`, or `are-you-eric.html`
 
-**Checkpoint**: User Story 1 independently presents, validates, and preserves three randomized Eric statements without disclosing an identity result.
+**Checkpoint**: User Story 1 independently presents, validates, and preserves three randomized general statements without disclosing an identity result.
 
 ---
 

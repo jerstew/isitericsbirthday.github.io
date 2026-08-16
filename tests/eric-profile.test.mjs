@@ -7,35 +7,39 @@ const { ERIC_PROFILE, ERIC_STATEMENTS, isEric, sampleEricStatements } =
   globalThis.EricIdentity;
 
 const EXPECTED_STATEMENTS = Object.freeze([
-  Object.freeze({ id: "likes-cats", text: "Eric likes cats.", answer: true }),
+  Object.freeze({
+    id: "likes-cats",
+    text: "Cats make excellent companions.",
+    answer: true,
+  }),
   Object.freeze({
     id: "likes-eddie-murphy-music",
-    text: "Eric likes Eddie Murphy as a musician and singer.",
+    text: "Eddie Murphy is a talented musician and singer.",
     answer: true,
   }),
   Object.freeze({
     id: "likes-sports-gambling",
-    text: "Eric likes gambling on sports.",
+    text: "Sports gambling is a fun activity.",
     answer: true,
   }),
   Object.freeze({
     id: "likes-thin-crust-pizza",
-    text: "Eric likes good thin-crust pizza.",
+    text: "Good thin-crust pizza is one of life's great pleasures.",
     answer: true,
   }),
   Object.freeze({
     id: "likes-architecture-arguments",
-    text: "Eric likes arguing about architecture.",
+    text: "Arguing about software architecture is an enjoyable pastime.",
     answer: false,
   }),
   Object.freeze({
     id: "likes-bad-mexican-food",
-    text: "Eric likes bad Mexican food.",
+    text: "Bad Mexican food is still worth eating.",
     answer: false,
   }),
   Object.freeze({
     id: "likes-call-of-duty",
-    text: "Eric likes Call of Duty.",
+    text: "Call of Duty is a fun game.",
     answer: false,
   }),
 ]);
@@ -45,6 +49,7 @@ test("canonical statement pool contains seven deeply frozen exact records", () =
   assert.equal(Object.isFrozen(ERIC_STATEMENTS), true);
   ERIC_STATEMENTS.forEach((statement) => {
     assert.equal(Object.isFrozen(statement), true);
+    assert.doesNotMatch(statement.text, /\bEric\b/);
   });
 });
 
