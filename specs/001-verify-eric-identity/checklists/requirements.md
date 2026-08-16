@@ -33,3 +33,4 @@
 
 - Validation iteration 1 identified one incomplete exact-copy requirement for the sworn-statement choices; FR-009 was expanded to include every required choice verbatim.
 - Validation iteration 2 passed all checklist items on 2026-08-09. No clarification markers remain.
+- Update validation iteration 1 passed all checklist items on 2026-08-16. The Step 4 statement pool, random selection behavior, answer persistence, validation, passing criteria, edge cases, entities, assumptions, and measurable outcomes are mutually consistent. No clarification markers remain.

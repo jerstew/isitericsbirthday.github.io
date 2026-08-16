@@ -8,6 +8,8 @@
 
 **Input**: User description: "Add a new page to the existing novelty microsite with a satirical, multi-step quiz that determines whether the visitor is Eric, presents distinct pass and fail outcomes, and is promoted from the main page with a 1990s-style callout."
 
+**Updated**: 2026-08-16 — Replace the Step 4 trait checklist with three randomly selected True/False statements about Eric's likes and dislikes.
+
 ## Clarifications
 
 ### Session 2026-08-09
@@ -23,6 +25,10 @@
 - Q: How should quiz progress be presented? → A: Use plain `Step n of 5` text beneath the description without a badge or block treatment.
 - Q: Where should the quiz dialog be positioned on mobile? → A: Position its top edge approximately 15% of the viewport height from the top, with a safe minimum margin and document scrolling when height or zoom makes that position impractical.
 
+### Session 2026-08-16
+
+- Q: How should the Step 4 content vary between quiz attempts? → A: Show three distinct statements selected at random from a seven-statement pool, require a True/False response for each, and evaluate each response against Eric's defined likes and dislikes.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Complete the Eric identity quiz (Priority: P1)
@@ -35,7 +41,7 @@ A visitor opens the quiz, answers five identity questions one step at a time, an
 
 **Acceptance Scenarios**:
 
-1. **Given** a visitor has opened a new quiz, **When** the visitor completes the steps in order, **Then** the quiz presents the first-name input, age selector, public-reaction options, trait checklist, and sworn-statement checklist with the specified wording and choices.
+1. **Given** a visitor has opened a new quiz, **When** the visitor completes the steps in order, **Then** the quiz presents the first-name input, age selector, public-reaction options, three True/False statements about Eric, and sworn-statement checklist with the specified wording and choices.
 2. **Given** a visitor is on a step with a required single-value answer, **When** the visitor attempts to continue without answering it, **Then** the visitor remains on that step and receives a clear prompt to provide an answer.
 3. **Given** a visitor has moved beyond the first step, **When** the visitor goes back to an earlier step, **Then** all answers already entered during the current attempt remain available for review or change.
 4. **Given** a visitor has reached the final step, **When** the visitor submits the attempt, **Then** all five responses are evaluated together and no outcome is disclosed before submission.
@@ -56,7 +62,7 @@ A visitor receives either an emphatic rejection or a celebratory verification ba
 
 **Acceptance Scenarios**:
 
-1. **Given** the submitted first name is `Eric` after ignoring capitalization and surrounding whitespace, the selected age is `Eric's Exact Age`, reaction A or C is selected, all three traits are selected, and only `I SOLEMNLY SWEAR` is selected in the final checklist, **When** the visitor submits, **Then** confetti appears with `IDENTITY VERIFIED: WELCOME, ERIC.`
+1. **Given** the submitted first name is `Eric` after ignoring capitalization and surrounding whitespace, the selected age is `Eric's Exact Age`, reaction A or C is selected, all three displayed statements are answered correctly, and only `I SOLEMNLY SWEAR` is selected in the final checklist, **When** the visitor submits, **Then** confetti appears with `IDENTITY VERIFIED: WELCOME, ERIC.`
 2. **Given** reaction B is selected or any other submitted answer differs from the accepted criteria, **When** the visitor submits, **Then** a full-screen retro red result displays `YOU ARE NOT ERIC.` and a secondary `Try again` control.
 3. **Given** the fail result is visible, **When** the visitor activates `Try again`, **Then** a fresh, unanswered attempt begins at the first step.
 4. **Given** the visitor has requested reduced motion, **When** the passing result appears, **Then** the verification message remains complete and celebratory without motion-dependent confetti.
@@ -83,8 +89,11 @@ A visitor viewing the existing birthday answer can discover and open the Eric id
 
 - A first name with different capitalization or surrounding whitespace, such as ` eric `, is treated as `Eric`; internal characters or additional names do not match.
 - Numeric age choices from 1 through 119 never substitute for the distinct `Eric's Exact Age` choice, even if one number happens to equal Eric's current age.
-- Selecting extra answers in either checkbox list is a profile deviation; a passing attempt requires the exact checkbox combination, not merely inclusion of the correct item.
-- Selecting no traits or no sworn statement is allowed as a response but produces the fail outcome upon submission.
+- Step 4 never displays the same statement more than once during a single attempt, even when statements are selected randomly.
+- A visitor cannot continue from Step 4 until all three displayed statements have a True or False response; answering any displayed statement incorrectly produces the fail outcome upon final submission.
+- Returning to Step 4 within the same attempt preserves both the three selected statements and the visitor's responses; retrying, refreshing, or reopening may produce a different selection.
+- Selecting extra answers in the sworn-statement checklist is a profile deviation; a passing attempt requires the exact checkbox combination, not merely inclusion of the correct item.
+- Selecting no sworn statement is allowed as a response but produces the fail outcome upon submission.
 - Repeated forward and backward navigation does not duplicate answers or change selections.
 - Moving between quiz stages never adds or replaces browser-history entries; browser Back and the title-bar X therefore leave the quiz rather than navigating between stages.
 - Refreshing or reopening the quiz starts a new attempt; unfinished and completed attempts are not recovered.
@@ -102,12 +111,21 @@ A visitor viewing the existing birthday answer can discover and open the Eric id
 - **FR-005**: Step 1 MUST display the prompt `Enter your first name.` and accept a text response.
 - **FR-006**: Step 2 MUST display the prompt `Select your current age.` and offer every integer from 1 through 119 plus a distinct `Eric's Exact Age` option.
 - **FR-007**: Step 3 MUST display `When someone calls out 'Hey Eric!' in public, what is your reaction?` and offer exactly one selection among: `A) I turn around.`, `B) I ignore it (I am not Eric).`, and `C) I wonder why someone is calling me by my name.`
-- **FR-008**: Step 4 MUST display `Select all traits that apply to you:` and allow any combination of: `Lives on the Westbank.`, `Resembles Eric.`, and `Is Eric.`
+- **FR-008**: Step 4 MUST present exactly three distinct statements selected at random from the statement pool in FR-008a and MUST require the visitor to mark each displayed statement as `True` or `False`.
+- **FR-008a**: The Step 4 statement pool and correct responses MUST be:
+  - `Eric likes cats.` — `True`
+  - `Eric likes Eddie Murphy as a musician and singer.` — `True`
+  - `Eric likes gambling on sports.` — `True`
+  - `Eric likes good thin-crust pizza.` — `True`
+  - `Eric likes arguing about architecture.` — `False`
+  - `Eric likes bad Mexican food.` — `False`
+  - `Eric likes Call of Duty.` — `False`
+- **FR-008b**: The three Step 4 statements MUST remain fixed for the duration of the current attempt, including backward and forward navigation, but a retry, refresh, or new visit MAY produce a different three-statement selection.
 - **FR-009**: Step 5 MUST display `Under penalty of perjury, do you solemnly swear (or affirm) that you are, in fact, the individual legally and physically recognized as Eric?` and allow any combination of: `I SOLEMNLY SWEAR: I am Eric.`, `PERJURY WARNING: I am not Eric, but I am attempting to impersonate Eric.`, and `FIFTH AMENDMENT: I decline to answer on the grounds that I may not be Eric.` The lead-in labels MUST retain their specified emphasis.
-- **FR-010**: The quiz MUST prevent forward movement when the first-name, age, or reaction step lacks an answer and MUST identify the unanswered prompt without discarding entered responses.
+- **FR-010**: The quiz MUST prevent forward movement when the first-name, age, or reaction step lacks an answer or when any displayed Step 4 statement lacks a True/False response, and MUST identify the unanswered prompt or statement without discarding entered responses.
 - **FR-011**: The visitor MUST be able to move backward before submission and revise prior answers without losing other answers from the current attempt.
 - **FR-012**: The quiz MUST evaluate the complete response only when the visitor submits the final step.
-- **FR-013**: The passing profiles MUST be: first name equal to `Eric` after case-insensitive comparison and removal of surrounding whitespace; age equal to the distinct `Eric's Exact Age` option; reaction A or C; all three traits selected; and only `I SOLEMNLY SWEAR: I am Eric.` selected in the sworn-statement checklist.
+- **FR-013**: The passing profiles MUST be: first name equal to `Eric` after case-insensitive comparison and removal of surrounding whitespace; age equal to the distinct `Eric's Exact Age` option; reaction A or C; all three displayed Step 4 statements answered with their correct responses from FR-008a; and only `I SOLEMNLY SWEAR: I am Eric.` selected in the sworn-statement checklist.
 - **FR-014**: Any response that does not match one of the two passing profiles MUST produce the fail outcome.
 - **FR-015**: The fail outcome MUST cover the available viewing area with a retro red banner, display `YOU ARE NOT ERIC.` as the dominant content, and include a secondary `Try again` control.
 - **FR-016**: Activating `Try again` MUST clear every response and return the visitor to step 1.
@@ -130,15 +148,16 @@ A visitor viewing the existing birthday answer can discover and open the Eric id
 
 ### Key Entities
 
-- **Quiz attempt**: The transient set of answers for one visit, consisting of first name, age selection, public reaction, selected traits, and selected sworn statements; it is discarded on retry, refresh, or page exit.
-- **Eric profile**: The canonical identity criteria, allowing reaction A or C and requiring exact matches for every other answer.
+- **Quiz attempt**: The transient content and answers for one visit, consisting of first name, age selection, public reaction, three selected Eric statements and their True/False responses, and selected sworn statements; it is discarded on retry, refresh, or page exit.
+- **Eric statement**: A claim about something Eric likes or dislikes, paired with its canonical True/False response and eligible for random selection on Step 4.
+- **Eric profile**: The canonical identity criteria, allowing reaction A or C and requiring exact matches for every other answer, including the correct response to every displayed Eric statement.
 - **Quiz result**: One of two mutually exclusive outcomes, verified or not Eric, derived from comparing a submitted quiz attempt with the Eric profile.
 
 ## Success Criteria *(mandatory)*
 
 ### Measurable Outcomes
 
-- **SC-001**: In a complete test matrix, 100% of accepted-profile submissions using reaction A or C receive the verified result, while reaction B and 100% of submissions differing in any other field receive the not-Eric result.
+- **SC-001**: In a complete test matrix covering every Step 4 statement and both accepted reactions, 100% of submissions that answer all three displayed statements correctly and match every other accepted-profile field receive the verified result, while reaction B, any incorrect Step 4 response, and 100% of submissions differing in any other field receive the not-Eric result.
 - **SC-002**: A first-time visitor can complete and submit the five-step quiz in under 2 minutes without external instructions.
 - **SC-003**: In usability testing, at least 90% of participants can identify their current quiz step, move backward to revise an answer, and reach a result on their first attempt.
 - **SC-004**: The promotion and full quiz flow remain readable and operable at every tested viewport width from 320 through 1440 pixels, at 200% text zoom, and using keyboard-only input.
@@ -158,15 +177,18 @@ A visitor viewing the existing birthday answer can discover and open the Eric id
 - **SC-018**: At 320, 375, 390, and 480 CSS-pixel widths, computed-style and visual inspection confirms 16 CSS-pixel outer margins, 24 CSS-pixel body padding, a 28–32 CSS-pixel page heading, a 44–48 CSS-pixel first-name input, a 48 CSS-pixel full-width `Next` button, the specified 8/20–24/24/8/24/16 CSS-pixel vertical rhythm, and no redundant nested border or shadow around the action.
 - **SC-019**: At supported mobile widths and representative short-height or 200%-zoom conditions, the dialog begins approximately 15% of the viewport height from the top when space permits and otherwise remains fully reachable through vertical document scrolling without clipping or horizontal overflow.
 - **SC-020**: Across the 320–1440 CSS-pixel test range, responsive comparison confirms that typography and controls are sized independently rather than uniformly scaled, the active question remains the primary content, and the interface retains square-cornered retro Windows styling without rounded cards, pill buttons, or gradients.
+- **SC-021**: Across at least 20 fresh quiz attempts, Step 4 displays exactly three distinct statements per attempt, every displayed statement belongs to the seven-statement pool, more than one three-statement combination appears, and backward/forward navigation never changes the combination within an attempt.
+- **SC-022**: In content review, all seven Step 4 statements have an obvious intended response consistent with the documented positive preferences (cats, Eddie Murphy as a musician and singer, sports gambling, and good thin-crust pizza) and negative preferences (arguing about architecture, bad Mexican food, and Call of Duty).
 
 ## Assumptions
 
 - `Eric's Exact Age` is intentionally a separate satirical answer and is the only passing age selection; numeric options remain available only as failing alternatives.
 - Reactions A and C are both accepted: Eric may instinctively turn around or recognize that someone is calling his name; reaction B remains disqualifying.
-- Eric's trait profile includes all three listed traits.
+- Eric's Step 4 profile treats the four positive-preference statements as true and the three negative-preference statements as false.
+- The seven initial Step 4 statements are draft satirical copy and may be reworded during content iteration without changing their underlying subject or correct response.
 - The passing sworn response selects only `I SOLEMNLY SWEAR: I am Eric.`; selecting either contradictory statement, alone or in addition, fails verification.
 - The mock perjury language is comedic interface copy and does not create an actual legal attestation or collect a signature.
 - Evaluation occurs after final submission rather than after each step so visitors can complete and revise the joke questionnaire without early answer disclosure.
-- Checkbox steps allow zero selections because an empty set is a valid failing response; only the text, age, and radio steps require an answer before advancing.
+- The sworn-statement checklist allows zero selections because an empty set is a valid failing response; the text, age, reaction, and each of the three Step 4 True/False prompts require an answer before advancing.
 - No accounts, shared services, stored records, result sharing, analytics, or server-side processing are in scope.
 - The feature depends only on the existing public microsite and its ability to link to an additional public page.
