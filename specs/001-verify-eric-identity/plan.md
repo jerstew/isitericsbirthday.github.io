@@ -1,6 +1,6 @@
 # Implementation Plan: Eric Identity Quiz
 
-**Branch**: `001-verify-eric-identity` | **Date**: 2026-08-16 | **Spec**: [spec.md](spec.md)
+**Branch**: `codex/randomized-eric-statements` | **Date**: 2026-08-16 | **Spec**: [spec.md](spec.md)
 
 **Input**: Feature specification from `/specs/001-verify-eric-identity/spec.md`
 

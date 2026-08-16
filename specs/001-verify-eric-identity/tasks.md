@@ -106,7 +106,7 @@
 
 ### Implementation for User Story 1 Delta
 
-- [ ] T016 [US1] Define the immutable seven-record Eric statement pool and pure injectable-random three-of-seven sampler in `assets/eric-profile.js`, making unknown sample inputs fail closed without mutating canonical records
+- [ ] T016 [US1] Define the immutable seven-record Eric statement pool and pure injectable-random three-of-seven sampler in `assets/eric-profile.js` without mutating canonical records
 - [ ] T017 [P] [US1] Replace the legacy Step 4 trait checkbox markup in `are-you-eric.html` with the statement-group mount point, instructions, and persistent validation region defined by `specs/001-verify-eric-identity/contracts/ui-contract.md`
 - [ ] T018 [US1] Render each sampled statement as a mounted fieldset with its statement legend and native True/False radio pair in `assets/eric-quiz.js`, retain selected IDs and responses through Back/Next, and block advancement while focusing the first unanswered group
 - [ ] T019 [US1] Style the three Step 4 statement fieldsets, legends, True/False option rows, validation state, keyboard focus, wrapping, and 44px targets across desktop and mobile in `assets/eric-quiz.css` without changing the established dialog geometry or retro visual contract

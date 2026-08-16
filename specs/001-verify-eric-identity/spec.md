@@ -1,6 +1,6 @@
 # Feature Specification: Eric Identity Quiz
 
-**Feature Branch**: `main` (no branch-creation hook configured)
+**Feature Branch**: `codex/randomized-eric-statements`
 
 **Created**: 2026-08-09
 

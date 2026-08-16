@@ -11,6 +11,7 @@ Represents the five answers submitted during one page load.
 | `firstName` | string | User-entered text | Required before leaving step 1; trimmed value must be non-empty |
 | `age` | string | `1` through `119`, or `eric-exact-age` | Required before leaving step 2 |
 | `reaction` | enum | `turn-around`, `ignore`, `own-name` | Required before leaving step 3 |
+| `selectedStatementIds` | ordered list of statement ID | The three statements selected for this attempt | Exactly three known, unique IDs from `EricStatementPool` |
 | `preferenceAnswers` | map of statement ID to boolean | Exactly the three statements selected for this attempt | All three keys must be known and distinct; every value must be explicitly `true` or `false` |
 | `oath` | set of enum | Any subset of `solemnly-swear`, `perjury-warning`, `fifth-amendment` | Zero through three unique values |
 
@@ -18,6 +19,7 @@ Represents the five answers submitted during one page load.
 
 - `firstName` is trimmed at both ends and compared case-insensitively.
 - Internal whitespace, additional words, spelling, and punctuation are not changed.
+- `selectedStatementIds` and the key set of `preferenceAnswers` must contain exactly the same three statement IDs; ordering affects presentation only and does not affect evaluation.
 - Preference-answer ordering has no meaning; statement identity and canonical boolean equality determine correctness.
 - Oath-set ordering has no meaning; membership and cardinality determine equality.
 - Missing, unknown, duplicate, or malformed values fail closed and never produce verification.
@@ -42,7 +44,7 @@ Coordinates presentation state during the active page load.
 |-------|------|-------|
 | `currentStep` | integer | 1 through 5 while answering |
 | `phase` | enum | `answering`, `verified`, or `rejected` |
-| `attempt` | QuizAttempt | Derived from the mounted form controls when required |
+| `attempt` | QuizAttempt | Derived from the mounted form controls and active `selectedStatementIds` when required |
 | `confettiActive` | boolean | May be true only during `verified` and never under reduced motion |
 | `historyEntriesCreated` | integer | Always `0`; stage transitions never create, replace, or encode an entry |
 | `selectedStatementIds` | ordered list of statement ID | Exactly three unique IDs from `EricStatementPool`; fixed while the attempt is active |
@@ -104,7 +106,7 @@ Immutable canonical records used to render and evaluate Step 4.
 
 - A fresh attempt samples exactly three IDs without replacement.
 - The canonical pool remains unchanged by sampling, rendering, navigation, evaluation, or retry.
-- Each selected ID appears exactly once in `selectedStatementIds` and exactly once in `preferenceAnswers` at submission.
+- Each selected ID appears exactly once in `selectedStatementIds` and exactly once as a key in `preferenceAnswers` at submission; neither collection may contain an ID absent from the other.
 - Back and Next preserve the selected IDs and entered booleans.
 - Retry, refresh, or reopen discards both the sample and answers; the next attempt may produce any valid three-item combination.
 - Unknown IDs, duplicate IDs, missing or extra response keys, and non-boolean answers fail evaluation.

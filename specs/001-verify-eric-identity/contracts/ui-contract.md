@@ -62,7 +62,7 @@ Result backgrounds use solid success or failure colors without radial, linear, o
 
 ## Evaluator contract
 
-The evaluator accepts a QuizAttempt-shaped value and returns a boolean. It returns `true` only for the canonical EricProfile criteria defined in [data-model.md](../data-model.md): reaction A or C is accepted, reaction B is rejected, all three selected statement responses equal their canonical booleans, and every other field matches exactly. It must not mutate the supplied object, response map, selected-ID list, or canonical pool. Missing, duplicate, extra, unknown, or malformed statement data returns `false`.
+The evaluator accepts a QuizAttempt-shaped value and returns a boolean. It returns `true` only for the canonical EricProfile criteria defined in [data-model.md](../data-model.md): reaction A or C is accepted, reaction B is rejected, the three unique IDs in `selectedStatementIds` exactly match the key set of `preferenceAnswers`, all three responses equal their canonical booleans, and every other field matches exactly. It must not mutate the supplied object, response map, selected-ID list, or canonical pool. Missing, duplicate, mismatched, extra, unknown, or malformed statement data returns `false`.
 
 ## Statement sampling contract
 
