@@ -27,7 +27,7 @@ The quiz also supports opening `index.html` directly from disk; the local server
 node --test
 ```
 
-Expected result: all tests pass, including normalized names, failing field values, the 64 trait/oath combinations, malformed inputs, and input immutability.
+Expected result: all tests pass, including the seven canonical statement records, three-of-seven sampling invariants, normalized names, correct and inverted statement answers, malformed response maps, oath combinations, and input immutability.
 
 ## Validate the main page
 
@@ -44,15 +44,25 @@ Follow [ui-contract.md](contracts/ui-contract.md) and [data-model.md](data-model
 1. Open the quiz directly and confirm a blank `Step 1 of 5`.
 2. Attempt to advance through steps 1, 2, and 3 without answers; each must remain active, show a persistent associated error, and focus the affected control.
 3. Supply answers, use Back and Next repeatedly, and confirm all edits persist.
-4. Confirm steps 4 and 5 allow an empty set and disclose no outcome before `Verify identity`.
-5. Submit the accepted profile once with reaction A and once with reaction C; confirm each shows the verified heading within 1 second with finite confetti.
-6. Repeat with reaction B and with one deviation in each other field; confirm every attempt produces the full-screen rejected result.
-7. Activate `Try again`; confirm all controls clear and focus returns to the step-1 heading.
-8. Partially answer the quiz and refresh; confirm the attempt is discarded.
-9. Above 480 CSS pixels, confirm the quiz window is no wider than 500 pixels, `ARE YOU ERIC?` is 28-32 pixels, the first-name input is 40-44 pixels high, the primary action is 80-100 pixels wide and right-aligned, and all body/footer regions share the same horizontal content edges.
-10. At 320, 375, 390, and 480 CSS pixels, confirm 16-pixel outer margins, 24-pixel body padding, a 28-32-pixel page heading, a 44-48-pixel first-name input, and a 48-pixel-high full-width primary action. Confirm the action footer uses one divider and has no redundant adjacent border or shadow.
-11. At the same mobile widths, confirm the vertical gaps are 8 pixels from heading to description, 20-24 pixels from description to plain progress text, 24 pixels from progress to question, 8 pixels from the first-name label to its input, 24 pixels from the input region to the footer divider, and 16 pixels from the divider to the action.
-12. Confirm question and answer text is at least 16 pixels, all interactive targets and option rows are at least 44 pixels high, the active question is visually dominant, and no layout has horizontal overflow.
+4. On Step 4, confirm exactly three distinct statements from the seven-item pool appear and each has a native True/False radio pair with the full statement as its accessible group name.
+5. Attempt to advance after answering zero, one, and two Step 4 statements; confirm the step remains active, a persistent associated error appears, and focus moves to the first unanswered group.
+6. Answer all three, move forward and back repeatedly, and confirm the same statements, order, and responses remain unchanged within the attempt.
+7. Submit the accepted profile once with reaction A and once with reaction C, answering every displayed statement canonically; confirm each shows the verified heading within 1 second with finite confetti.
+8. Repeat with reaction B and with one inverted Step 4 response; confirm every attempt produces the full-screen rejected result.
+9. Activate `Try again`; confirm all controls clear, focus returns to the step-1 heading, and Step 4 receives a newly sampled three-statement set.
+10. Partially answer the quiz and refresh; confirm the attempt and selected Step 4 statements are discarded.
+11. Above 480 CSS pixels, confirm the quiz window is no wider than 500 pixels, `ARE YOU ERIC?` is 28-32 pixels, the first-name input is 40-44 pixels high, the primary action is 80-100 pixels wide and right-aligned, and all body/footer regions share the same horizontal content edges.
+12. At 320, 375, 390, and 480 CSS pixels, confirm 16-pixel outer margins, 24-pixel body padding, a 28-32-pixel page heading, a 44-48-pixel first-name input, and a 48-pixel-high full-width primary action. Confirm the action footer uses one divider and has no redundant adjacent border or shadow.
+13. At the same mobile widths, confirm the vertical gaps are 8 pixels from heading to description, 20-24 pixels from description to plain progress text, 24 pixels from progress to question, 8 pixels from the first-name label to its input, 24 pixels from the input region to the footer divider, and 16 pixels from the divider to the action.
+14. Confirm question and answer text is at least 16 pixels, all interactive targets and option rows are at least 44 pixels high, the active question is visually dominant, and no layout has horizontal overflow.
+
+## Validate Step 4 variation and evaluation
+
+1. Start at least 20 fresh attempts using retry or reload and record the three Step 4 IDs shown in each.
+2. Confirm every attempt contains exactly three unique members of the canonical seven-item pool and that more than one combination occurs.
+3. Confirm all seven exact statement texts and their canonical truth values match [data-model.md](data-model.md).
+4. For each statement, submit at least one otherwise-passing attempt with its canonical response and one with its response inverted; canonical responses remain eligible to pass and every inverted response fails.
+5. Confirm no sample or response appears in browser storage, the address, or network traffic.
 
 ## Validate title-bar exit behavior
 

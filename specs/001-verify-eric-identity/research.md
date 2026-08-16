@@ -10,7 +10,7 @@
 
 ## Decision 2: Native multi-step form semantics
 
-**Decision**: Author one form containing all five steps. Use labels for text/select controls and fieldset/legend groups for radio and checkbox controls. Keep controls mounted, apply `hidden` to inactive steps, and include `Step n of 5` in the focused step heading.
+**Decision**: Author one form containing all five steps. Use labels for text/select controls and fieldset/legend groups for radio, True/False, and checkbox controls. Render the three selected Step 4 statement groups once per attempt, keep controls mounted, apply `hidden` to inactive steps, and include `Step n of 5` in the focused step heading.
 
 **Rationale**: Native controls supply keyboard behavior and accessible names. Keeping the same controls mounted preserves answers across Back/Next navigation, while `hidden` removes inactive steps from display, focus order, and the accessibility tree.
 
@@ -18,7 +18,7 @@
 
 ## Decision 3: Navigation, validation, and focus behavior
 
-**Decision**: Use a single form-submission path: submission advances steps 1-4 and verifies identity on step 5. Back is a non-submitting button. The form uses persistent inline validation for required name, age, and reaction answers, associates errors programmatically, and focuses the invalid control. Step changes and retry focus the new step heading with `tabindex="-1"`.
+**Decision**: Use a single form-submission path: submission advances steps 1-4 and verifies identity on step 5. Back is a non-submitting button. The form uses persistent inline validation for required name, age, reaction, and all three Step 4 True/False answers, associates errors programmatically, and focuses the first invalid control or unanswered statement group. Step changes and retry focus the new step heading with `tabindex="-1"`.
 
 **Rationale**: This retains expected Enter-key behavior, prevents an outcome before final submission, and avoids leaving keyboard focus on a newly hidden control. Persistent text errors are reliable at high zoom and for assistive technology.
 
@@ -26,7 +26,7 @@
 
 ## Decision 4: Accepted-profile evaluation boundary
 
-**Decision**: Put name normalization, accepted-reaction membership, exact set comparison, and pass/fail evaluation in a pure browser-global script loaded before a separate UI orchestration script. Accept reactions A and C, reject reaction B, and treat missing or malformed input as a failing profile rather than an exception. Use classic scripts so the static quiz also works in direct-file and preview contexts that block module loading.
+**Decision**: Put the immutable statement pool, name normalization, accepted-reaction membership, statement-answer comparison, exact oath-set comparison, and pass/fail evaluation in a pure browser-global script loaded before a separate UI orchestration script. Accept reactions A and C, reject reaction B, and treat unknown, duplicate, missing, extra, or malformed statement responses as a failing profile rather than an exception. Use classic scripts so the static quiz also works in direct-file and preview contexts that block module loading.
 
 **Rationale**: The exact-match predicate is the highest-risk behavior and can be exhaustively tested without a DOM emulator. Separating it also prevents UI state from changing the supplied attempt during comparison, while ordered classic scripts avoid `.mjs` MIME and `file:` module restrictions.
 
@@ -58,7 +58,7 @@
 
 ## Decision 8: Package-free testing and browser validation
 
-**Decision**: Use Node 24's built-in test runner for the pure evaluator and static markup/CSS contracts. Cover normalized passing names, representative failing names/ages/reactions, all 64 trait/oath bitmask combinations, missing inputs, evaluator immutability, the 500-pixel cap, responsive title hooks, and breakpoint declarations. Use a locally served current browser for UI, accessibility, privacy, and birthday regression checks, plus computed-style and bounding-rectangle inspection at 320, 375, 390, 480, and 481 CSS pixels for every step. Repeat responsive checks under short heights, an on-screen keyboard, and browser zoom up to 200% while retaining a 320 CSS-pixel effective-width minimum.
+**Decision**: Use Node 24's built-in test runner for the pure evaluator, a pure three-of-seven sampling helper, and static markup/CSS contracts. Cover all seven statement texts and truth values, repeated samples for length/membership/uniqueness without mutating the pool, normalized passing names, representative failing names/ages/reactions, each correct and inverted statement answer, malformed response maps, oath combinations, missing inputs, evaluator immutability, and responsive source contracts. Use a locally served current browser for UI, random-combination variety, within-attempt selection stability, required-answer focus, accessibility, privacy, and responsive regression checks.
 
 **Rationale**: Automated logic and static tests protect deterministic contracts with no package manifest or browser download. Rendered measurements are still required because source-regex tests cannot prove the final cascade, title line count, shared edges, scroll reachability, or absence of overflow across all five steps.
 
@@ -127,3 +127,19 @@
 **Rationale**: The clarified visual language expressly excludes gradients. Solid fills preserve the emphatic full-screen outcomes without adding modern decoration or changing result semantics.
 
 **Alternatives considered**: Keeping the existing gradients leaves a delivered-state conflict with FR-032. Replacing them with additional textured layers would preserve the same visual competition. Converting results into cards would contradict the full-screen outcome contract.
+
+## Decision 17: Three-of-seven preference statement sampling
+
+**Decision**: Model each Step 4 item as an immutable record containing a stable identifier, exact statement text, and canonical boolean answer. For each fresh attempt, use a pure helper to shuffle a copy of the seven identifiers and take three without replacement. The helper accepts an injectable random-number source for deterministic tests and uses the browser's ordinary random source by default. Store only the selected identifiers and visitor answers in the active session; do not guarantee a True/False balance or rotation across visits.
+
+**Rationale**: Sampling without replacement directly satisfies the distinct-item rule and permits all 35 valid three-item combinations. Keeping canonical records in the pure profile module prevents display and evaluation truth values from drifting, while copied-array shuffling avoids mutating shared configuration.
+
+**Alternatives considered**: Selecting repeatedly until three unique items are found adds avoidable retry logic. Enforcing a truth-value mix would exclude valid random combinations not required by the specification. Persisting recent selections to force rotation would violate the transient-state boundary.
+
+## Decision 18: Native per-statement True/False groups
+
+**Decision**: Render each selected statement as a fieldset with the statement as its legend and a required native radio pair labeled `True` and `False`. Use a stable group name derived from the statement identifier, retain all three mounted during the attempt, and focus the first unanswered group when validation fails.
+
+**Rationale**: Independent radio groups express one required boolean per statement with native keyboard behavior and unambiguous accessible names. Mounted controls preserve answers across navigation without duplicating state synchronization.
+
+**Alternatives considered**: A single checkbox per statement makes unchecked mean either False or unanswered. Custom toggle buttons require additional ARIA state and keyboard handling. A table of radios can become difficult to understand and scroll at narrow widths.

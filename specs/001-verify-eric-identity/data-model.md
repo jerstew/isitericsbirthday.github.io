@@ -11,14 +11,15 @@ Represents the five answers submitted during one page load.
 | `firstName` | string | User-entered text | Required before leaving step 1; trimmed value must be non-empty |
 | `age` | string | `1` through `119`, or `eric-exact-age` | Required before leaving step 2 |
 | `reaction` | enum | `turn-around`, `ignore`, `own-name` | Required before leaving step 3 |
-| `traits` | set of enum | Any subset of `westbank`, `resembles-eric`, `is-eric` | Zero through three unique values |
+| `preferenceAnswers` | map of statement ID to boolean | Exactly the three statements selected for this attempt | All three keys must be known and distinct; every value must be explicitly `true` or `false` |
 | `oath` | set of enum | Any subset of `solemnly-swear`, `perjury-warning`, `fifth-amendment` | Zero through three unique values |
 
 ### Normalization
 
 - `firstName` is trimmed at both ends and compared case-insensitively.
 - Internal whitespace, additional words, spelling, and punctuation are not changed.
-- Set ordering has no meaning; membership and cardinality determine equality.
+- Preference-answer ordering has no meaning; statement identity and canonical boolean equality determine correctness.
+- Oath-set ordering has no meaning; membership and cardinality determine equality.
 - Missing, unknown, duplicate, or malformed values fail closed and never produce verification.
 
 ## EricProfile
@@ -30,7 +31,7 @@ The immutable canonical acceptance criteria. Two profiles pass because the react
 | `firstName` | `eric` after normalization |
 | `age` | `eric-exact-age` |
 | `reaction` | `turn-around` or `own-name` |
-| `traits` | Exactly `westbank`, `resembles-eric`, and `is-eric` |
+| `preferenceAnswers` | Every selected statement ID maps to its canonical boolean value |
 | `oath` | Exactly `solemnly-swear` |
 
 ## QuizSession
@@ -44,6 +45,7 @@ Coordinates presentation state during the active page load.
 | `attempt` | QuizAttempt | Derived from the mounted form controls when required |
 | `confettiActive` | boolean | May be true only during `verified` and never under reduced motion |
 | `historyEntriesCreated` | integer | Always `0`; stage transitions never create, replace, or encode an entry |
+| `selectedStatementIds` | ordered list of statement ID | Exactly three unique IDs from `EricStatementPool`; fixed while the attempt is active |
 
 ### State transitions
 
@@ -53,7 +55,7 @@ answering(step n) --valid Next--> answering(step n+1), for n=1..4
 answering(step n) --Back--> answering(step n-1), for n=2..5
 answering(step 5) --submit accepted profile--> verified
 answering(step 5) --submit any deviation--> rejected
-rejected --Try again--> answering(step 1, cleared attempt)
+rejected --Try again--> answering(step 1, cleared attempt, new statement sample)
 answering(step any) --title-bar X with prior history--> previous browser entry
 answering(step any) --title-bar X without prior history--> homepage
 refresh/reopen -> answering(step 1, cleared attempt)
@@ -83,3 +85,26 @@ Responsive and zoom validation use the effective layout viewport: browser zoom m
 | `message` | fixed text | `IDENTITY VERIFIED: WELCOME, ERIC.` or `YOU ARE NOT ERIC.` |
 
 The result is derived only from the accepted-reaction membership check plus exact equality for every other `QuizAttempt` field; it is not stored separately.
+
+## EricStatementPool
+
+Immutable canonical records used to render and evaluate Step 4.
+
+| ID | Display text | Canonical answer |
+|----|--------------|------------------|
+| `likes-cats` | `Eric likes cats.` | `true` |
+| `likes-eddie-murphy-music` | `Eric likes Eddie Murphy as a musician and singer.` | `true` |
+| `likes-sports-gambling` | `Eric likes gambling on sports.` | `true` |
+| `likes-thin-crust-pizza` | `Eric likes good thin-crust pizza.` | `true` |
+| `likes-architecture-arguments` | `Eric likes arguing about architecture.` | `false` |
+| `likes-bad-mexican-food` | `Eric likes bad Mexican food.` | `false` |
+| `likes-call-of-duty` | `Eric likes Call of Duty.` | `false` |
+
+### Selection and validation rules
+
+- A fresh attempt samples exactly three IDs without replacement.
+- The canonical pool remains unchanged by sampling, rendering, navigation, evaluation, or retry.
+- Each selected ID appears exactly once in `selectedStatementIds` and exactly once in `preferenceAnswers` at submission.
+- Back and Next preserve the selected IDs and entered booleans.
+- Retry, refresh, or reopen discards both the sample and answers; the next attempt may produce any valid three-item combination.
+- Unknown IDs, duplicate IDs, missing or extra response keys, and non-boolean answers fail evaluation.

@@ -22,10 +22,10 @@ Only the current step is visible and focusable. Its heading contains plain, unbo
 | 1 | `Enter your first name.` text input | Free text | Trimmed value must not be empty |
 | 2 | `Select your current age.` select | Integers 1-119 plus `Eric's Exact Age` | A choice must be selected |
 | 3 | `When someone calls out 'Hey Eric!' in public, what is your reaction?` radio group | A, B, and C exactly as specified | One choice must be selected |
-| 4 | `Select all traits that apply to you:` checkbox group | Westbank, resembles Eric, is Eric | Any set, including empty |
+| 4 | Three selected Eric preference statements, each presented as a fieldset with a native True/False radio pair | Three distinct records sampled from the seven-item pool in `data-model.md` | Every displayed statement must have exactly one response |
 | 5 | Full penalty-of-perjury prompt checkbox group | Solemnly swear, perjury warning, fifth amendment exactly as specified | Any set, including empty; submit label is `Verify identity` |
 
-Steps 4 and 5 visibly state that continuing with no selection is allowed. Required-step errors remain visible, identify the relevant prompt, are programmatically associated with the affected controls, and focus the invalid input or first radio.
+Step 5 permits an empty selection. Step 4 does not advance until all three statements are answered. Required-step errors remain visible, identify the relevant prompt or first unanswered statement, are programmatically associated with the affected controls, and focus the invalid input or first unanswered radio group.
 
 ## Navigation and focus contract
 
@@ -34,6 +34,8 @@ Steps 4 and 5 visibly state that continuing with no selection is allowed. Requir
 - Enter follows the same path as activating Next or Verify identity.
 - Each successful step change focuses the new step heading.
 - Final submission evaluates all answers once and reveals no intermediate pass/fail information.
+- The three Step 4 statement groups are rendered once per attempt and retain both their selection and responses during Back/Next navigation.
+- Retry clears the Step 4 responses and creates a fresh three-statement sample; refresh or reopen also starts with a fresh sample.
 - No step change, Back action, validation event, retry, or result transition creates or replaces a browser-history entry or changes the page address.
 - The title bar includes a Windows-style X button with visible X text, accessible name `Go back`, native hover tooltip `Go back`, visible focus, and a target of at least 44 by 44 CSS pixels.
 - Activating X performs one browser Back action when prior history exists; if no prior history entry exists, it opens the relative homepage.
@@ -60,7 +62,15 @@ Result backgrounds use solid success or failure colors without radial, linear, o
 
 ## Evaluator contract
 
-The evaluator accepts a QuizAttempt-shaped value and returns a boolean. It returns `true` only for the canonical EricProfile criteria defined in [data-model.md](../data-model.md): reaction A or C is accepted, reaction B is rejected, and every other field must match exactly. It must not mutate the supplied object or collections. Missing, unknown, or malformed values return `false`.
+The evaluator accepts a QuizAttempt-shaped value and returns a boolean. It returns `true` only for the canonical EricProfile criteria defined in [data-model.md](../data-model.md): reaction A or C is accepted, reaction B is rejected, all three selected statement responses equal their canonical booleans, and every other field matches exactly. It must not mutate the supplied object, response map, selected-ID list, or canonical pool. Missing, duplicate, extra, unknown, or malformed statement data returns `false`.
+
+## Statement sampling contract
+
+- The canonical pool contains exactly the seven IDs, texts, and answers defined in [data-model.md](../data-model.md).
+- A fresh attempt receives exactly three distinct pool records.
+- Sampling never mutates the pool and does not require a particular True/False balance.
+- More than one valid three-statement combination must be observable across repeated fresh attempts; a particular sequence is not guaranteed.
+- Each statement exposes its complete text as the radio-group accessible name, with explicit `True` and `False` control labels.
 
 ## Privacy contract
 
