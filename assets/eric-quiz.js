@@ -1,6 +1,6 @@
 "use strict";
 
-const { isEric } = globalThis.EricIdentity;
+const { isEric, sampleEricStatements } = globalThis.EricIdentity;
 
 const quizPage = document.querySelector(".quiz-page");
 const form = document.querySelector("#identityQuiz");
@@ -12,14 +12,65 @@ const verifiedResult = document.querySelector("#verifiedResult");
 const rejectedResult = document.querySelector("#rejectedResult");
 const tryAgainButton = document.querySelector("#tryAgainButton");
 const confettiCanvas = document.querySelector("#confettiCanvas");
+const preferenceStatements = document.querySelector("#preferenceStatements");
+const preferenceStatementsError = document.querySelector(
+  "#preferenceStatementsError",
+);
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 let currentStep = 0;
 let animationFrameId = 0;
 let confettiActive = false;
 let particles = [];
+let selectedStatements = [];
 
 const CONFETTI_COLORS = ["#ffea00", "#ff4f81", "#00e5ff", "#ffffff", "#ff8c00"];
+const TRUE_FALSE_OPTIONS = Object.freeze([
+  Object.freeze({ label: "True", value: "true" }),
+  Object.freeze({ label: "False", value: "false" }),
+]);
+
+function preferenceGroupName(statementId) {
+  return `preference-${statementId}`;
+}
+
+function renderPreferenceStatements() {
+  selectedStatements = sampleEricStatements();
+  preferenceStatements.replaceChildren();
+
+  selectedStatements.forEach((statement) => {
+    const fieldset = document.createElement("fieldset");
+    fieldset.className = "preference-statement";
+    fieldset.dataset.statementId = statement.id;
+    fieldset.setAttribute("aria-describedby", preferenceStatementsError.id);
+
+    const legend = document.createElement("legend");
+    legend.textContent = statement.text;
+    fieldset.append(legend);
+
+    const options = document.createElement("div");
+    options.className = "preference-options";
+
+    TRUE_FALSE_OPTIONS.forEach(({ label, value }, optionIndex) => {
+      const optionLabel = document.createElement("label");
+      optionLabel.className = "option-row preference-option";
+
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = preferenceGroupName(statement.id);
+      input.value = value;
+      input.required = optionIndex === 0;
+
+      const text = document.createElement("span");
+      text.textContent = label;
+      optionLabel.append(input, text);
+      options.append(optionLabel);
+    });
+
+    fieldset.append(options);
+    preferenceStatements.append(fieldset);
+  });
+}
 
 function resizeConfettiCanvas() {
   const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
@@ -125,6 +176,13 @@ function clearReactionError() {
   controls.forEach((control) => control.removeAttribute("aria-invalid"));
 }
 
+function clearPreferenceError() {
+  preferenceStatementsError.hidden = true;
+  preferenceStatements
+    .querySelectorAll('input[type="radio"]')
+    .forEach((control) => control.removeAttribute("aria-invalid"));
+}
+
 function validateCurrentStep() {
   if (currentStep === 0) {
     const control = form.elements.firstName;
@@ -161,16 +219,47 @@ function validateCurrentStep() {
     return !invalid;
   }
 
+  if (currentStep === 3) {
+    const firstUnanswered = selectedStatements.find((statement) => {
+      const controls = [
+        ...form.elements[preferenceGroupName(statement.id)],
+      ];
+      return !controls.some((control) => control.checked);
+    });
+    const invalid = Boolean(firstUnanswered);
+    preferenceStatementsError.hidden = !invalid;
+    preferenceStatements
+      .querySelectorAll('input[type="radio"]')
+      .forEach((control) => {
+        if (invalid) {
+          control.setAttribute("aria-invalid", "true");
+        } else {
+          control.removeAttribute("aria-invalid");
+        }
+      });
+    if (firstUnanswered) {
+      form.elements[preferenceGroupName(firstUnanswered.id)][0].focus();
+    }
+    return !invalid;
+  }
+
   return true;
 }
 
 function collectAttempt() {
   const data = new FormData(form);
+  const preferenceAnswers = Object.fromEntries(
+    selectedStatements.map((statement) => [
+      statement.id,
+      data.get(preferenceGroupName(statement.id)) === "true",
+    ]),
+  );
   return {
     firstName: String(data.get("firstName") ?? ""),
     age: String(data.get("age") ?? ""),
     reaction: String(data.get("reaction") ?? ""),
-    traits: data.getAll("traits").map(String),
+    selectedStatementIds: selectedStatements.map(({ id }) => id),
+    preferenceAnswers,
     oath: data.getAll("oath").map(String),
   };
 }
@@ -196,12 +285,14 @@ function clearAllErrors() {
   );
   setFieldError(form.elements.age, document.querySelector("#ageError"), false);
   clearReactionError();
+  clearPreferenceError();
 }
 
 function resetQuiz() {
   cancelConfetti();
   form.reset();
   clearAllErrors();
+  renderPreferenceStatements();
   verifiedResult.hidden = true;
   rejectedResult.hidden = true;
   quizPage.hidden = false;
@@ -267,6 +358,8 @@ form.elements.age.addEventListener("change", () => {
   control.addEventListener("change", clearReactionError);
 });
 
+preferenceStatements.addEventListener("change", clearPreferenceError);
+
 tryAgainButton.addEventListener("click", resetQuiz);
 
 window.addEventListener("resize", () => {
@@ -277,4 +370,5 @@ reducedMotion.addEventListener("change", () => {
   if (reducedMotion.matches) cancelConfetti();
 });
 
+renderPreferenceStatements();
 showStep(0, { focus: false });

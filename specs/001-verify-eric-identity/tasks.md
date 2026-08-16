@@ -101,16 +101,16 @@
 
 ### Tests for User Story 1 Delta
 
-- [ ] T014 [P] [US1] Add failing pool and sampler tests to `tests/eric-profile.test.mjs` covering all seven exact records, canonical truth values, three-item length, pool membership, uniqueness, deterministic injected randomness, repeated-sample variety, and canonical-pool immutability
-- [ ] T015 [P] [US1] Add failing static Step 4 contracts to `tests/site-routing.test.mjs` that reject the legacy trait checkboxes and require a statement mount point, associated validation message, and accessible True/False group hooks in `are-you-eric.html` and `assets/eric-quiz.js`
+- [X] T014 [P] [US1] Add failing pool and sampler tests to `tests/eric-profile.test.mjs` covering all seven exact records, canonical truth values, three-item length, pool membership, uniqueness, deterministic injected randomness, repeated-sample variety, and canonical-pool immutability
+- [X] T015 [P] [US1] Add failing static Step 4 contracts to `tests/site-routing.test.mjs` that reject the legacy trait checkboxes and require a statement mount point, associated validation message, and accessible True/False group hooks in `are-you-eric.html` and `assets/eric-quiz.js`
 
 ### Implementation for User Story 1 Delta
 
-- [ ] T016 [US1] Define the immutable seven-record Eric statement pool and pure injectable-random three-of-seven sampler in `assets/eric-profile.js` without mutating canonical records
-- [ ] T017 [P] [US1] Replace the legacy Step 4 trait checkbox markup in `are-you-eric.html` with the statement-group mount point, instructions, and persistent validation region defined by `specs/001-verify-eric-identity/contracts/ui-contract.md`
-- [ ] T018 [US1] Render each sampled statement as a mounted fieldset with its statement legend and native True/False radio pair in `assets/eric-quiz.js`, retain selected IDs and responses through Back/Next, and block advancement while focusing the first unanswered group
-- [ ] T019 [US1] Style the three Step 4 statement fieldsets, legends, True/False option rows, validation state, keyboard focus, wrapping, and 44px targets across desktop and mobile in `assets/eric-quiz.css` without changing the established dialog geometry or retro visual contract
-- [ ] T020 [US1] Run `tests/eric-profile.test.mjs`, `tests/site-routing.test.mjs`, and the Step 4 variation, required-answer, keyboard, accessibility-tree, persistence, responsive, and overflow scenarios in `specs/001-verify-eric-identity/quickstart.md`, correcting User Story 1 deviations in `assets/eric-profile.js`, `assets/eric-quiz.js`, `assets/eric-quiz.css`, or `are-you-eric.html`
+- [X] T016 [US1] Define the immutable seven-record Eric statement pool and pure injectable-random three-of-seven sampler in `assets/eric-profile.js` without mutating canonical records
+- [X] T017 [P] [US1] Replace the legacy Step 4 trait checkbox markup in `are-you-eric.html` with the statement-group mount point, instructions, and persistent validation region defined by `specs/001-verify-eric-identity/contracts/ui-contract.md`
+- [X] T018 [US1] Render each sampled statement as a mounted fieldset with its statement legend and native True/False radio pair in `assets/eric-quiz.js`, retain selected IDs and responses through Back/Next, and block advancement while focusing the first unanswered group
+- [X] T019 [US1] Style the three Step 4 statement fieldsets, legends, True/False option rows, validation state, keyboard focus, wrapping, and 44px targets across desktop and mobile in `assets/eric-quiz.css` without changing the established dialog geometry or retro visual contract
+- [X] T020 [US1] Run `tests/eric-profile.test.mjs`, `tests/site-routing.test.mjs`, and the Step 4 variation, required-answer, keyboard, accessibility-tree, persistence, responsive, and overflow scenarios in `specs/001-verify-eric-identity/quickstart.md`, correcting User Story 1 deviations in `assets/eric-profile.js`, `assets/eric-quiz.js`, `assets/eric-quiz.css`, or `are-you-eric.html`
 
 **Checkpoint**: User Story 1 independently presents, validates, and preserves three randomized Eric statements without disclosing an identity result.
 
@@ -124,13 +124,13 @@
 
 ### Tests for User Story 2 Delta
 
-- [ ] T021 [US2] Replace legacy trait-set evaluator cases in `tests/eric-profile.test.mjs` with failing tests for correct three-statement maps, every single-answer inversion, unknown/duplicate/missing/extra/non-boolean data, A/C acceptance, B rejection, oath exactness, and evaluator input immutability
+- [X] T021 [US2] Replace legacy trait-set evaluator cases in `tests/eric-profile.test.mjs` with failing tests for correct three-statement maps, every single-answer inversion, unknown/duplicate/missing/extra/non-boolean data, A/C acceptance, B rejection, oath exactness, and evaluator input immutability
 
 ### Implementation for User Story 2 Delta
 
-- [ ] T022 [US2] Replace exact trait-set comparison with canonical three-statement response-map validation in `assets/eric-profile.js` and collect the selected statement IDs plus explicit booleans into the submitted attempt in `assets/eric-quiz.js`
-- [ ] T023 [US2] Update `Try again` handling in `assets/eric-quiz.js` to clear Step 4 controls and errors, discard the prior selected IDs, obtain and mount a fresh valid three-statement sample, and preserve existing result reset and Step 1 focus behavior
-- [ ] T024 [US2] Run the accepted A/C, rejected B, canonical/inverted statement, malformed evaluator input, result-focus, one-second result, reduced-motion, and retry scenarios in `tests/eric-profile.test.mjs` and `specs/001-verify-eric-identity/quickstart.md`, correcting User Story 2 deviations in `assets/eric-profile.js` or `assets/eric-quiz.js`
+- [X] T022 [US2] Replace exact trait-set comparison with canonical three-statement response-map validation in `assets/eric-profile.js` and collect the selected statement IDs plus explicit booleans into the submitted attempt in `assets/eric-quiz.js`
+- [X] T023 [US2] Update `Try again` handling in `assets/eric-quiz.js` to clear Step 4 controls and errors, discard the prior selected IDs, obtain and mount a fresh valid three-statement sample, and preserve existing result reset and Step 1 focus behavior
+- [X] T024 [US2] Run the accepted A/C, rejected B, canonical/inverted statement, malformed evaluator input, result-focus, one-second result, reduced-motion, and retry scenarios in `tests/eric-profile.test.mjs` and `specs/001-verify-eric-identity/quickstart.md`, correcting User Story 2 deviations in `assets/eric-profile.js` or `assets/eric-quiz.js`
 
 **Checkpoint**: User Story 2 independently produces the correct result for every canonical or inverted Step 4 statement and resets into a valid fresh attempt.
 
@@ -140,8 +140,8 @@
 
 **Purpose**: Prove the additive Step 4 implementation preserves the completed responsive, accessibility, privacy, history, homepage, and result behavior from T001-T013.
 
-- [ ] T025 [P] Audit `are-you-eric.html`, `assets/eric-profile.js`, `assets/eric-quiz.js`, and `assets/eric-quiz.css` against `specs/001-verify-eric-identity/contracts/ui-contract.md` for native group semantics, exact copy, unique IDs/names, focus order, 44px targets, 320-1440px layout, 200% zoom, reduced motion, transient state, zero network/storage/URL exposure, and unchanged browser-history behavior
-- [ ] T026 Run `node --test` and the complete updated sequence in `specs/001-verify-eric-identity/quickstart.md`, resolve every remaining Step 4 or regression deviation in `are-you-eric.html`, `assets/`, or `tests/`, and mark only T014-T026 complete in `specs/001-verify-eric-identity/tasks.md` after implementation evidence is recorded
+- [X] T025 [P] Audit `are-you-eric.html`, `assets/eric-profile.js`, `assets/eric-quiz.js`, and `assets/eric-quiz.css` against `specs/001-verify-eric-identity/contracts/ui-contract.md` for native group semantics, exact copy, unique IDs/names, focus order, 44px targets, 320-1440px layout, 200% zoom, reduced motion, transient state, zero network/storage/URL exposure, and unchanged browser-history behavior
+- [X] T026 Run `node --test` and the complete updated sequence in `specs/001-verify-eric-identity/quickstart.md`, resolve every remaining Step 4 or regression deviation in `are-you-eric.html`, `assets/`, or `tests/`, and mark only T014-T026 complete in `specs/001-verify-eric-identity/tasks.md` after implementation evidence is recorded
 
 ---
 

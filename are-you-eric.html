@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light" />
     <title>Are You Eric? | Is It Eric's Birthday?</title>
-    <link rel="stylesheet" href="assets/eric-quiz.css" />
+    <link rel="stylesheet" href="assets/eric-quiz.css?v=3" />
   </head>
   <body>
     <main class="quiz-page">
@@ -202,13 +202,20 @@
 
             <section class="quiz-step" data-step="4" aria-labelledby="step4Heading" hidden>
               <h2 id="step4Heading" tabindex="-1">Step 4 of 5</h2>
-              <fieldset>
-                <legend>Select all traits that apply to you:</legend>
-                <p class="optional-note">Optional: you may continue without selecting an option.</p>
-                <label class="option-row"><input type="checkbox" name="traits" value="westbank" /> <span>Lives on the Westbank.</span></label>
-                <label class="option-row"><input type="checkbox" name="traits" value="resembles-eric" /> <span>Resembles Eric.</span></label>
-                <label class="option-row"><input type="checkbox" name="traits" value="is-eric" /> <span>Is Eric.</span></label>
-              </fieldset>
+              <p class="question-label">Mark each statement about Eric as True or False.</p>
+              <div
+                class="preference-statements"
+                id="preferenceStatements"
+                aria-describedby="preferenceStatementsError"
+              ></div>
+              <p
+                class="form-error"
+                id="preferenceStatementsError"
+                role="alert"
+                hidden
+              >
+                Mark every statement as True or False before continuing.
+              </p>
             </section>
 
             <section class="quiz-step" data-step="5" aria-labelledby="step5Heading" hidden>
@@ -253,7 +260,7 @@
       </div>
     </section>
 
-    <script src="assets/eric-profile.js?v=2"></script>
-    <script src="assets/eric-quiz.js?v=2"></script>
+    <script src="assets/eric-profile.js?v=3"></script>
+    <script src="assets/eric-quiz.js?v=3"></script>
   </body>
 </html>

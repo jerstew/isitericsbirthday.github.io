@@ -1,13 +1,50 @@
 (function exposeEricIdentity(global) {
   "use strict";
 
+  const ERIC_STATEMENTS = Object.freeze([
+    Object.freeze({ id: "likes-cats", text: "Eric likes cats.", answer: true }),
+    Object.freeze({
+      id: "likes-eddie-murphy-music",
+      text: "Eric likes Eddie Murphy as a musician and singer.",
+      answer: true,
+    }),
+    Object.freeze({
+      id: "likes-sports-gambling",
+      text: "Eric likes gambling on sports.",
+      answer: true,
+    }),
+    Object.freeze({
+      id: "likes-thin-crust-pizza",
+      text: "Eric likes good thin-crust pizza.",
+      answer: true,
+    }),
+    Object.freeze({
+      id: "likes-architecture-arguments",
+      text: "Eric likes arguing about architecture.",
+      answer: false,
+    }),
+    Object.freeze({
+      id: "likes-bad-mexican-food",
+      text: "Eric likes bad Mexican food.",
+      answer: false,
+    }),
+    Object.freeze({
+      id: "likes-call-of-duty",
+      text: "Eric likes Call of Duty.",
+      answer: false,
+    }),
+  ]);
+
   const ERIC_PROFILE = Object.freeze({
     firstName: "eric",
     age: "eric-exact-age",
     reactions: Object.freeze(["turn-around", "own-name"]),
-    traits: Object.freeze(["westbank", "resembles-eric", "is-eric"]),
     oath: Object.freeze(["solemnly-swear"]),
   });
+
+  const STATEMENT_BY_ID = new Map(
+    ERIC_STATEMENTS.map((statement) => [statement.id, statement]),
+  );
 
   function hasExactValues(actual, expected) {
     if (!Array.isArray(actual) || actual.length !== expected.length) {
@@ -19,6 +56,51 @@
       uniqueValues.size === actual.length &&
       expected.every((value) => uniqueValues.has(value))
     );
+  }
+
+  function sampleEricStatements(random = Math.random) {
+    const shuffled = [...ERIC_STATEMENTS];
+
+    for (let index = shuffled.length - 1; index > 0; index -= 1) {
+      const swapIndex = Math.floor(random() * (index + 1));
+      [shuffled[index], shuffled[swapIndex]] = [
+        shuffled[swapIndex],
+        shuffled[index],
+      ];
+    }
+
+    return shuffled.slice(0, 3);
+  }
+
+  function hasCorrectPreferenceAnswers(selectedStatementIds, answers) {
+    if (
+      !Array.isArray(selectedStatementIds) ||
+      selectedStatementIds.length !== 3 ||
+      !answers ||
+      typeof answers !== "object" ||
+      Array.isArray(answers)
+    ) {
+      return false;
+    }
+
+    const uniqueIds = new Set(selectedStatementIds);
+    const answerIds = Object.keys(answers);
+    if (
+      uniqueIds.size !== selectedStatementIds.length ||
+      answerIds.length !== selectedStatementIds.length ||
+      answerIds.some((id) => !uniqueIds.has(id))
+    ) {
+      return false;
+    }
+
+    return selectedStatementIds.every((id) => {
+      const statement = STATEMENT_BY_ID.get(id);
+      return (
+        statement &&
+        typeof answers[id] === "boolean" &&
+        answers[id] === statement.answer
+      );
+    });
   }
 
   function isEric(attempt) {
@@ -35,10 +117,18 @@
         ERIC_PROFILE.firstName &&
       attempt.age === ERIC_PROFILE.age &&
       ERIC_PROFILE.reactions.includes(attempt.reaction) &&
-      hasExactValues(attempt.traits, ERIC_PROFILE.traits) &&
+      hasCorrectPreferenceAnswers(
+        attempt.selectedStatementIds,
+        attempt.preferenceAnswers,
+      ) &&
       hasExactValues(attempt.oath, ERIC_PROFILE.oath)
     );
   }
 
-  global.EricIdentity = Object.freeze({ ERIC_PROFILE, isEric });
+  global.EricIdentity = Object.freeze({
+    ERIC_PROFILE,
+    ERIC_STATEMENTS,
+    isEric,
+    sampleEricStatements,
+  });
 })(globalThis);
