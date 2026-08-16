@@ -249,34 +249,72 @@ select {
 
 .preference-statements {
   display: grid;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .preference-statement {
-  padding: 0.75rem;
+  display: flow-root;
+  min-width: 0;
+  padding: 0.875rem;
   background: var(--panel-mid);
-  border-color: var(--panel-dark) var(--panel-light) var(--panel-light)
-    var(--panel-dark);
+  border-color:
+    var(--panel-light)
+    var(--panel-dark)
+    var(--panel-dark)
+    var(--panel-light);
   border-style: solid;
   border-width: 0.125rem;
+  box-shadow: none;
 }
 
 .preference-statement legend {
+  float: left;
+  display: block;
+  width: 100%;
   margin: 0;
-  padding: 0 0.25rem;
+  padding: 0 0 0.75rem;
   font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
 .preference-options {
+  clear: both;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: 0.625rem;
+  margin: 0;
 }
 
 .preference-option {
+  align-items: center;
+  min-height: 3rem;
   margin: 0;
+  padding: 0.625rem 0.75rem;
   background: var(--panel-bg);
+  border: 0.125rem solid transparent;
+}
+
+.preference-option:hover {
+  background: #d0d0d0;
+  border-color: var(--panel-dark);
+}
+
+.preference-option:has(input:checked) {
+  background: #ffffff;
+  border-color: var(--title-bg);
+  box-shadow: inset 0 0 0 0.125rem var(--title-bg);
+}
+
+.preference-option:has(input:focus-visible) {
+  outline: 0.1875rem solid var(--focus);
+  outline-offset: 0.125rem;
+}
+
+@media (max-width: 30rem) {
+  .preference-options {
+    grid-template-columns: 1fr;
+  }
 }
 
 .form-error,
